@@ -7,27 +7,19 @@ class StoryData
     public string $file = __DIR__ . '/../data/stories.json';
 
     /** @return Story[] */
-    // public function getAll(): array
-    // {
-    //     $handle = fopen($this->file, 'r');
-    //     $stories = [];
+    public function getAll(): array
+    {
+        $jsonContent = file_get_contents($this->file);
+        $data = json_decode($jsonContent, true);
+        $stories = [];
 
-    //     while (!feof($handle)) {
-    //         $row = fgetcsv($handle);
+        foreach ($data as $row) {
+            $story = new Story(intval($row['id']), $row['title'], $row['location'], $row['content']);
+            $stories[] = $story;
+        }
 
-    //         if ($row === false || is_null($row[0])) {
-    //             break;
-    //         }
-
-    //         $story = new Story(intval($row[0]), $row[1], $row[2], $row[3]);
-
-    //         $stories[] = $story;
-    //     }
-
-    //     fclose($handle);
-
-    //     return $stories;
-    // }
+        return $stories;
+    }
 
     /** @return Story[] */
     public function getAll(): array
