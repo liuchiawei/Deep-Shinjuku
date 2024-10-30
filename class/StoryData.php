@@ -4,7 +4,7 @@ require_once __DIR__ . '/story.php';
 
 class StoryData
 {
-    public string $file = __DIR__ . '/../data/stories.csv';
+    public string $file = __DIR__ . '/../data/stories.json';
 
     /** @return Story[] */
     // public function getAll(): array
@@ -31,18 +31,18 @@ class StoryData
 
     /** @return Story[] */
     public function getAll(): array
-{
-    $jsonContent = file_get_contents($this->file);
-    $data = json_decode($jsonContent, true);
-    $stories = [];
+    {
+        $jsonContent = file_get_contents($this->file);
+        $data = json_decode($jsonContent, true);
+        $stories = [];
 
-    foreach ($data as $row) {
-        $story = new Story(intval($row['id']), $row['title'], $row['location'], $row['content']);
-        $stories[] = $story;
+        foreach ($data as $row) {
+            $story = new Story(intval($row['id']), $row['title'], $row['location'], $row['content']);
+            $stories[] = $story;
+        }
+
+        return $stories;
     }
-
-    return $stories;
-}
 
     public function getById(int $id): ?Story
     {
@@ -61,8 +61,6 @@ class StoryData
     public function getMaxId(): int
     {
         $stories = $this->getAll();
-        return max(array_map(fn ($story) => $story->id, $stories));
+        return max(array_map(fn($story) => $story->id, $stories));
     }
 }
-
-?>
