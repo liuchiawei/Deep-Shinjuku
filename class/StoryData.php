@@ -21,21 +21,6 @@ class StoryData
         return $stories;
     }
 
-    /** @return Story[] */
-    public function getAll(): array
-    {
-        $jsonContent = file_get_contents($this->file);
-        $data = json_decode($jsonContent, true);
-        $stories = [];
-
-        foreach ($data as $row) {
-            $story = new Story(intval($row['id']), $row['title'], $row['location'], $row['content']);
-            $stories[] = $story;
-        }
-
-        return $stories;
-    }
-
     public function getById(int $id): ?Story
     {
         $stories = $this->getAll();
