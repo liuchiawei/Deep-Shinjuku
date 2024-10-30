@@ -15,5 +15,3 @@ class Story
         $this->content = $content;
     }
 }
-
-?>
