@@ -43,8 +43,6 @@ $maxId = $storyData->getMaxId();
             <p class="js_scroll fade-in"><?php echo $story->content; ?></p>
         </div>
     </article>
-    <!-- Upload Test -->
-    <!-- Directly From Cursor -->
     <a href="all.php">一覧に戻る</a>
     <?php include __DIR__ . '/include/footer.php'; ?>
 </body>
