@@ -3,7 +3,7 @@ name: Auto Pull Request and Merge
 on:
   push:
     branches:
-      - 'dev/*'  # Theo dõi tất cả các nhánh dev
+      - 'dev/*' 
 
 jobs:
   create-pr:
@@ -18,8 +18,8 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          base: main  # Nhánh chính
-          branch: ${{ github.ref_name }}  # Nhánh của thành viên
+          base: main 
+          branch: ${{ github.ref_name }} 
           title: 'Auto PR from ${{ github.actor }}'
           body: 'This PR is automatically created by GitHub Actions.'
 
@@ -28,4 +28,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
-          merge-method: squash  # Hoặc dùng merge hoặc rebase tùy theo nhu cầu
+          merge-method: squash
