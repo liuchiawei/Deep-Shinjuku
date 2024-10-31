@@ -1,5 +1,5 @@
 <?php
-$jsonFile = '/data/stories.json';
+$jsonFile = '/data/likes_data.json';
 $jsonData = file_get_contents($jsonFile);
 $data = json_decode($jsonData, true);
 

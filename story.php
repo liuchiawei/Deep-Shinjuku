@@ -41,6 +41,10 @@ $maxId = $storyData->getMaxId();
         <div class="story-article-location"><?php echo $story->location; ?></div>
         <div class="story-article-content">
             <p class="js_scroll fade-in"><?php echo $story->content; ?></p>
+            <div class="story-article-buttons-wrap">
+                <button class="like-button"></button>
+                <div class="like-count" id="likeCount"></div>
+            </div>
         </div>
     </article>
     <a href="index.php">一覧に戻る</a>
