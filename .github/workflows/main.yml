@@ -1,0 +1,30 @@
+name: Auto Pull Request and Merge
+
+on:
+  push:
+    branches:
+      - 'dev/*'  # Theo dõi tất cả các nhánh dev
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main  # Nhánh chính
+          branch: ${{ github.ref_name }}  # Nhánh của thành viên
+          title: 'Auto PR from ${{ github.actor }}'
+          body: 'This PR is automatically created by GitHub Actions.'
+
+      - name: Enable Auto-Merge for PR
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.create-pr.outputs.pull-request-number }}
+          merge-method: squash  # Hoặc dùng merge hoặc rebase tùy theo nhu cầu
