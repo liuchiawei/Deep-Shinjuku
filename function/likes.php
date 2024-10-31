@@ -25,5 +25,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //    };
 //    xhr.send();
 // }
-
-//git commit test
