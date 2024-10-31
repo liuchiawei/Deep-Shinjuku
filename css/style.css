@@ -21,6 +21,12 @@ a {
     }
 }
 
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 /* 共通 */
 html, body {
     background-color: var(--background-color);
@@ -220,6 +226,7 @@ html, body {
 .story-article-content {
     display: flex;
     justify-content: center;
+    position: relative;
     width: 90%;
     height: 480px;
     margin: 20px auto;
@@ -235,6 +242,19 @@ html, body {
     line-height: 1.8;
     letter-spacing: 0.05em;
     writing-mode: vertical-rl;
+}
+
+.story-article-buttons-wrap {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+/* like ボタン */
+.like-button {
+    width: 20px;
+    height: 20px;
+    background-color: red;
 }
 
 /* to left and Right icon */
