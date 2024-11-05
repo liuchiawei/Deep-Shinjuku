@@ -89,7 +89,7 @@ html, body {
 }
 
 .stories-item-title {
-    writing-mode: vertical-lr;
+    writing-mode: vertical-rl;
     position: absolute;
     height: 70%;
     top: 20px;
@@ -218,9 +218,11 @@ html, body {
     animation: fade-in 1s ease .3s forwards;
 }
 
-.story-article-location {
+.story-article-location, .story-article-map-title {
     font-size: 14px;
     text-align: center;
+    letter-spacing: 0.2em;
+    font-weight: 300;
 }
 
 .story-article-content {
@@ -251,16 +253,21 @@ html, body {
 }
 
 /* TODO: コメントのコンテンツを作成する */
-/* .story-article-comment styling */
-.story-article-comment {
-    margin: 20px auto;
+/* .story-article-explanation styling */
+.story-article-explanation {
+    margin: 40px auto;
+    text-align: center;
+    font-size: 36px;
+    font-family: "Zen Old Mincho", serif;
+    font-weight: 500;
+    letter-spacing: 0.05em;
 }
 
-.story-article-comment::before {
+.story-article-explanation::before {
     content: '“';
 }
 
-.story-article-comment::after {
+.story-article-explanation::after {
     content: '”';
 }
 
@@ -268,12 +275,6 @@ html, body {
 /* .story-article-map styling */
 .story-article-map {
     margin: 20px auto;
-}
-
-.story-article-map-title {
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
 }
 
 .story-article-map-content {
@@ -351,10 +352,21 @@ html, body {
     rotate: 135deg;
 }
 
+.to-index {
+    width: 180px;
+    margin: 20px auto;
+    text-align: center;
+    & a:hover {
+        transition: 0.3s ease-out;
+        font-weight: bold;
+    }
+}
+
 /* TODO: フッターを作成する */
 /* .footer styling */
 .footer {
     background-color: black;
+    padding: 20px;
 }
 
 .footer p {

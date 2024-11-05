@@ -47,14 +47,18 @@ $maxId = $storyData->getMaxId();
             </div>
         </div>
         <!-- TODO: コメントのコンテンツを作成する(PHP)  -->
-        <div class="story-article-comment"></div>
+        <div class="story-article-explanation">
+            <?php echo $story->explanation ?>
+        </div>
         <!-- TODO: 地図のコンテンツを作成する(PHP) -->
         <div class="story-article-map">
-            <div class="story-article-map-title">地図</div>
             <div class="story-article-map-content"></div>
+            <div class="story-article-map-title"><?php echo $story->location ?></div>
         </div>
     </article>
-    <a href="index.php">一覧に戻る</a>
+    <div class="to-index">
+        <a href="index.php">一覧に戻る</a>
+    </div>
     <?php include __DIR__ . '/include/footer.php'; ?>
 </body>
 <script src="js/app.js?<?php echo time(); ?>"></script>
