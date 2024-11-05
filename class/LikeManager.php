@@ -81,5 +81,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // // ページ読み込み時にlocalStorageの値を読み込んでボタンのテキストを更新
 // window.onload = function() {
 //    var hasLiked = localStorage.getItem("hasLiked") === "true";
-//    document.getElementById("likeButton").innerText = hasLiked ? "Bỏ Like" : "Like";
+//    document.getElementById("likeButton").innerText = hasLiked ? "Unlike" : "Like";
 // };
