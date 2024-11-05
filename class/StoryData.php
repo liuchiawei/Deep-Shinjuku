@@ -14,7 +14,7 @@ class StoryData
         $stories = [];
 
         foreach ($data as $row) {
-            $story = new Story(intval($row['id']), $row['title'], $row['location'], $row['content'], $row['explanation']);
+            $story = new Story(intval($row['id']), $row['title'], $row['location'], $row['location-id'], $row['content'], $row['explanation']);
             $stories[] = $story;
         }
 
