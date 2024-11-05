@@ -7,15 +7,15 @@ class Story
     public string $location;
     public string $locationId;
     public string $content;
-    public string $comment;
+    public string $explanation;
 
-    public function __construct(int $id, string $title, string $location, string $locationId, string $content, string $comment)
+    public function __construct(int $id, string $title, string $location, string $locationId, string $content, string $explanation)
     {
         $this->id = $id;
         $this->title = $title;
         $this->location = $location;
         $this->locationId = $locationId;
         $this->content = $content;
-        $this->comment = $comment;
+        $this->explanation = $explanation;
     }
 }
