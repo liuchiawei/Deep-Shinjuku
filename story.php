@@ -46,6 +46,13 @@ $maxId = $storyData->getMaxId();
                 <div class="like-count" id="likeCount"></div>
             </div>
         </div>
+        <!-- TODO: コメントのコンテンツを作成する(PHP)  -->
+        <div class="story-article-comment"></div>
+        <!-- TODO: 地図のコンテンツを作成する(PHP) -->
+        <div class="story-article-map">
+            <div class="story-article-map-title">地図</div>
+            <div class="story-article-map-content"></div>
+        </div>
     </article>
     <a href="index.php">一覧に戻る</a>
     <?php include __DIR__ . '/include/footer.php'; ?>

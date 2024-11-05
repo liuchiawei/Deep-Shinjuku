@@ -250,7 +250,41 @@ html, body {
     right: 20px;
 }
 
-/* like ボタン */
+/* TODO: コメントのコンテンツを作成する */
+/* .story-article-comment styling */
+.story-article-comment {
+    margin: 20px auto;
+}
+
+.story-article-comment::before {
+    content: '“';
+}
+
+.story-article-comment::after {
+    content: '”';
+}
+
+/* TODO: 地図のコンテンツを作成する */
+/* .story-article-map styling */
+.story-article-map {
+    margin: 20px auto;
+}
+
+.story-article-map-title {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.story-article-map-content {
+    margin: 20px auto;
+    width: 360px;
+    height: 360px;
+    background-color: red;
+}
+
+/* TODO: いいねボタンを作成する */
+/* .like-button styling */
 .like-button {
     width: 20px;
     height: 20px;
@@ -316,6 +350,26 @@ html, body {
     left: 0;
     rotate: 135deg;
 }
+
+/* TODO: フッターを作成する */
+/* .footer styling */
+.footer {
+    background-color: black;
+}
+
+.footer p {
+    color: white;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
 
 /* アニメーション */
 .fadeInBottom {
