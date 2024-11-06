@@ -1,5 +1,6 @@
 const storiesItems = document.querySelectorAll(".stories-item");
 const storiesItem = document.querySelector(".stories-item");
+const storiesRow = document.querySelectorAll(".stories-row");
 const storiesWrap = document.querySelector(".stories-wrap");
 
 // マウスでスクロール
@@ -105,7 +106,7 @@ storiesItems.forEach((item) => {
 
 // Page Load Animation
 function fadeInItems() {
-  storiesItems.forEach((item, index) => {
+  storiesRow.forEach((item, index) => {
     item.style.opacity = "0";
     setTimeout(() => {
       item.classList.add("fadeInBottom");
@@ -119,35 +120,24 @@ function fadeInItems() {
 }
 // Page Load Animation
 
-if (document.querySelector(".stories-wrap")) {
-  window.onload = function () {
-    centerView();
-    enableDragging();
-    keyboardScrolling();
-    fadeInItems();
-  };
-}
-
-// TODO: ANIMATION
 // ↓↓↓↓↓↓↓↓↓ page scroll animation ↓↓↓↓↓↓↓↓↓
-const scrollElements = document.querySelectorAll('.js_scroll');
+const scrollElements = document.querySelectorAll(".js_scroll");
 
 // check element's scrollTop height
 const elementInView = (el, percentageScroll = 100) => {
-  const elementTop = el.getBoundingClientRect().top
+  const elementTop = el.getBoundingClientRect().top;
 
   return (
     elementTop <=
     (window.innerHeight || document.documentElement.clientHeight) *
       (percentageScroll / 100)
-  )
+  );
 };
 
 // add scrolled class
 const displayScrollElement = (element) => {
-  element.classList.add('scrolled')
+  element.classList.add("scrolled");
 };
-
 
 // reset if it's not in the window.
 const hideScrollElement = (element) => {
@@ -161,28 +151,36 @@ const handleScrollAnimation = () => {
       displayScrollElement(el);
     } else {
       hideScrollElement(el);
-    };
-  })
+    }
+  });
 };
 
 // efficiency
-let throttleTimer = false
+let throttleTimer = false;
 
 const throttle = (callback, time) => {
-  if (throttleTimer) return
+  if (throttleTimer) return;
 
-  throttleTimer = true
+  throttleTimer = true;
 
   setTimeout(() => {
-    callback()
-    throttleTimer = false
-  }, time)
+    callback();
+    throttleTimer = false;
+  }, time);
 };
 
 // event listener
-window.addEventListener('scroll', () => {
-  throttle(handleScrollAnimation, 250)
-})
+window.addEventListener("scroll", () => {
+  throttle(handleScrollAnimation, 250);
+});
 
 // ↑↑↑↑↑↑↑↑↑ page scroll animation ↑↑↑↑↑↑↑↑↑
 
+if (document.querySelector(".stories-wrap")) {
+  window.onload = function () {
+    // centerView();
+    enableDragging();
+    keyboardScrolling();
+    fadeInItems();
+  };
+}

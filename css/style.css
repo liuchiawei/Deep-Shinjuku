@@ -2,8 +2,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap');
 :root {
-    --background-color: #efe8dc;
+    --background-color: #131520;
     --icon-color: #fff;
+    --runner-duration: 10s;
 }
 
 /* リセット */
@@ -38,26 +39,46 @@ html, body {
 }
 
 /* index styling */
+.viewport {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    overflow: hidden;
+}
+
 .stories-wrap {
-    width: 2400px;
-    height: 2400px;
+    height: 150vh;
     padding: 80px;
-    display: grid;
-    grid-template-columns: repeat(5, 180px);
-    gap: 120px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    place-items: center;
     cursor: grab;
+    position: absolute;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0) perspective(1200px) rotateY(10deg) rotateX(-10deg);
 }
 
 .stories-wrap:active {
     cursor: grabbing;
 }
 
+.stories-row {
+    display: flex;
+    justify-content: space-around;
+    margin: clamp(10px, 10vw, 20px);
+    width: 20vw;
+    transform: translateX(-100%);
+    animation: runner var(--runner-duration) linear infinite;
+    &:nth-child(even) {
+        animation-duration: calc(var(--runner-duration) * 1.5);
+    }    
+}
+
 .stories-item {
     position: relative;
-    width: 180px;
-    height: 270px;
+    margin: 0 clamp(10px, 10vw, 20px);
+    width: 120px;
+    height: 170px;
     transform-origin: center bottom;
     transform-style: preserve-3d;
     perspective: 1000px;
@@ -87,29 +108,29 @@ html, body {
     z-index: -1;
     background-color: white;
     transform: translateZ(0px);
-    box-shadow: 40px 40px 10px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 20px 20px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .stories-item-title {
     writing-mode: vertical-rl;
     position: absolute;
     height: 70%;
-    top: 20px;
-    left: 90px;
-    transform: translateX(-50%);
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
     color: white;
     font-family: "Zen Old Mincho", serif;
     font-weight: 600;
-    letter-spacing: 0.15em;
-    font-size: 18px;
+    letter-spacing: 0.1em;
+    font-size: 14px;
 }
 
 .stories-item-location {
     text-align: center;
-    font-size: 10px;
+    font-size: 8px;
     color: white;
     position: absolute;
-    bottom: 15px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     letter-spacing: 0.1em;
@@ -551,4 +572,10 @@ html, body {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+@keyframes runner {
+    to {
+        transform: translateX(-200%);
+    }
 }
