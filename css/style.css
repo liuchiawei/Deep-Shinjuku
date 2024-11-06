@@ -1,6 +1,3 @@
-/* TEST FROM LIU 11/06 */
-/* TEST 002*/
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap');
 :root {
     --paper-color: #efe8dc;
@@ -8,6 +5,7 @@
     --icon-color: #fff;
     --runner-duration: 24s;
 }
+
 
 /* リセット */
 * {
@@ -62,8 +60,6 @@ html, body {
     justify-content: space-around;
     margin: clamp(20px, 10vw, 40px);
     width: 200vw;
-    /* TODO: */
-    /* transform: translateX(0%); */
     animation: runner var(--runner-duration) linear infinite;
     &:nth-child(even) {
         animation-duration: calc(var(--runner-duration) * 1.5);
