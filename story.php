@@ -10,21 +10,18 @@ $maxId = $storyData->getMaxId();
 $storyId = $_GET['id'] ?? null;
 
 if ($storyId !== null) {
-    // Khởi tạo LikeManager và lấy số lượt like hiện tại
+    //今のLike数を取得
     $likeManager = new LikeManager('./data/likes_data.json');
-    $likeCount = $likeManager->getLikes($storyId);  // Lấy số lượt like hiện tại
+    $likeCount = $likeManager->getLikes($storyId);
 
-    // Kiểm tra xem đã like chưa (tạo biến để lưu trạng thái like)
+    //Like済みかどうかを取得
     $hasAlreadyLiked = isset($_SESSION['liked_stories'][$storyId]) ? true : false;
 
-    // Nếu có yêu cầu "POST", xử lý cập nhật trạng thái Like
     if (isset($_POST['hasLiked'])) {
         $hasLiked = $_POST['hasLiked'] === 'true';
-        $newLikeCount = $likeManager->toggleLikeForStory($storyId, $hasLiked);  // Cập nhật số lượt like
+        $newLikeCount = $likeManager->toggleLikeForStory($storyId, $hasLiked);
 
-        // Trả về số lượt like mới dưới dạng text cho JavaScript
         echo $newLikeCount;
-        exit();  // Dừng script sau khi gửi phản hồi
     }
 }
 ?>

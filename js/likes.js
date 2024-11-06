@@ -1,44 +1,42 @@
 document.getElementById("likeButton").addEventListener("click", updateLikes);
 
 function updateLikes(event) {
-   event.preventDefault(); // Ngăn chặn hành động mặc định của form (nếu có)
+   event.preventDefault();
 
-   // Lấy storyId từ thuộc tính data của nút like
    var storyId = document.getElementById("likeButton").dataset.storyId;
 
-   // Lấy trạng thái like từ localStorage dựa trên storyId, mặc định là false
+   //LocalStorageからhasLikedの値を取得
    var hasLiked = localStorage.getItem("hasLiked_" + storyId) === "true";
 
-   // Cập nhật trực tiếp giao diện, thay đổi số lượt like mà không chờ phản hồi từ server
+   //Likeの数をアップデートする
    var likeCountElement = document.getElementById("likeCount");
    var currentLikeCount = parseInt(likeCountElement.innerText);
 
-   // Thực hiện thay đổi số lượt like ngay lập tức
+   //Likeの数をアップデートする
    if (hasLiked) {
       likeCountElement.innerText = currentLikeCount - 1;
    } else {
       likeCountElement.innerText = currentLikeCount + 1;
    }
 
-   // Gửi yêu cầu AJAX đến server để cập nhật likes trong JSON
+   //AJAXリクエストを送信
    var xhr = new XMLHttpRequest();
-   xhr.open("POST", "story.php?id=" + storyId, true);  // Gửi POST đến chính file story.php
+   xhr.open("POST", "story.php?id=" + storyId, true);  //story.phpにPOSTリクエストを送信
    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-         // Cập nhật trạng thái like vào localStorage dựa trên storyId
-         localStorage.setItem("hasLiked_" + storyId, !hasLiked);  // Đảo ngược trạng thái like
+         //LocalStorageに保存
+         localStorage.setItem("hasLiked_" + storyId, !hasLiked);
 
-         // Cập nhật nội dung của nút "Like" hoặc "Unlike"
+         //LikeかUnlikeかを切り替える
          document.getElementById("likeButton").innerText = hasLiked ? "Like" : "Unlike";
       }
    };
 
-   // Gửi giá trị trạng thái "hasLiked" và "storyId" tới server
    xhr.send("hasLiked=" + (hasLiked ? 'true' : 'false') + "&storyId=" + storyId);
 }
 
-// Khi tải trang, lấy trạng thái "hasLiked" từ localStorage dựa trên storyId và cập nhật nút
+//ページが読み込まれた時に、LikeかUnlikeかを切り替える
 window.onload = function () {
    var storyId = document.getElementById("likeButton").dataset.storyId;
    var hasLiked = localStorage.getItem("hasLiked_" + storyId) === "true";

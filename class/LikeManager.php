@@ -28,30 +28,28 @@ class LikeManager
 
    public function toggleLikeForStory($storyId, $hasLiked)
    {
-      // Tìm câu chuyện theo ID
+      //IDに一致するストーリーを検索
       foreach ($this->data as &$story) {
          if ($story['id'] == $storyId) {
-            // Kiểm tra trạng thái like và cập nhật số lượt like
             if ($hasLiked) {
-               $story['likes']--; // Nếu đã like, giảm số lượt like
+               $story['likes']--; //Like済みの場合、Like数を減らす
             } else {
-               $story['likes']++; // Nếu chưa like, tăng số lượt like
+               $story['likes']++; //Likeしていない場合、Like数を増やす
             }
-            $this->saveData();  // Ghi lại dữ liệu vào file JSON
-            return $story['likes'];  // Trả về số lượt like mới
+            $this->saveData();
+            return $story['likes'];
          }
       }
-      return 0;  // Nếu không tìm thấy câu chuyện, trả về 0
+      return 0;
    }
 
    public function getLikes($storyId)
    {
-      // Trả về số lượt like của câu chuyện với ID
       foreach ($this->data as $story) {
          if ($story['id'] == $storyId) {
             return $story['likes'];
          }
       }
-      return 0;  // Nếu không tìm thấy câu chuyện, trả về 0
+      return 0;
    }
 }
