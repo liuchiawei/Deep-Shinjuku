@@ -1,7 +1,7 @@
 [
    {
       "id": "1",
-      "likes": "0",
+      "likes": 2,
       "comments": 
       [
 
@@ -10,7 +10,7 @@
 
    {
       "id": "2",
-      "likes": "0",
+      "likes": 3,
       "comments": 
       [
 
@@ -19,7 +19,7 @@
 
    {
       "id": "3",
-      "likes": "0",
+      "likes": 5,
       "comments": 
       [
 
@@ -28,7 +28,7 @@
 
    {
       "id": "4",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -37,7 +37,7 @@
 
    {
       "id": "5",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -46,7 +46,7 @@
 
    {
       "id": "6",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -55,7 +55,7 @@
 
    {
       "id": "7",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -64,7 +64,7 @@
 
    {
       "id": "8",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -73,7 +73,7 @@
 
    {
       "id": "9",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -82,7 +82,7 @@
 
    {
       "id": "10",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -91,7 +91,7 @@
 
    {
       "id": "12",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -100,7 +100,7 @@
 
    {
       "id": "13",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -109,7 +109,7 @@
 
    {
       "id": "14",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -118,7 +118,7 @@
 
    {
       "id": "15",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -127,7 +127,7 @@
 
    {
       "id": "16",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -136,7 +136,7 @@
 
    {
       "id": "17",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -145,7 +145,7 @@
 
    {
       "id": "18",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -154,7 +154,7 @@
 
    {
       "id": "19",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -163,7 +163,7 @@
 
    {
       "id": "20",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -172,7 +172,7 @@
 
    {
       "id": "21",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -181,7 +181,7 @@
 
    {
       "id": "22",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -190,7 +190,7 @@
 
    {
       "id": "23",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -199,7 +199,7 @@
 
    {
       "id": "24",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 
@@ -208,7 +208,7 @@
 
    {
       "id": "25",
-      "likes": "0",
+      "likes": 0,
       "comments": 
       [
 

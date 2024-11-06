@@ -1,11 +1,16 @@
 <?php
 
 require_once __DIR__ . '/class/StoryData.php';
+require_once __DIR__ . '/class/LikeManager.php';
 
 $storyData = new StoryData();
 $story = $storyData->getById($_GET['id']);
 
 $maxId = $storyData->getMaxId();
+
+
+$likeManager = new LikeManager('./data/likes_data.json');  // Đường dẫn tới file JSON
+$likecount = $likeManager->getLikes($story->id);
 ?>
 <html>
 <?php include __DIR__ . '/include/head.php'; ?>
@@ -42,8 +47,8 @@ $maxId = $storyData->getMaxId();
         <div class="story-article-content">
             <p class="js_scroll fade-in"><?php echo $story->content; ?></p>
             <div class="story-article-buttons-wrap">
-                <button class="like-button"></button>
-                <div class="like-count" id="likeCount"></div>
+                <button id="likeButton" class="like-button" data-story-id="<?php echo $story->id; ?>"></button>
+                <div class="like-count" id="likeCount"><?php echo $likecount; ?></div>
             </div>
         </div>
         <!-- TODO: コメントのコンテンツを作成する(PHP)  -->
@@ -62,5 +67,10 @@ $maxId = $storyData->getMaxId();
     <?php include __DIR__ . '/include/footer.php'; ?>
 </body>
 <script src="js/app.js?<?php echo time(); ?>"></script>
+<script src="js/likes.js"></script>
+
+<script>
+    document.getElementById('likeButton').dataset.storyId = <?php echo $story->id; ?>;
+</script>
 
 </html>
