@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/class/StoryData.php';
 require_once __DIR__ . '/class/LikeManager.php';
 
@@ -8,9 +7,26 @@ $story = $storyData->getById($_GET['id']);
 
 $maxId = $storyData->getMaxId();
 
+$storyId = $_GET['id'] ?? null;
 
-$likeManager = new LikeManager('./data/likes_data.json');  // Đường dẫn tới file JSON
-$likecount = $likeManager->getLikes($story->id);
+if ($storyId !== null) {
+    // Khởi tạo LikeManager và lấy số lượt like hiện tại
+    $likeManager = new LikeManager('./data/likes_data.json');
+    $likeCount = $likeManager->getLikes($storyId);  // Lấy số lượt like hiện tại
+
+    // Kiểm tra xem đã like chưa (tạo biến để lưu trạng thái like)
+    $hasAlreadyLiked = isset($_SESSION['liked_stories'][$storyId]) ? true : false;
+
+    // Nếu có yêu cầu "POST", xử lý cập nhật trạng thái Like
+    if (isset($_POST['hasLiked'])) {
+        $hasLiked = $_POST['hasLiked'] === 'true';
+        $newLikeCount = $likeManager->toggleLikeForStory($storyId, $hasLiked);  // Cập nhật số lượt like
+
+        // Trả về số lượt like mới dưới dạng text cho JavaScript
+        echo $newLikeCount;
+        exit();  // Dừng script sau khi gửi phản hồi
+    }
+}
 ?>
 <html>
 <?php include __DIR__ . '/include/head.php'; ?>
@@ -47,15 +63,17 @@ $likecount = $likeManager->getLikes($story->id);
         <div class="story-article-content">
             <p class="js_scroll fade-in"><?php echo $story->content; ?></p>
             <div class="story-article-buttons-wrap">
-                <button id="likeButton" class="like-button" data-story-id="<?php echo $story->id; ?>"></button>
-                <div class="like-count" id="likeCount"><?php echo $likecount; ?></div>
+                <form method="POST" action="story.php?id=<?php echo $story->id; ?>">
+                    <button type="submit" name="hasLiked" value="<?php echo $hasAlreadyLiked ? 'false' : 'true'; ?>" id="likeButton" class="like-button">
+                        <?php echo $hasAlreadyLiked ? 'Unlike' : 'Like'; ?>
+                    </button>
+                </form>
+                <div class="like-count" id="likeCount"><?php echo $likeCount; ?></div>
             </div>
         </div>
-        <!-- TODO: コメントのコンテンツを作成する(PHP)  -->
         <div class="story-article-explanation">
             <?php echo $story->explanation ?>
         </div>
-        <!-- TODO: 地図のコンテンツを作成する(PHP) -->
         <div class="story-article-map">
             <div class="story-article-map-content"></div>
             <div class="story-article-map-title"><?php echo $story->location ?></div>

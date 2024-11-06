@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/class/LikeManager.php';
+require_once __DIR__ . '../class/LikeManager.php';
 
 // Nhận trạng thái like và storyId từ yêu cầu POST
 $hasLiked = $_POST['hasLiked'] ?? 'false';
@@ -15,4 +15,6 @@ if ($storyId !== null) {
 
    // Trả về số lượt like mới dưới dạng phản hồi AJAX
    echo $newLikesCount;
+} else {
+   echo "Error: Invalid story ID.";
 }

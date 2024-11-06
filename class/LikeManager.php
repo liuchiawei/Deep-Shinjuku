@@ -31,18 +31,17 @@ class LikeManager
       // Tìm câu chuyện theo ID
       foreach ($this->data as &$story) {
          if ($story['id'] == $storyId) {
-            if ($hasLiked === "true") {
-               // Nếu đã like, giảm số lượt like
-               $story['likes']--;
+            // Kiểm tra trạng thái like và cập nhật số lượt like
+            if ($hasLiked) {
+               $story['likes']--; // Nếu đã like, giảm số lượt like
             } else {
-               // Nếu chưa like, tăng số lượt like
-               $story['likes']++;
+               $story['likes']++; // Nếu chưa like, tăng số lượt like
             }
-            $this->saveData();
-            return $story['likes'];  // Trả về số lượt like mới cho câu chuyện
+            $this->saveData();  // Ghi lại dữ liệu vào file JSON
+            return $story['likes'];  // Trả về số lượt like mới
          }
       }
-      return 0; // Nếu không tìm thấy câu chuyện, trả về 0
+      return 0;  // Nếu không tìm thấy câu chuyện, trả về 0
    }
 
    public function getLikes($storyId)
