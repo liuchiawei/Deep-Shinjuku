@@ -88,7 +88,7 @@ if ($storyId !== null) {
                 <button type="button" id="deleteComment" class="user-comment-btn">削除</button>
             </div>
             <div class="user-comment-content">
-                コメント
+                コメント内容
             </div>
             <div class="user-comment-author">
                 名前
@@ -97,7 +97,7 @@ if ($storyId !== null) {
                 日時
             </div>
         </div>
-        <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全てのコメントを見る</button>
+        <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全てのコメントを見る（TODO:こちらに全部のコメントの数を表示）</button>
     </div>
     <div class="to-index">
         <a href="index.php">一覧に戻る</a>
