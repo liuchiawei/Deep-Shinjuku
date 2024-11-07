@@ -76,6 +76,29 @@ if ($storyId !== null) {
             <div class="story-article-map-title"><?php echo $story->location ?></div>
         </div>
     </article>
+    <form action="story.php?id=<?php echo $story->id; ?>" method="POST">
+        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+        <button type="submit">コメントを投稿</button>
+    </form>
+    <div id="user-comment-wrap" class="user-comment-wrap">
+        <!-- TODO:コメントを表示する(foreach) -->
+        <div class="user-comment">
+            <div class="user-comment-btns">
+                <button type="button" id="editComment" class="user-comment-btn">編集</button>
+                <button type="button" id="deleteComment" class="user-comment-btn">削除</button>
+            </div>
+            <div class="user-comment-content">
+                コメント
+            </div>
+            <div class="user-comment-author">
+                名前
+            </div>
+            <div class="user-comment-time">
+                日時
+            </div>
+        </div>
+        <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全てのコメントを見る</button>
+    </div>
     <div class="to-index">
         <a href="index.php">一覧に戻る</a>
     </div>

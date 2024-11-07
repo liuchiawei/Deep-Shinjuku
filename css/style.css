@@ -33,7 +33,7 @@ button {
 /* 共通 */
 html, body {
     background: url('../image/texture/paper-texture.jpg?v=<?php echo time(); ?>');
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
     /* background: radial-gradient(circle, #343836be 0%, var(--background-color) 30%); */
     background-blend-mode: multiply;
     background-attachment: fixed;
