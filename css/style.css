@@ -12,7 +12,10 @@
     --book-height: 170px;
     /* story.phpの本のサイズ */
     --article-book-width: 240px;
-    --article-book-height: 360px;
+    --article-book-height: 340px;
+    /* コメント欄のサイズ */
+    --comment-wrap-width: 360px;
+    --comment-wrap-height: 120px;
 }
 
 
@@ -23,7 +26,7 @@
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: var(--comment-font);
 }
 
 a {
@@ -120,8 +123,8 @@ html, body {
     /* タイトル */
     &::after{
         content: attr(data-title);
-        color: white;
-        font-family: "Zen Old Mincho", serif;
+        color: var(--font-color);
+        font-family: var(--title-font);
         font-weight: 400;
         letter-spacing: 0.1em;
         font-size: 8px;
@@ -163,7 +166,7 @@ html, body {
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     color: white;
-    font-family: "Zen Old Mincho", serif;
+    font-family: var(--title-font);
     font-weight: 600;
     letter-spacing: 0.1em;
     font-size: 10px;
@@ -252,7 +255,7 @@ html, body {
 }
 
 .story-item-title {
-    font-family: "Zen Old Mincho", serif;
+    font-family: var(--title-font);
     font-size: 24px;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -285,7 +288,7 @@ html, body {
     font-weight: 600;
     text-align: center;
     letter-spacing: 0.1em;
-    font-family: "Zen Old Mincho", serif;
+    font-family: var(--title-font);
     font-weight: 900;
     margin: 10px 0;
     opacity: 0;
@@ -313,7 +316,7 @@ html, body {
 }
 
 .story-article-content p {
-    font-family: "Zen Old Mincho", serif;
+    font-family: var(--title-font);
     font-weight: 500;
     font-size: 16px;
     line-height: 1.8;
@@ -333,7 +336,7 @@ html, body {
     margin: 40px auto;
     text-align: center;
     font-size: 36px;
-    font-family: "Zen Old Mincho", serif;
+    font-family: var(--title-font);
     font-weight: 500;
     letter-spacing: 0.05em;
     color: var(--font-color);
@@ -363,6 +366,12 @@ html, body {
 /* TODO:コメント欄のスタイリング */
 .user-comment-wrap {
     background-color: red;
+}
+
+.user-comment {
+    width: var(--comment-wrap-width);
+    height: var(--comment-wrap-height);
+    border: 1px solid #000;
 }
 
 /* TODO: いいねボタンを作成する */
