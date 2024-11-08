@@ -76,11 +76,12 @@ if ($storyId !== null) {
             <div class="story-article-map-title"><?php echo $story->location ?></div>
         </div>
     </article>
-    <form action="story.php?id=<?php echo $story->id; ?>" method="POST">
-        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+    <div class="user-comment-wrap">
+        <form action="story.php?id=<?php echo $story->id; ?>" method="POST">
+            <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
         <button type="submit">コメントを投稿</button>
     </form>
-    <div id="user-comment-wrap" class="user-comment-wrap">
+
         <!-- TODO:コメントを表示する(foreach) -->
         <div class="user-comment">
             <div class="user-comment-btns">

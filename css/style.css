@@ -4,6 +4,15 @@
     --background-color: #131520;
     --icon-color: #fff;
     --runner-duration: 24s;
+    --title-font: "Zen Old Mincho", serif;
+    --comment-font: "Noto Sans JP", sans-serif;
+    --font-color: #fff;
+    /* index.phpの本のサイズ */
+    --book-width: 120px;
+    --book-height: 170px;
+    /* story.phpの本のサイズ */
+    --article-book-width: 240px;
+    --article-book-height: 360px;
 }
 
 
@@ -32,8 +41,9 @@ button {
 
 /* 共通 */
 html, body {
-    background: url('../image/texture/paper-texture.jpg?v=<?php echo time(); ?>');
-    /* background-color: var(--background-color); */
+    /* TODO:背景色を変更する */
+    background-color: var(--background-color);
+    /* background: url('../image/texture/paper-texture.jpg?v=<?php echo time(); ?>'); */
     /* background: radial-gradient(circle, #343836be 0%, var(--background-color) 30%); */
     background-blend-mode: multiply;
     background-attachment: fixed;
@@ -68,8 +78,8 @@ html, body {
 
 .stories-item {
     position: relative;
-    width: 120px;
-    height: 170px;
+    width: var(--book-width);
+    height: var(--book-height);
     transform: rotateX(20deg) rotateY(30deg);
     transform-origin: center bottom;
     transform-style: preserve-3d;
@@ -256,7 +266,7 @@ html, body {
 
 .story-item-location {
     font-size: 14px;
-    color: white;
+    color: var(--font-color);
     letter-spacing: 0.1em;
     position: absolute;
     bottom: 10px;
@@ -270,6 +280,7 @@ html, body {
 }
 
 .story-article-title {
+    color: var(--font-color);
     font-size: 36px;
     font-weight: 600;
     text-align: center;
@@ -286,6 +297,7 @@ html, body {
     text-align: center;
     letter-spacing: 0.2em;
     font-weight: 300;
+    color: var(--font-color);
 }
 
 .story-article-content {
@@ -324,6 +336,7 @@ html, body {
     font-family: "Zen Old Mincho", serif;
     font-weight: 500;
     letter-spacing: 0.05em;
+    color: var(--font-color);
 }
 
 .story-article-explanation::before {
@@ -344,6 +357,11 @@ html, body {
     margin: 20px auto;
     width: 360px;
     height: 360px;
+    background-color: red;
+}
+
+/* TODO:コメント欄のスタイリング */
+.user-comment-wrap {
     background-color: red;
 }
 
@@ -419,6 +437,9 @@ html, body {
     width: 180px;
     margin: 20px auto;
     text-align: center;
+    & a {
+        color: var(--font-color);
+    }
     & a:hover {
         transition: 0.3s ease-out;
         font-weight: bold;
