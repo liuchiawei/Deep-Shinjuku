@@ -17,17 +17,15 @@ $stories = $storyData->getAll();
                 <?php for ($j = 0; $j < 10; $j++) : ?>
                     <?php $story = $stories[$i * 5 + $j % 5]; ?>
                     <div class="stories-item" id="<?= $story->id ?>">
-                        <div class="stories-item-cover">
+                        <div class="stories-item-cover" style="background: url('image/<?= $story->id ?>.jpg') no-repeat center center / cover;" >
                             <a href="./story.php?id=<?= $story->id ?>">
-                                <div class="stories-item-image">
-                                    <img src="image/<?= $story->id ?>.jpg" alt="<?= $story->title ?>">
-                                </div>
                                 <h2 class="stories-item-title"><?= $story->title ?></h2>
                                 <h3 class="stories-item-location"><?= $story->location ?></h3>
                             </a>
                         </div>
-                        <div class="stories-item-background"></div>
+                        <div class="stories-item-open"></div>
                         <div class="stories-item-spine" data-title="<?= $story->title ?>"></div>
+                        <div class="stories-item-background" style="background: url('image/<?= $story->id ?>.jpg') no-repeat center center / cover;"></div>
                     </div>
                 <?php endfor; ?>
             </div>

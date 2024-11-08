@@ -91,7 +91,8 @@ storiesItems.forEach((item) => {
     scrollToElement(this);
     setTimeout(() => {
       cover.classList.remove("openBook");
-    }, 1550);
+      item.style.transform = "rotateX(20deg) rotateY(30deg)";
+    }, 3000);
 
     // 次のページに移動
     cover.addEventListener(
@@ -106,19 +107,19 @@ storiesItems.forEach((item) => {
 // 本を開いて中心に移動
 
 // Indexのイントロアニメーション Page Load Animation
-function fadeInItems() {
-  storiesRow.forEach((item, index) => {
-    item.style.opacity = "0";
-    setTimeout(() => {
-      item.classList.add("fadeInBottom");
+// function fadeInItems() {
+//   storiesRow.forEach((item, index) => {
+//     item.style.opacity = "0";
+//     setTimeout(() => {
+//       item.classList.add("fadeInBottom");
 
-      setTimeout(() => {
-        item.style.opacity = "1";
-        item.classList.remove("fadeInBottom");
-      }, 800);
-    }, index * 100); // 100msずつ遅延させて順番にフェードイン
-  });
-}
+//       setTimeout(() => {
+//         item.style.opacity = "1";
+//         item.classList.remove("fadeInBottom");
+//       }, 800);
+//     }, index * 100); // 100msずつ遅延させて順番にフェードイン
+//   });
+// }
 // Page Load Animation
 
 // ↓↓↓↓↓↓↓↓↓ page scroll animation ↓↓↓↓↓↓↓↓↓

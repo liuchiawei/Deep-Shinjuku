@@ -3,7 +3,7 @@
     --paper-color: #efe8dc;
     --background-color: #131520;
     --icon-color: #fff;
-    --runner-duration: 24s;
+    --runner-duration: 25s;
     --title-font: "Zen Old Mincho", serif;
     --comment-font: "Noto Sans JP", sans-serif;
     --font-color: #fff;
@@ -59,14 +59,9 @@ html, body {
     flex-direction: column;
     justify-content: center;
     position: absolute;
-    left: 10%;
-    transform: translate3d(-10%, 0, 0) perspective(2000px) rotateY(10deg) rotateX(-10deg);
-    /* cursor: grab; */
+    left: 0;
+    transform: translate3d(0, 0, 0) perspective(2000px) rotateY(10deg) rotateX(-10deg);
 }
-
-/* .stories-wrap:active {
-    cursor: grabbing;
-} */
 
 .stories-row {
     display: flex;
@@ -143,18 +138,32 @@ html, body {
     position: relative;
     z-index: 3;
     background-color: black;
-    transform-origin: right;
+    transform-origin: right;        
 }
 
-.stories-item-background {
+.stories-item-cover::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    backdrop-filter: brightness(0.4);
+    transition: 0.3s ease-out;
     z-index: -1;
+}
+
+.stories-item-open {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
     background-color: white;
-    transform: translateZ(0px);
+    transform-origin: center;
+    /* transform: translateZ(0px); */
+    scale: 0.95;
     box-shadow: 20px 20px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -183,18 +192,19 @@ html, body {
     letter-spacing: 0.1em;
 }
 
-.stories-item-image {
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    filter: brightness(0.4);
-    transition: 0.3s ease-out;
-}
-
-.stories-item-image img {
-    height: 100%;
+.stories-item-background {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    transform: translateX(-40%) translateY(-50%);
+    filter: blur(40px) opacity(0.6);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 /* Story Item Hover Styling */
@@ -204,8 +214,8 @@ html, body {
     scale: 1.05;
 }
 
-.stories-item:hover .stories-item-image {
-    filter: brightness(1);
+.stories-item:hover .stories-item-cover::before {
+    backdrop-filter: none;
 }
 
 .stories-item:hover .stories-item-title {
