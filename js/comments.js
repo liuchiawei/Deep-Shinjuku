@@ -9,7 +9,7 @@ function postComment(event) {
 
     // Tạo AJAX request để gửi bình luận đến PHP
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "story.php", true);
+    xhr.open("POST", "story.php?id=" + storyId, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function () {
