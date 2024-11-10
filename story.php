@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/class/StoryData.php';
 require_once __DIR__ . '/class/LikeManager.php';
+require_once __DIR__ . '/class/CommentManager.php';
 
 $storyData = new StoryData();
 $story = $storyData->getById($_GET['id']);
@@ -23,6 +24,29 @@ if ($storyId !== null) {
 
         echo $newLikeCount;
     }
+}
+
+$commentManager = new CommentManager('./data/likes_data.json');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Nhận dữ liệu từ AJAX
+    $storyId = $_POST['storyId'];
+    $author = $_POST['author'];
+    $content = $_POST['content'];
+
+    // Thêm bình luận vào JSON
+    $newComment = $commentManager->addComment($storyId, $author, $content);
+
+    // Trả về bình luận mới dưới dạng JSON để hiển thị ngay lập tức
+    echo json_encode($newComment);
+} else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['storyId'])) {
+    $storyId = $_GET['storyId'];
+
+    // Lấy tất cả các bình luận cho câu chuyện từ JSON
+    $comments = $commentManager->getComments($storyId);
+
+    // Trả về danh sách bình luận dưới dạng JSON
+    echo json_encode($comments);
 }
 ?>
 <html>
@@ -79,8 +103,8 @@ if ($storyId !== null) {
     <div class="user-comment-wrap">
         <form action="story.php?id=<?php echo $story->id; ?>" method="POST">
             <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-        <button type="submit">コメントを投稿</button>
-    </form>
+            <button type="submit">コメントを投稿</button>
+        </form>
 
         <!-- TODO:コメントを表示する(foreach) -->
         <div class="user-comment">
@@ -107,6 +131,7 @@ if ($storyId !== null) {
 </body>
 <script src="js/app.js?<?php echo time(); ?>"></script>
 <script src="js/likes.js"></script>
+<script src="js/comments.js"></script>
 
 <script>
     document.getElementById('likeButton').dataset.storyId = <?php echo $story->id; ?>;
