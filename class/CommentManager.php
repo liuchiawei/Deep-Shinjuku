@@ -11,7 +11,6 @@ class CommentManager
         $this->loadData();
     }
 
-    // Tải dữ liệu từ file JSON
     private function loadData()
     {
         if (file_exists($this->jsonFile)) {
@@ -22,7 +21,6 @@ class CommentManager
         }
     }
 
-    // Lưu dữ liệu vào file JSON
     private function saveData()
     {
         // Chỉ lưu nếu dữ liệu có thay đổi hoặc cần thiết
