@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['storyId'])) {
     $storyId = $_GET['storyId'];
     $comments = $commentManager->getComments($storyId);
+    $commentCount = count($comments);
     $displayedComments = [];
 
     $input = json_decode(file_get_contents('php://input'), true);
@@ -124,14 +125,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="button" id="editComment" class="user-comment-btn">編集</button>
                 <button type="button" id="deleteComment" class="user-comment-btn">削除</button>
             </div>
-            <!-- <div class="user-comment-content">
-                コメント内容
-            </div>
-            <div class="user-comment-author">
-                名前
-            </div> -->
+            <?php foreach ($comments as $comment) : ?>
+                <div class="user-comment-content">
+                    <?php echo $comment['content']; ?>
+                </div>
+                <div class="user-comment-author">
+                    <?php echo $comment['author']; ?>
+                </div>
+            <?php endforeach; ?>
         </div>
-        <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全êての<?php echo $commentCount ?>のコメントを表示する</button>
+        <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全べての<?php echo $commentCount ?>のコメントを表示する</button>
     </div>
     <div class="to-index">
         <a href="index.php">一覧に戻る</a>
