@@ -1,3 +1,3 @@
 <footer class="footer">
-  <p>©2024 DEEP SHINJUKU</p>
+  <p>©2024 コードの森 All rights reserved.</p>
 </footer>
