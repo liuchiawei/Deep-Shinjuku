@@ -6,17 +6,17 @@ function postComment(event) {
     var storyId = document.getElementById("commentForm").dataset.storyId;
     var author = document.getElementById("author").value;
     var content = document.getElementById("content").value;
-        // Tạo AJAX request để gửi bình luận đến PHP
+        //AjaxでPHPにデータを送信
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "story.php?id=" + storyId, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-                        // Xóa dữ liệu input sau khi gửi bình luận
+                        //コメントを送信しらら、フォームをクリア
             document.getElementById("author").value = '';
             document.getElementById("content").value = '';
-            // Thêm bình luận vào giao diện mà không cần làm mới trang
+            //ページをリロードせずにコメントを追加
             var newComment = JSON.parse(xhr.responseText);
             displayComment(newComment);
         }
@@ -24,17 +24,17 @@ function postComment(event) {
 
     xhr.send("storyId=" + storyId + "&author=" + encodeURIComponent(author) + "&content=" + encodeURIComponent(content));
 }
-// Hiển thị bình luận mới
+//新しいコメントを表示
 function displayComment(comment) {
     var commentSection = document.getElementById("commentSection");
 
     var commentDiv = document.createElement("div");
     commentDiv.className = "comment";
     commentDiv.innerHTML = `<strong>${comment.author}</strong> (${comment.time}): ${comment.content}`;
-    // Thêm bình luận mới vào phần đầu của danh sách bình luận
+    //新しいコメントを上に表示
     commentSection.insertBefore(commentDiv, commentSection.firstChild);
 }
-// Khi trang tải, lấy các bình luận từ server để hiển thị
+
 window.onload = function () {
     var storyId = document.getElementById("commentForm").dataset.storyId;
     const storedCommentId = localStorage.getItem('commentId');

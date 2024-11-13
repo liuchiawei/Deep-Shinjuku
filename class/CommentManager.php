@@ -23,7 +23,7 @@ class CommentManager
 
     private function saveData()
     {
-        // Chỉ lưu nếu dữ liệu có thay đổi hoặc cần thiết
+        //データが空でない場合保存する
         if (!empty($this->data)) {
             // Kiểm tra nếu dữ liệu thực sự thay đổi trước khi ghi
             $existingData = file_get_contents($this->jsonFile);
@@ -44,7 +44,7 @@ class CommentManager
             'time' => date('Y-m-d H:i:s'),
             'content' => $content
         ];
-        // Tìm câu chuyện dựa vào storyId, rồi thêm bình luận vào danh sách bình luận
+        // ストーリIDが一致するストーリーを探す
         foreach ($this->data as &$story) {
             if ($story['id'] == $storyId) {
                 $story['comments'][] = $newComment;
@@ -52,7 +52,7 @@ class CommentManager
                 return $newComment;
             }
         }
-        // Nếu không tìm thấy câu chuyện, tạo mới một câu chuyện và thêm bình luận vào đó
+        //ストーリーが見つからない場合は新しいストーリーを作成
         $this->data[] = [
             'id' => $storyId,
             'comments' => [$newComment]
