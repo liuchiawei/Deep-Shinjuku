@@ -6,18 +6,16 @@ function postComment(event) {
     var storyId = document.getElementById("commentForm").dataset.storyId;
     var author = document.getElementById("author").value;
     var content = document.getElementById("content").value;
-
-    // Tạo AJAX request để gửi bình luận đến PHP
+        // Tạo AJAX request để gửi bình luận đến PHP
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "story.php?id=" + storyId, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            // Xóa dữ liệu input sau khi gửi bình luận
+                        // Xóa dữ liệu input sau khi gửi bình luận
             document.getElementById("author").value = '';
             document.getElementById("content").value = '';
-
             // Thêm bình luận vào giao diện mà không cần làm mới trang
             var newComment = JSON.parse(xhr.responseText);
             displayComment(newComment);
@@ -26,7 +24,6 @@ function postComment(event) {
 
     xhr.send("storyId=" + storyId + "&author=" + encodeURIComponent(author) + "&content=" + encodeURIComponent(content));
 }
-
 // Hiển thị bình luận mới
 function displayComment(comment) {
     var commentSection = document.getElementById("commentSection");
@@ -34,26 +31,26 @@ function displayComment(comment) {
     var commentDiv = document.createElement("div");
     commentDiv.className = "comment";
     commentDiv.innerHTML = `<strong>${comment.author}</strong> (${comment.time}): ${comment.content}`;
-
     // Thêm bình luận mới vào phần đầu của danh sách bình luận
     commentSection.insertBefore(commentDiv, commentSection.firstChild);
 }
-
 // Khi trang tải, lấy các bình luận từ server để hiển thị
 window.onload = function () {
     var storyId = document.getElementById("commentForm").dataset.storyId;
+    const storedCommentId = localStorage.getItem('commentId');
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "story.php?storyId=" + storyId, true);
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var comments = JSON.parse(xhr.responseText);
-            comments.forEach(function (comment) {
-                displayComment(comment);
-            });
-        }
-    };
-
-    xhr.send();
+    fetch("story.php?storyId=" + storyId, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ storyId: storyId, commentId: storedCommentId })
+    })
+    .then(response => response.json())
+    .then(comments => {
+        comments.slice(0, 2).forEach(function (comment) {
+            displayComment(comment);
+        });
+    })
+    .catch(error => console.error('Lỗi:', error));
 };

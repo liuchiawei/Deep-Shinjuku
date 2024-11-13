@@ -29,25 +29,42 @@ if ($storyId !== null) {
 $commentManager = new CommentManager('./data/likes_data.json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Nhận dữ liệu từ AJAX
     $storyId = $_POST['storyId'];
     $author = $_POST['author'];
     $content = $_POST['content'];
 
-    // Thêm bình luận vào JSON
     $newComment = $commentManager->addComment($storyId, $author, $content);
-
-    // Trả về bình luận mới dưới dạng JSON để hiển thị ngay lập tức
     echo json_encode($newComment);
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['storyId'])) {
     $storyId = $_GET['storyId'];
-
-    // Lấy tất cả các bình luận cho câu chuyện từ JSON
     $comments = $commentManager->getComments($storyId);
+    $commentCount = count($comments);
+    $displayedComments = [];
 
-    // Trả về danh sách bình luận dưới dạng JSON
-    echo json_encode($comments);
+    $input = json_decode(file_get_contents('php://input'), true);
+    $storedCommentId = $input['commentId'] ?? null;
+
+    if ($storedCommentId) {
+        foreach ($comments as $comment) {
+            if ($comment['comment_id'] == $storedCommentId) {
+                $displayedComments[] = $comment;
+                break;
+            }
+        }
+    }
+
+    foreach ($comments as $comment) {
+        if (count($displayedComments) >= 2) {
+            break;
+        }
+        if (!in_array($comment, $displayedComments)) {
+            $displayedComments[] = $comment;
+        }
+    }
+
+    echo json_encode($displayedComments);
 }
+
 ?>
 <html>
 <?php include __DIR__ . '/include/head.php'; ?>
@@ -112,17 +129,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="button" id="editComment" class="user-comment-btn">編集</button>
                 <button type="button" id="deleteComment" class="user-comment-btn">削除</button>
             </div>
-            <div class="user-comment-content">
+            <!-- <div class="user-comment-content">
                 コメント内容
             </div>
             <div class="user-comment-author">
                 名前
-            </div>
-            <div class="user-comment-time">
-                日時
-            </div>
+            </div> -->
         </div>
-        <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全てのコメントを見る（TODO:こちらに全部のコメントの数を表示）</button>
+        <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全êての<?php echo $commentCount ?>のコメントを表示する</button>
     </div>
     <div class="to-index">
         <a href="index.php">一覧に戻る</a>
