@@ -35,16 +35,15 @@ class CommentManager
         }
     }
 
-    // Thêm bình luận cho một câu chuyện dựa vào storyId
+    //コメントを追加する
     public function addComment($storyId, $author, $content)
     {
         $newComment = [
-            'comment_id' => uniqid(), //唯一のIDを生成
+            'comment_id' => uniqid(),
             'author' => $author,
             'time' => date('Y-m-d H:i:s'),
             'content' => $content
         ];
-
         // Tìm câu chuyện dựa vào storyId, rồi thêm bình luận vào danh sách bình luận
         foreach ($this->data as &$story) {
             if ($story['id'] == $storyId) {
@@ -53,8 +52,7 @@ class CommentManager
                 return $newComment;
             }
         }
-
-        // Nếu không tìm thấy câu chuyện, tạo mới một câu chuyện và thêm bình luận vào
+        // Nếu không tìm thấy câu chuyện, tạo mới một câu chuyện và thêm bình luận vào đó
         $this->data[] = [
             'id' => $storyId,
             'comments' => [$newComment]
@@ -62,8 +60,7 @@ class CommentManager
         $this->saveData();
         return $newComment;
     }
-
-    //すべてのコメントを取得
+    //全てのコメントを取得する
     public function getComments($storyId)
     {
         foreach ($this->data as $story) {
@@ -73,7 +70,6 @@ class CommentManager
         }
         return [];
     }
-
     //コメントIDに一致するコメントを削除
     public function editComment($storyId, $commentId, $newContent)
     {
@@ -82,7 +78,7 @@ class CommentManager
                 foreach ($story['comments'] as &$comment) {
                     if ($comment['comment_id'] == $commentId) {
                         $comment['content'] = $newContent;
-                        $comment['time'] = date('Y-m-d H:i:s'); // Cập nhật thời gian chỉnh sửa
+                        $comment['time'] = date('Y-m-d H:i:s');
                         $this->saveData();
                         return true;
                     }
@@ -91,7 +87,6 @@ class CommentManager
         }
         return false;
     }
-
     //コメントIDに一致するコメントを削除
     public function deleteComment($storyId, $commentId)
     {
@@ -100,7 +95,7 @@ class CommentManager
                 foreach ($story['comments'] as $index => $comment) {
                     if ($comment['comment_id'] == $commentId) {
                         unset($story['comments'][$index]);
-                        $story['comments'] = array_values($story['comments']); // Đặt lại chỉ số mảng
+                        $story['comments'] = array_values($story['comments']);
                         $this->saveData();
                         return true;
                     }
