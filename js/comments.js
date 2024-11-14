@@ -52,5 +52,5 @@ window.onload = function () {
             displayComment(comment);
         });
     })
-    .catch(error => console.error('Lỗi:', error));
+    .catch(error => console.error('Error', error));
 };

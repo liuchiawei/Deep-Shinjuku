@@ -23,52 +23,44 @@ class CommentManager
 
     private function saveData()
     {
-        //データが空でない場合保存する
-        if (!empty($this->data)) {
-            $existingData = file_get_contents($this->jsonFile);
-            $existingData = json_decode($existingData, true);
-
-            if ($existingData !== $this->data) {
-                file_put_contents($this->jsonFile, json_encode($this->data, JSON_PRETTY_PRINT));
-            }
-        }
+        file_put_contents($this->jsonFile, json_encode($this->data, JSON_PRETTY_PRINT));
     }
 
     //コメントを追加する
     public function addComment($storyId, $author, $content)
     {
+        // jsonファイルを読み込む
+        $data = json_decode(file_get_contents($this->jsonFile), true);
+
         $newComment = [
             'comment_id' => uniqid(),
             'author' => $author,
-            'time' => date('Y-m-d H:i:s'),
+            'time' => date('Y-m-d'),
             'content' => $content
         ];
-        // ストーリIDが一致するストーリーを探す
-        foreach ($this->data as &$story) {
+
+        foreach ($data as &$story) {
             if ($story['id'] == $storyId) {
                 $story['comments'][] = $newComment;
-                $this->saveData();
+                file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
                 return $newComment;
             }
         }
-        //ストーリーが見つからない場合は新しいストーリーを作成
-        $this->data[] = [
-            'id' => $storyId,
-            'comments' => [$newComment]
-        ];
-        $this->saveData();
-        return $newComment;
+
+        return null;
     }
+
     //全てのコメントを取得する
     public function getComments($storyId)
     {
         foreach ($this->data as $story) {
             if ($story['id'] == $storyId) {
-                return $story['comments'] ?? [];
+                return count($story['comments']);
             }
         }
-        return [];
+        return 0;
     }
+
     //コメントIDに一致するコメントを削除
     public function editComment($storyId, $commentId, $newContent)
     {
@@ -77,7 +69,7 @@ class CommentManager
                 foreach ($story['comments'] as &$comment) {
                     if ($comment['comment_id'] == $commentId) {
                         $comment['content'] = $newContent;
-                        $comment['time'] = date('Y-m-d H:i:s');
+                        $comment['time'] = date('Y-m-d');
                         $this->saveData();
                         return true;
                     }

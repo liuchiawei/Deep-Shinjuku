@@ -4,6 +4,8 @@ $storyData = new StoryData();
 $story = $storyData->getById($_GET['id']);
 $maxId = $storyData->getMaxId();
 $storyId = $_GET['id'] ?? null;
+$comments = [];
+$commentCount = 0;
 
 if ($storyId !== null) {
    //今のストーリーのLike数を取得
@@ -21,39 +23,19 @@ if ($storyId !== null) {
 
 $commentManager = new CommentManager('./data/likes_data.json');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-   $storyId = $_POST['storyId'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['id'])) {
+   $storyId = $_GET['id'];
    $author = $_POST['author'];
    $content = $_POST['content'];
+   $commentCount = $commentManager->getComments($storyId);
 
+   //addCommentメソッドを使ってコメントを追加
    $newComment = $commentManager->addComment($storyId, $author, $content);
-   echo json_encode($newComment);
-} else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['storyId'])) {
-   $storyId = $_GET['storyId'];
-   $comments = $commentManager->getComments($storyId);
-   $commentCount = count($comments);
-   $displayedComments = [];
 
-   $input = json_decode(file_get_contents('php://input'), true);
-   $storedCommentId = $input['commentId'] ?? null;
-
-   if ($storedCommentId) {
-      foreach ($comments as $comment) {
-         if ($comment['comment_id'] == $storedCommentId) {
-            $displayedComments[] = $comment;
-            break;
-         }
-      }
+   if ($newComment) {
+      echo json_encode($newComment);
+   } else {
+      echo json_encode(['error' => 'エラーが発生しました']);
    }
-
-   foreach ($comments as $comment) {
-      if (count($displayedComments) >= 2) {
-         break;
-      }
-      if (!in_array($comment, $displayedComments)) {
-         $displayedComments[] = $comment;
-      }
-   }
-
-   echo json_encode($displayedComments);
 }

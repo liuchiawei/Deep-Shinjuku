@@ -6,14 +6,8 @@
             {
                 "comment_id": 1,
                 "author": "User1",
-                "time": "2023-10-01 12:00:00",
+                "time": "2023-10-01",
                 "content": "This is a comment."
-            },
-            {
-                "comment_id": 2,
-                "author": "User2",
-                "time": "2023-10-02 15:30:00",
-                "content": "This is another comment."
             }
         ]
     },
@@ -22,16 +16,10 @@
         "likes": 1,
         "comments": [
             {
-                "comment_id": 3,
+                "comment_id": 2,
                 "author": "User3",
-                "time": "2023-10-03 18:00:00",
+                "time": "2023-10-03",
                 "content": "This is a comment."
-            },
-            {
-                "comment_id": 4,
-                "author": "User4",
-                "time": "2023-10-04 20:30:00",
-                "content": "This is another comment."
             }
         ]
     },
