@@ -25,7 +25,6 @@ class CommentManager
     {
         //データが空でない場合保存する
         if (!empty($this->data)) {
-            // Kiểm tra nếu dữ liệu thực sự thay đổi trước khi ghi
             $existingData = file_get_contents($this->jsonFile);
             $existingData = json_decode($existingData, true);
 
