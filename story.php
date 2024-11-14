@@ -2,7 +2,7 @@
 require_once __DIR__ . '/class/StoryData.php';
 require_once __DIR__ . '/class/LikeManager.php';
 require_once __DIR__ . '/class/CommentManager.php';
-require_once __DIR__ . '/api/LikeComment.php';
+require_once __DIR__ . '/api/Interaction.php';
 
 ?>
 
@@ -78,7 +78,7 @@ require_once __DIR__ . '/api/LikeComment.php';
                 </div>
             <?php endforeach; ?>
         </div>
-        <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全べての<?php echo $commentCount ?>のコメントを表示する</button>
+        <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全ての<?php echo $commentCount ?>のコメントを表示する</button>
     </div>
     <div class="to-index">
         <a href="index.php">一覧に戻る</a>
