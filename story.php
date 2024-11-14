@@ -53,7 +53,18 @@ require_once __DIR__ . '/api/Interaction.php';
             <?php echo $story->explanation ?>
         </div>
         <div class="story-article-map">
-            <div class="story-article-map-content"></div>
+            <div class="story-article-map-content">
+                <iframe
+                    width="600"
+                    height="450"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAvCim13FGe1rH23MIoU3ARs45Ngx6z218
+    &q=Space+Needle,Seattle+WA">
+                </iframe>
+            </div>
             <div class="story-article-map-title"><?php echo $story->location ?></div>
         </div>
     </article>
