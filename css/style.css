@@ -1,12 +1,22 @@
-/* TEST FROM LIU 11/06 */
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap');
 :root {
-    --background-color: #efe8dc;
+    --paper-color: #efe8dc;
+    --background-color: #131520;
     --icon-color: #fff;
+    --runner-duration: 25s;
+    --title-font: "Zen Old Mincho", serif;
+    --comment-font: "Noto Sans JP", sans-serif;
+    --font-color: #fff;
+    /* index.phpの本のサイズ */
+    --book-width: 120px;
+    --book-height: 170px;
+    /* story.phpの本のサイズ */
+    --article-book-width: 240px;
+    --article-book-height: 340px;
+    /* コメント欄のサイズ */
+    --comment-wrap-width: 360px;
+    --comment-wrap-height: 120px;
 }
-
-/* test from chung 11/13 */
 
 /* リセット */
 * {
@@ -15,7 +25,7 @@
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: var(--comment-font);
 }
 
 a {
@@ -33,117 +43,190 @@ button {
 
 /* 共通 */
 html, body {
+    /* TODO:背景色を変更する */
     background-color: var(--background-color);
-    background: url('../image/texture/paper-texture.jpg?v=<?php echo time(); ?>');
+    /* background: url('../image/texture/paper-texture.jpg?v=<?php echo time(); ?>'); */
+    /* background: radial-gradient(circle, #343836be 0%, var(--background-color) 30%); */
     background-blend-mode: multiply;
     background-attachment: fixed;
 }
 
 /* index styling */
 .stories-wrap {
-    width: 2400px;
-    height: 2400px;
     padding: 80px;
-    display: grid;
-    grid-template-columns: repeat(5, 180px);
-    gap: 120px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    place-items: center;
-    cursor: grab;
+    position: absolute;
+    left: 0;
+    transform: translate3d(0, 0, 0) perspective(2000px) rotateY(10deg) rotateX(-10deg);
 }
 
-.stories-wrap:active {
-    cursor: grabbing;
+.stories-row {
+    display: flex;
+    justify-content: space-around;
+    margin: clamp(20px, 10vw, 40px);
+    width: 200vw;
+    animation: runner var(--runner-duration) linear infinite;
+    &:nth-child(even) {
+        animation-duration: calc(var(--runner-duration) * 1.5);
+    }    
 }
 
 .stories-item {
     position: relative;
-    width: 180px;
-    height: 270px;
+    width: var(--book-width);
+    height: var(--book-height);
+    transform: rotateX(20deg) rotateY(30deg);
     transform-origin: center bottom;
     transform-style: preserve-3d;
-    perspective: 1000px;
-    transition: 0.4s ease-out;
+    perspective: 1100px;
+    transition: 0.8s ease-out;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    &::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 95%;
+        height: 24px;
+        background-color: var(--paper-color);
+        transform-origin: top right;
+        transform: rotateX(90deg);
+        transition: 0.3s ease-out;
+        filter: brightness(0.8);
+        z-index: -1;
+    }
+}
+
+.stories-item-spine {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    transform-origin: right;
+    transform: rotateY(90deg);
+    background-color: var(--background-color);
+    z-index: 3;
+    /* タイトル */
+    &::after{
+        content: attr(data-title);
+        color: var(--font-color);
+        font-family: var(--title-font);
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        font-size: 8px;
+        writing-mode: vertical-rl;
+        text-align: center;
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        transform: translateX(-50%) rotateY(180deg);
+    }
 }
 
 .stories-item-cover {
     width: 100%;
     height: 100%;
     position: relative;
-    z-index: 1;
+    z-index: 3;
     background-color: black;
-    transform-origin: right;
+    transform-origin: right;        
 }
 
-.stories-item-background {
+.stories-item-cover::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    -webkit-backdrop-filter: brightness(0.4);
+    backdrop-filter: brightness(0.4);
+    transition: 0.3s ease-out;
     z-index: -1;
+}
+
+.stories-item-open {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
     background-color: white;
-    transform: translateZ(0px);
-    box-shadow: 40px 40px 10px 0 rgba(0, 0, 0, 0.5);
+    transform-origin: center;
+    /* transform: translateZ(0px); */
+    scale: 0.95;
+    box-shadow: 20px 20px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .stories-item-title {
     writing-mode: vertical-rl;
     position: absolute;
     height: 70%;
-    top: 20px;
-    left: 90px;
-    transform: translateX(-50%);
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
     color: white;
-    font-family: "Zen Old Mincho", serif;
+    font-family: var(--title-font);
     font-weight: 600;
-    letter-spacing: 0.15em;
-    font-size: 18px;
+    letter-spacing: 0.1em;
+    font-size: 10px;
 }
 
 .stories-item-location {
     text-align: center;
-    font-size: 10px;
+    font-size: 8px;
     color: white;
     position: absolute;
-    bottom: 15px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     letter-spacing: 0.1em;
 }
 
-.stories-item-image {
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    filter: brightness(0.4);
-    transition: 0.3s ease-out;
-}
-
-.stories-item-image img {
-    height: 100%;
+.stories-item-background {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    transform: translateX(-40%) translateY(-50%);
+    filter: blur(40px) opacity(0.6);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 /* Story Item Hover Styling */
 .stories-item:hover {
+    transform: rotateX(0deg) rotateY(0deg);
     animation: float 1.5s ease-in-out infinite;
     scale: 1.05;
 }
 
-.stories-item:hover .stories-item-image {
-    filter: brightness(1);
+.stories-item:hover .stories-item-cover::before {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
 }
 
 .stories-item:hover .stories-item-title {
     text-shadow: 0 0 10px black;
 }
+
+.stories-item:hover::after {
+    transform: rotateX(90deg) translateY(-10px);
+}
+
 /* Story Item Hover Styling */
 
 /* story.php styling */
@@ -183,7 +266,7 @@ html, body {
 }
 
 .story-item-title {
-    font-family: "Zen Old Mincho", serif;
+    font-family: var(--title-font);
     font-size: 24px;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -197,7 +280,7 @@ html, body {
 
 .story-item-location {
     font-size: 14px;
-    color: white;
+    color: var(--font-color);
     letter-spacing: 0.1em;
     position: absolute;
     bottom: 10px;
@@ -211,11 +294,12 @@ html, body {
 }
 
 .story-article-title {
+    color: var(--font-color);
     font-size: 36px;
     font-weight: 600;
     text-align: center;
     letter-spacing: 0.1em;
-    font-family: "Zen Old Mincho", serif;
+    font-family: var(--title-font);
     font-weight: 900;
     margin: 10px 0;
     opacity: 0;
@@ -227,6 +311,7 @@ html, body {
     text-align: center;
     letter-spacing: 0.2em;
     font-weight: 300;
+    color: var(--font-color);
 }
 
 .story-article-content {
@@ -237,12 +322,12 @@ html, body {
     height: 480px;
     margin: 20px auto;
     padding: 30px;
-    background-color: var(--background-color);
+    background-color: var(--paper-color);
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5);
 }
 
 .story-article-content p {
-    font-family: "Zen Old Mincho", serif;
+    font-family: var(--title-font);
     font-weight: 500;
     font-size: 16px;
     line-height: 1.8;
@@ -262,9 +347,10 @@ html, body {
     margin: 40px auto;
     text-align: center;
     font-size: 36px;
-    font-family: "Zen Old Mincho", serif;
+    font-family: var(--title-font);
     font-weight: 500;
     letter-spacing: 0.05em;
+    color: var(--font-color);
 }
 
 .story-article-explanation::before {
@@ -286,6 +372,17 @@ html, body {
     width: 360px;
     height: 360px;
     background-color: red;
+}
+
+/* TODO:コメント欄のスタイリング */
+.user-comment-wrap {
+    background-color: red;
+}
+
+.user-comment {
+    width: var(--comment-wrap-width);
+    height: var(--comment-wrap-height);
+    border: 1px solid #000;
 }
 
 /* TODO: いいねボタンを作成する */
@@ -360,24 +457,37 @@ html, body {
     width: 180px;
     margin: 20px auto;
     text-align: center;
+    & a {
+        color: var(--font-color);
+    }
     & a:hover {
         transition: 0.3s ease-out;
         font-weight: bold;
     }
 }
 
-/* TODO: フッターを作成する */
 /* .footer styling */
 .footer {
-    background-color: black;
-    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
-.footer p {
-    color: white;
-    text-align: center;
+.footer .copyright {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    padding: 10px;
 }
 
+.footer-logo {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+}
 
 
 
@@ -437,13 +547,13 @@ html, body {
 /* @keyframes */
 @keyframes float {
     0% {
-        transform: translateY(0);
+        top: 0;
     }
     50% {
-        transform: translateY(-4px);
+        top: -4px;
     }
     100% {
-        transform: translateY(0);
+        top: 0;
     }
 }   
 
@@ -553,4 +663,10 @@ html, body {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+@keyframes runner {
+    to {
+        transform: translateX(-100vw);
+    }
 }
