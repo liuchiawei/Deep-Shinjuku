@@ -69,7 +69,7 @@ require_once __DIR__ . '/api/Interaction.php';
         </div>
     </article>
     <div class="user-comment-wrap">
-        <form action="story.php?id=<?php echo $story->id; ?>" method="POST">
+        <form id="commentForm" action="story.php?id=<?php echo $story->id; ?>" method="POST">
             <textarea name="content" id="comment" cols="30" rows="10"></textarea>
             <input type="text" name="author" id="username" placeholder="ニックネーム">
             <button type="submit">コメントを投稿</button>

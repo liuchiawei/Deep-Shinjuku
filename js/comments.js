@@ -5,37 +5,43 @@ function postComment(event) {
 
     var storyId = document.getElementById("commentForm").dataset.storyId;
     var author = document.getElementById("author").value;
-    var content = document.getElementById("content").value;
+    var content = document.getElementById("comment").value;
 
-    // Tạo XMLHttpRequest để gửi dữ liệu qua AJAX
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "story.php?id=" + storyId, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // Bình luận đã được gửi thành công, làm sạch form
-            document.getElementById("author").value = '';
-            document.getElementById("content").value = '';
-            
-            // Phản hồi từ PHP (JSON) sẽ bao gồm comment_id
-            var newComment = JSON.parse(xhr.responseText);
-            
-            // Lưu comment_id vào LocalStorage
-            if (newComment.comment_id) {
-                localStorage.setItem('commentId', newComment.comment_id);
-            }
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                document.getElementById("author").value = '';
+                document.getElementById("content").value = '';
 
-            // Hiển thị bình luận mới
-            displayComment(newComment);
+                try {
+                    var newComment = JSON.parse(xhr.responseText);
+
+                    // Nếu phản hồi có chứa comment_id, lưu vào LocalStorage
+                    if (newComment && newComment.comment_id) {
+                        localStorage.setItem("commentId_" + storyId, newComment.comment_id);
+                        console.log("Comment ID saved to LocalStorage:", newComment.comment_id);
+                    } else {
+                        console.error("Comment ID not found in response:", xhr.responseText);
+                    }
+
+                    displayComment(newComment);
+                } catch (e) {
+                    console.error("error when parse JSON:", e);
+                }
+            } else {
+                console.error("Error:", xhr.status, xhr.statusText);
+            }
         }
     };
 
-    // Gửi dữ liệu qua POST (bao gồm storyId, author, content)
     xhr.send("storyId=" + storyId + "&author=" + encodeURIComponent(author) + "&content=" + encodeURIComponent(content));
 }
 
-// Hàm hiển thị bình luận mới
+// Hiển thị bình luận mới
 function displayComment(comment) {
     var commentSection = document.getElementById("commentSection");
 
@@ -43,14 +49,14 @@ function displayComment(comment) {
     commentDiv.className = "comment";
     commentDiv.innerHTML = `<strong>${comment.author}</strong> (${comment.time}): ${comment.content}`;
     
-    // Thêm bình luận mới vào đầu danh sách
     commentSection.insertBefore(commentDiv, commentSection.firstChild);
 }
+
 
 // Tải lại bình luận khi trang được tải
 window.onload = function () {
     var storyId = document.getElementById("commentForm").dataset.storyId;
-    const storedCommentId = localStorage.getItem('commentId');
+    var storedCommentId = localStorage.getItem("commentId_" + storyId);
 
     fetch("story.php?storyId=" + storyId, {
         method: "POST",
@@ -61,7 +67,6 @@ window.onload = function () {
     })
     .then(response => response.json())
     .then(comments => {
-        // Hiển thị các bình luận (chỉ 2 bình luận mới nhất)
         comments.slice(0, 2).forEach(function (comment) {
             displayComment(comment);
         });
