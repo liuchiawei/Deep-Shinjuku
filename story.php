@@ -81,14 +81,6 @@ require_once __DIR__ . '/api/Interaction.php';
                 <button type="button" id="editComment" class="user-comment-btn">編集</button>
                 <button type="button" id="deleteComment" class="user-comment-btn">削除</button>
             </div>
-            <?php foreach ($comments as $comment) : ?>
-                <div class="user-comment-content">
-                    <?php echo $comment['content']; ?>
-                </div>
-                <div class="user-comment-author">
-                    <?php echo $comment['author']; ?>
-                </div>
-            <?php endforeach; ?>
         </div>
         <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全ての<?php echo $commentCount ?>のコメントを表示する</button>
     </div>

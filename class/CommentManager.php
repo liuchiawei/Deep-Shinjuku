@@ -61,7 +61,7 @@ class CommentManager
         return 0;
     }
 
-    //コメントIDに一致するコメントを削除
+    //コメントIDに一致するコメントを編集
     public function editComment($storyId, $commentId, $newContent)
     {
         foreach ($this->data as &$story) {
