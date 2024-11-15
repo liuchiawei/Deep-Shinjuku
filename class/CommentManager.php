@@ -55,10 +55,10 @@ class CommentManager
     {
         foreach ($this->data as $story) {
             if ($story['id'] == $storyId) {
-                return count($story['comments']);
+                return $story['comments'];
             }
         }
-        return 0;
+        return [];
     }
 
     //コメントIDに一致するコメントを編集

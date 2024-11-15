@@ -4,6 +4,17 @@ require_once __DIR__ . '/class/LikeManager.php';
 require_once __DIR__ . '/class/CommentManager.php';
 require_once __DIR__ . '/api/Interaction.php';
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['storyId'])) {
+    $storyId = (int)$_GET['storyId'];  // Chuyển đổi sang kiểu int để đảm bảo đúng loại dữ liệu
+    $commentManager = new CommentManager('./data/likes_data.json');
+    $comments = $commentManager->getComments($storyId);
+
+    header('Content-Type: application/json');
+    echo json_encode($comments);
+    exit;
+}
+
 ?>
 
 <html>
@@ -69,9 +80,9 @@ require_once __DIR__ . '/api/Interaction.php';
         </div>
     </article>
     <div class="user-comment-wrap">
-        <form id="commentForm" action="story.php?id=<?php echo $story->id; ?>" method="POST">
-            <textarea name="content" id="comment" cols="30" rows="10"></textarea>
-            <input type="text" name="author" id="username" placeholder="ニックネーム">
+        <form id="commentForm" data-story-id="<?php echo $story->id; ?>" action="story.php?id=<?php echo $story->id; ?>" method="POST">
+            <textarea name="content" id="content" cols="30" rows="10"></textarea>
+            <input type="text" name="author" id="author" placeholder="ニックネーム">
             <button type="submit">コメントを投稿</button>
         </form>
 
@@ -82,7 +93,9 @@ require_once __DIR__ . '/api/Interaction.php';
                 <button type="button" id="deleteComment" class="user-comment-btn">削除</button>
             </div>
         </div>
-        <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全ての<?php echo $commentCount ?>のコメントを表示する</button>
+        <button popovertarget="allComments" id="seeAllBtn">全て見る</button>
+        <div popover id="allComments"></div>
+        <!-- <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全ての<?php echo $commentCount ?>のコメントを表示する</button> -->
     </div>
     <div class="to-index">
         <a href="index.php">一覧に戻る</a>
