@@ -15,7 +15,7 @@
     --font-weight-xl: 900;
     --font-color: #f0f0f0;
     --font-color-sub: #808080;
-    --font-size-xl: 48px;
+    --font-size-xl: 54px;
     --font-size-l: 32px;
     --font-size-m: 14px;
     --font-size-s: 10px;
@@ -344,7 +344,7 @@ html, body {
 }
 
 .story-article-title {
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-l);
     letter-spacing: var(--letter-spacing-l);
     font-family: var(--font-title);
     font-weight: var(--font-weight-xl);
@@ -545,7 +545,7 @@ html, body {
 
     .story-info {
         .story-info-title {
-            font-size: var(--font-size-m);
+            font-size: var(--font-size-l);
         }    
         .story-info-brief {
             font-size: var(--font-size-s);
