@@ -339,6 +339,7 @@ html, body {
 
 .story-article {
     max-width: var(--story-article-width);
+    margin-inline: auto;
     padding: clamp(var(--padding-s), 6vw, var(--padding-l));
 }
 
@@ -490,7 +491,7 @@ html, body {
 
 /* .prev-next-story-wrap styling */
 .prev-next-story-wrap {
-    max-width: var(--story-article-width);
+    max-width: var(--story-article-width) auto;
     width: 100%;
     min-height: 120px;
     display: flex;
