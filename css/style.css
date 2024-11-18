@@ -263,12 +263,12 @@ html, body {
 }
 
 .story-info {
-    width: 50%;
+    width: 60%;
     position: relative;
 }
 
 .story-info-title {
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-xl);
     font-family: var(--font-title);
     font-weight: var(--font-weight-xl);
     letter-spacing: var(--letter-spacing-l);
