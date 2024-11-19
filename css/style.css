@@ -97,7 +97,7 @@ html, body {
     letter-spacing: var(--letter-spacing-l);
     transition: 0.3s ease-out;
     &:hover {
-        text-shadow: 0 0 20px var(--font-color);
+        text-shadow: 0 0 10px var(--font-color);
     }
 }
 
@@ -109,7 +109,7 @@ html, body {
     justify-content: center;
     position: absolute;
     perspective: 1000px;
-    left: 80%;
+    left: -10%;
     transform: translate3d(0, 0, 0) rotateY(10deg) rotateX(-10deg);
 }
 
@@ -467,6 +467,18 @@ html, body {
     background-color: red;
     grid-area: photo;
     overflow: hidden;
+    display: grid;
+    grid-template-areas: 
+        "photo-l photo-l"
+        "photo-s photo-s";
+    grid-template-rows: 300px 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--padding-xs);
+}
+
+.story-photo-l {
+    border: 1px solid yellow;
+    grid-area: photo-l;
 }
 
 .story-photo-s {

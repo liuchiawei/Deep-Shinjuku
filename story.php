@@ -101,9 +101,8 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
             <div class="story-photo-map-wrap">
                 <div class="story-detail-title">写真と地図</div>
                 <div class="story-photo">
-                </div>
-                <div class="story-photo-s">
-
+                    <div class="story-photo-l"></div>
+                    <div class="story-photo-s"></div>
                 </div>
                 <div class="story-map">
                     <div class="story-map-content">
