@@ -3,8 +3,9 @@
 :root {
     --paper-color: #efe8dc;
     --background-color: #131520;
+    --black-color: #101010;
     --icon-color: #fff;
-    --runner-duration: 25s;
+    --runner-duration: 30s;
     --font-title: "Yuji Boku", serif;
     --font-title-weight: bold;
     --font-sans: "Noto Sans JP", sans-serif;
@@ -71,8 +72,7 @@ button {
 /* 共通 */
 html, body {
     background-color: var(--background-color);
-    background-blend-mode: multiply;
-    background-attachment: fixed;
+    position: relative;
 }
 
 /* Nav styling */
@@ -81,7 +81,7 @@ html, body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     display: flex;
     justify-content: space-between;
     padding: var(--padding-s);
@@ -103,13 +103,14 @@ html, body {
 
 /* index styling */
 .stories-wrap {
-    padding: var(--padding-l);
+    padding: var(--padding-s);
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: absolute;
-    left: 0;
-    transform: translate3d(0, 0, 0) perspective(2000px) rotateY(10deg) rotateX(-10deg);
+    perspective: 1000px;
+    left: 80%;
+    transform: translate3d(0, 0, 0) rotateY(10deg) rotateX(-10deg);
 }
 
 .stories-row {
@@ -130,7 +131,7 @@ html, body {
     transform: rotateX(20deg) rotateY(30deg);
     transform-origin: center bottom;
     transform-style: preserve-3d;
-    perspective: 1100px;
+    perspective: 700px;
     transition: 0.8s ease-out;
     cursor: pointer;
     -webkit-user-select: none;
@@ -144,7 +145,7 @@ html, body {
         top: 0;
         right: 0;
         width: 95%;
-        height: 24px;
+        height: 12px;/* 本の厚み */
         background-color: var(--paper-color);
         transform-origin: top right;
         transform: rotateX(90deg);
