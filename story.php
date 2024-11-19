@@ -94,8 +94,6 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
                 <div class="story-photo">
                 </div>
                 <div class="story-photo-s">
->>>>>>> origin/main
-
                 </div>
                 <div class="story-map">
                     <div class="story-map-content">
