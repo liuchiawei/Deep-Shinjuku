@@ -151,7 +151,6 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
             </div>
         </a>
     </section>
->>>>>>> origin/main
     <?php include __DIR__ . '/include/footer.php'; ?>
 </body>
 <script src="js/app.js?<?php echo time(); ?>"></script>
