@@ -1,7 +1,7 @@
 [
     {
         "id": "1",
-        "likes": 3,
+        "likes": 5,
         "comments": [
             {
                 "comment_id": 1,
