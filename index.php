@@ -11,6 +11,7 @@ $stories = $storyData->getAll();
 <?php include __DIR__ . '/include/head.php'; ?>
 
 <body style="overflow-x: hidden;">
+    <?php include __DIR__ . '/include/nav.php'; ?>
     <div class="stories-wrap" id="stories-wrap">
         <?php for ($i = 0; $i < 5; $i++) : ?>
             <div class="stories-row">
