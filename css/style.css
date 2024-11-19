@@ -70,12 +70,35 @@ button {
 
 /* 共通 */
 html, body {
-    /* TODO:背景色を変更する */
     background-color: var(--background-color);
-    /* background: url('../image/texture/paper-texture.jpg?v=<?php echo time(); ?>'); */
-    /* background: radial-gradient(circle, #343836be 0%, var(--background-color) 30%); */
     background-blend-mode: multiply;
     background-attachment: fixed;
+}
+
+/* Nav styling */
+.nav {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--padding-s);
+    z-index: 99;
+}
+
+.nav-item {
+    width: 80px;
+    text-transform: uppercase;
+    font-size: var(--font-size-s);
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-m);
+    letter-spacing: var(--letter-spacing-l);
+    transition: 0.3s ease-out;
+    &:hover {
+        text-shadow: 0 0 20px var(--font-color);
+    }
 }
 
 /* index styling */
