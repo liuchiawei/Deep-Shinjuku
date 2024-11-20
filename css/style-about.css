@@ -1,50 +1,25 @@
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.about-floating-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
 }
 
-body {
-    font-family: sans-serif;
-    background-color: white;
-    color: black;
-    line-height: 1.6;
-}
-
-.header {
-    padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.site-title {
-    font-size: 1rem;
-    font-weight: normal;
-}
-
-.about-link {
-    text-decoration: none;
-    color: black;
-}
-
-.main-content {
+.about-content {
     padding: 2rem;
     position: relative;
 }
 
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.grid-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+.about-title {
+    font-size: 5rem;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin: 4rem 0;
+    line-height: 1.4;
 }
 
 .main-title {
@@ -60,7 +35,7 @@ body {
     margin: 2rem 0;
 }
 
-.description {
+.about-description {
     max-width: 800px;
     margin: 4rem auto;
     padding: 0 1rem;
@@ -71,6 +46,7 @@ body {
     max-width: 800px;
     margin: 4rem auto;
     padding: 0 1rem;
+    text-align: center;
 }
 
 .team-name {
@@ -78,13 +54,6 @@ body {
 }
 
 .members {
-    margin: 1rem 0;
-}
-
-.team-photo {
-    width: 100%;
-    height: 300px;
-    background-color: #f0f0f0;
     margin: 1rem 0;
 }
 
@@ -102,7 +71,7 @@ body {
     width: 150px;
     height: 200px;
     object-fit: cover;
-    animation: float 20s infinite linear;
+    animation: floating 20s infinite linear;
     opacity: 0.8;
 }
 
@@ -144,7 +113,7 @@ body {
     animation-delay: -18s;
 }
 
-@keyframes float {
+@keyframes floating {
     0% {
         transform: translate(0, 0) rotate(0deg);
     }
