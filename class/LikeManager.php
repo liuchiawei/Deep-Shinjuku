@@ -2,77 +2,41 @@
 
 class LikeManager
 {
-   private $filePath;
-   private $dataFilePath;
+   private $jsonFile;
    private $data;
-   public $likes = 0;
 
-   public function __construct($filePath = __DIR__ . '/../data/likes_data.json', $dataFilePath = __DIR__ . '/../data/likes_data.json')
+   public function __construct($jsonFile)
    {
-      $this->filePath = $filePath;
-      $this->dataFilePath = $dataFilePath;
-      $this->loadLikes();
+      $this->jsonFile = $jsonFile;
       $this->loadData();
    }
 
-   public function loadData()
+   private function loadData()
    {
-      if (file_exists($this->dataFilePath)) {
-         $this->data = json_decode(file_get_contents($this->dataFilePath), true) ?? [];
+      if (file_exists($this->jsonFile)) {
+         $jsonData = file_get_contents($this->jsonFile);
+         $this->data = json_decode($jsonData, true);
       } else {
          $this->data = [];
       }
    }
 
-   public function loadLikes()
+   private function saveData()
    {
-      if (file_exists($this->filePath)) {
-         $this->likes = json_decode(file_get_contents($this->filePath), true) ?? 0;
-      } else {
-         $this->likes = 0;
-      }
-   }
-
-   public function saveData()
-   {
-      // Save story data to the JSON file
-      if (!file_put_contents($this->dataFilePath, json_encode($this->data, JSON_PRETTY_PRINT))) {
-         error_log("ファイルを書き込めません: " . $this->dataFilePath);
-      } else {
-         echo "Data has been written to the file successfully.";
-      }
-   }
-
-   public function saveLikes()
-   {
-      // Save total like count to the likes_data.json file
-      if (!file_put_contents($this->filePath, json_encode($this->likes, JSON_PRETTY_PRINT))) {
-         error_log("ファイルを書き込めません: " . $this->filePath);
-      } else {
-         echo "Like count has been written to the file successfully.";
-      }
+      file_put_contents($this->jsonFile, json_encode($this->data, JSON_PRETTY_PRINT));
    }
 
    public function toggleLikeForStory($storyId, $hasLiked)
    {
+      //IDに一致するストーリーを検索
       foreach ($this->data as &$story) {
          if ($story['id'] == $storyId) {
-            if (!isset($story['likes'])) {
-               $story['likes'] = 0;
-            }
             if ($hasLiked) {
-               $story['likes']--;
+               $story['likes']--; //Like済みの場合、Like数を減らす
             } else {
-               $story['likes']++;
+               $story['likes']++; //Likeしていない場合、Like数を増やす
             }
-
-            // Save updated story data
             $this->saveData();
-
-            // Update the global likes count and save it
-            $this->likes = array_sum(array_column($this->data, 'likes'));
-            $this->saveLikes();
-
             return $story['likes'];
          }
       }
@@ -83,7 +47,7 @@ class LikeManager
    {
       foreach ($this->data as $story) {
          if ($story['id'] == $storyId) {
-            return $story['likes'] ?? '∞';
+            return $story['likes'];
          }
       }
       return 0;
