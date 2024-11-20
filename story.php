@@ -32,6 +32,7 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
 <?php include __DIR__ . '/include/head.php'; ?>
 
 <body>
+    <?php include __DIR__ . '/include/nav.php'; ?>
     <div class="story-wrap">
         <div class="story-info">
             <div class="story-info-title"><?php echo $story->title; ?></div>
