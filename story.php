@@ -51,11 +51,9 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
         <div class="story-article-content">
             <p class="js_scroll fade-in"><?php echo $story->content; ?></p>
             <div class="story-article-buttons-wrap">
-                <form method="POST" action="story.php?id=<?php echo $story->id; ?>">
-                    <button type="submit" name="hasLiked" value="<?php echo $hasAlreadyLiked ? 'false' : 'true'; ?>" id="likeButton" class="like-button">
-                        <?php echo $hasAlreadyLiked ? '<i class="bi bi-heart-fill"></i>' : '<i class="bi bi-heart"></i>'; ?>
-                    </button>
-                </form>
+                <button type="button" id="likeButton" class="like-button" data-story-id="<?php echo $story->id; ?>">
+                    <?php echo $hasAlreadyLiked ? '<i class="bi bi-heart-fill"></i>' : '<i class="bi bi-heart"></i>'; ?>
+                </button>
                 <div class="like-count" id="likeCount"><?php echo $likeCount; ?></div>
             </div>
         </div>
