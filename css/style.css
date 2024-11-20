@@ -660,6 +660,10 @@ html, body {
         }
     }
 
+    .about-content {
+        overflow: hidden;
+    }
+
     .footer .copyright {
         position: relative;
         bottom: var(--padding-xs);
@@ -674,7 +678,6 @@ html, body {
     padding: var(--padding-l) clamp(var(--padding-s), 6vw, var(--padding-xl));
     max-width: var(--story-article-width);
     width: 100%;
-    overflow: hidden;
 }
 
 .about-title {
