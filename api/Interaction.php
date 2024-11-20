@@ -32,14 +32,12 @@ if ($storyId !== null) {
    }
 }
 
-$commentManager = new CommentManager('/../data/likes_data.json');
-
+$commentManager = new CommentManager('data/likes_data.json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['id'])) {
    $storyId = $_GET['id'];
    $author = $_POST['author'];
    $content = $_POST['content'];
-   $commentCount = $commentManager->getComments($storyId);
 
    //addCommentメソッドを使ってコメントを追加
    $newComment = $commentManager->addComment($storyId, $author, $content);

@@ -4,16 +4,7 @@ require_once __DIR__ . '/class/LikeManager.php';
 require_once __DIR__ . '/class/CommentManager.php';
 require_once __DIR__ . '/api/Interaction.php';
 
-
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['storyId'])) {
-    $storyId = (int)$_GET['storyId'];
-    $commentManager = new CommentManager('./data/likes_data.json');
-    $comments = $commentManager->getComments($storyId);
-
-    header('Content-Type: application/json');
-    echo json_encode($comments);
-    exit;
-}
+session_start();
 
 $nextStory = $storyData->getById($story->id + 1 <= $maxId ? $story->id + 1 : 1);
 $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
