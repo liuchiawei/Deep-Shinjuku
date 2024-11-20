@@ -35,12 +35,21 @@ class LikeManager
 
    public function saveData()
    {
-      // Kiểm tra xem việc ghi vào file có thành công hay không
+      // Save story data to the JSON file
       if (!file_put_contents($this->dataFilePath, json_encode($this->data, JSON_PRETTY_PRINT))) {
-         // Nếu không thành công, ghi thông báo lỗi vào log
          error_log("ファイルを書き込めません: " . $this->dataFilePath);
       } else {
          echo "Data has been written to the file successfully.";
+      }
+   }
+
+   public function saveLikes()
+   {
+      // Save total like count to the likes_data.json file
+      if (!file_put_contents($this->filePath, json_encode($this->likes, JSON_PRETTY_PRINT))) {
+         error_log("ファイルを書き込めません: " . $this->filePath);
+      } else {
+         echo "Like count has been written to the file successfully.";
       }
    }
 
@@ -56,7 +65,14 @@ class LikeManager
             } else {
                $story['likes']++;
             }
+
+            // Save updated story data
             $this->saveData();
+
+            // Update the global likes count and save it
+            $this->likes = array_sum(array_column($this->data, 'likes'));
+            $this->saveLikes();
+
             return $story['likes'];
          }
       }

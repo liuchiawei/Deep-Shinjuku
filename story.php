@@ -65,7 +65,8 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
                 <div class="story-detail-title">目撃者の説述</div>
                 <div class="story-comment-form">
                     <form action="story.php?id=<?php echo $story->id; ?>" method="POST">
-                        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                        <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                        <input type="text" name="author" id="author" placeholder="名前">
                         <button type="submit">コメントを投稿</button>
                     </form>
                 </div>
