@@ -2,39 +2,55 @@
 
 class LikeManager
 {
-   private $jsonFile;
+   private $filePath;
+   private $dataFilePath;
    private $data;
+   public $likes = 0;
 
-   public function __construct($jsonFile)
+   public function __construct($filePath = __DIR__ . '/../data/likes_data.json', $dataFilePath = __DIR__ . '/../data/likes_data.json')
    {
-      $this->jsonFile = $jsonFile;
+      $this->filePath = $filePath;
+      $this->dataFilePath = $dataFilePath;
+      $this->loadLikes();
       $this->loadData();
    }
 
-   private function loadData()
+   public function loadData()
    {
-      if (file_exists($this->jsonFile)) {
-         $jsonData = file_get_contents($this->jsonFile);
-         $this->data = json_decode($jsonData, true);
+      if (file_exists($this->dataFilePath)) {
+         $this->data = json_decode(file_get_contents($this->dataFilePath), true) ?? [];
       } else {
          $this->data = [];
       }
    }
 
-   private function saveData()
+   public function loadLikes()
    {
-      file_put_contents($this->jsonFile, json_encode($this->data, JSON_PRETTY_PRINT));
+      if (file_exists($this->filePath)) {
+         $this->likes = json_decode(file_get_contents($this->filePath), true) ?? 0;
+      } else {
+         $this->likes = 0;
+      }
+   }
+
+   public function saveData()
+   {
+      if (!file_put_contents($this->dataFilePath, json_encode($this->data, JSON_PRETTY_PRINT))) {
+         error_log("ファイルを読み取れません: " . $this->dataFilePath);
+      }
    }
 
    public function toggleLikeForStory($storyId, $hasLiked)
    {
-      //IDに一致するストーリーを検索
       foreach ($this->data as &$story) {
          if ($story['id'] == $storyId) {
+            if (!isset($story['likes'])) {
+               $story['likes'] = 0;
+            }
             if ($hasLiked) {
-               $story['likes']--; //Like済みの場合、Like数を減らす
+               $story['likes']--;
             } else {
-               $story['likes']++; //Likeしていない場合、Like数を増やす
+               $story['likes']++;
             }
             $this->saveData();
             return $story['likes'];
@@ -47,7 +63,7 @@ class LikeManager
    {
       foreach ($this->data as $story) {
          if ($story['id'] == $storyId) {
-            return $story['likes'];
+            return $story['likes'] ?? '∞';
          }
       }
       return 0;
