@@ -1,15 +1,26 @@
 <?php
 
+require_once __DIR__ . '/../class/StoryData.php';
+require_once __DIR__ . '/../class/LikeManager.php';
+require_once __DIR__ . '/../class/CommentManager.php';
+
+session_start();
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+   $storyId = (int)$_GET['id'];
+} else {
+   echo "Invalid or missing ID.";
+}
+
 $storyData = new StoryData();
-$story = $storyData->getById($_GET['id']);
+$story = $storyData->getById($storyId);
 $maxId = $storyData->getMaxId();
-$storyId = $_GET['id'] ?? null;
 $comments = [];
 $commentCount = 0;
 
 if ($storyId !== null) {
    //今のストーリーのLike数を取得
-   $likeManager = new LikeManager('./data/likes_data.json');
+   $likeManager = new LikeManager('/../data/likes_data.json');
    $likeCount = $likeManager->getLikes($storyId);
    //今のユーザーがLikeしているかどうかを取得
    $hasAlreadyLiked = isset($_SESSION['liked_stories'][$storyId]) ? true : false;
@@ -21,7 +32,7 @@ if ($storyId !== null) {
    }
 }
 
-$commentManager = new CommentManager('./data/likes_data.json');
+$commentManager = new CommentManager('/../data/likes_data.json');
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['id'])) {

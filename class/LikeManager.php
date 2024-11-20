@@ -35,8 +35,12 @@ class LikeManager
 
    public function saveData()
    {
+      // Kiểm tra xem việc ghi vào file có thành công hay không
       if (!file_put_contents($this->dataFilePath, json_encode($this->data, JSON_PRETTY_PRINT))) {
-         error_log("ファイルを読み取れません: " . $this->dataFilePath);
+         // Nếu không thành công, ghi thông báo lỗi vào log
+         error_log("ファイルを書き込めません: " . $this->dataFilePath);
+      } else {
+         echo "Data has been written to the file successfully.";
       }
    }
 
