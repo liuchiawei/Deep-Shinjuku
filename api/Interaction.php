@@ -4,8 +4,6 @@ require_once __DIR__ . '/../class/StoryData.php';
 require_once __DIR__ . '/../class/LikeManager.php';
 require_once __DIR__ . '/../class/CommentManager.php';
 
-session_start();
-
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
    $storyId = (int)$_GET['id'];
 } else {
