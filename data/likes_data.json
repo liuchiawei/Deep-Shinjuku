@@ -8,6 +8,12 @@
                 "author": "User1",
                 "time": "2023-10-01",
                 "content": "This is a comment."
+            },
+            {
+                "comment_id": "6743d375c2302",
+                "author": "elon musk",
+                "time": "2024-11-25",
+                "content": "Good Article"
             }
         ]
     },

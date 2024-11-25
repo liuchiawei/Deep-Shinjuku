@@ -8,6 +8,9 @@ session_start();
 
 $nextStory = $storyData->getById($story->id + 1 <= $maxId ? $story->id + 1 : 1);
 $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
+
+$commentManager = new CommentManager(__DIR__ . '/data/likes_data.json');
+$comments = $commentManager->getComments($story->id);
 ?>
 
 <html>
@@ -77,7 +80,30 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
                         日時
                     </div>
                 </div>
-                <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全てのコメントを見る（TODO:こちらに全部のコメントの数を表示）</button>
+                <div id="comments-Popup" style="
+                width: 400px;
+                height: 300px;
+                position:fixed;
+                right: 1rem;
+                bottom: 1rem;
+                background-color: #ddd;
+                color: black;
+                ">
+                    <?php if (!empty($comments)): ?>
+                        <ul>
+                            <?php foreach ($comments as $comment): ?>
+                                <li>
+                                    <strong><?= htmlspecialchars($comment['author']) ?>:</strong>
+                                    <p><?= htmlspecialchars($comment['content']) ?></p>
+                                    <em><?= htmlspecialchars($comment['time']) ?></em>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php else: ?>
+                        <p>No comments available.</p>
+                    <?php endif; ?>
+                </div>
+                <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全てのコメントを見る</button>
             </div>
             <div class="story-photo-map-wrap">
                 <div class="story-detail-title">写真と地図</div>
