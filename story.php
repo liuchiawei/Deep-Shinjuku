@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_comment_id'])) {
                         <button type="button" id="editComment" class="story-comment-btn">編集</button>
                         <button type="button" id="deleteComment" class="user-comment-btn">削除</button>
                     </div>
-                    <div class="user-comment-content">
+                    <!-- <div class="user-comment-content">
                         コメント内容
                     </div>
                     <div class="user-comment-author">
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_comment_id'])) {
                     </div>
                     <div class="user-comment-time">
                         日時
-                    </div>
+                    </div> -->
                 </div>
                 <div id="comments-Popup" style="
                 width: fit-content;
