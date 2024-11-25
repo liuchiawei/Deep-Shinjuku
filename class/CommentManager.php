@@ -35,7 +35,7 @@ class CommentManager
         $newComment = [
             'comment_id' => uniqid(),
             'author' => $author,
-            'time' => date('Y-m-d'),
+            'time' => date('Y-m-d H:i:s'),
             'content' => $content
         ];
 
@@ -69,7 +69,7 @@ class CommentManager
                 foreach ($story['comments'] as &$comment) {
                     if ($comment['comment_id'] == $commentId) {
                         $comment['content'] = $newContent;
-                        $comment['time'] = date('Y-m-d');
+                        $comment['time'] = date('Y-m-d H:i:s');
                         $this->saveData();
                         return true;
                     }
