@@ -7,8 +7,9 @@ function postComment(event) {
     const author = document.getElementById("author").value;
     const content = document.getElementById("content").value;
 
-    // Gửi dữ liệu bằng fetch
-    fetch("story.php?id=" + storyId, {
+    console.log(storyId, author, content);
+
+    fetch("story-api.php?id=" + storyId, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `storyId=${storyId}&author=${encodeURIComponent(author)}&content=${encodeURIComponent(content)}`
@@ -17,17 +18,14 @@ function postComment(event) {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            return response.json(); // Parse JSON từ server
+            return response.json(); // Parse JSON from response body
         })
         .then(newComment => {
             if (newComment && newComment.comment_id) {
-                // Lưu comment_id vào LocalStorage
+                //Save comment_id to LocalStorage
                 addCommentToLocalStorage(newComment.comment_id);
 
                 console.log("Comment ID saved to LocalStorage:", newComment.comment_id);
-
-                // Hiển thị comment mới
-                displayComment(newComment);
 
                 // Reset form
                 document.getElementById("author").value = '';
@@ -41,7 +39,6 @@ function postComment(event) {
         });
 }
 
-// Lưu comment_id vào LocalStorage
 function addCommentToLocalStorage(commentId) {
     let savedCommentIds = JSON.parse(localStorage.getItem("commentIds")) || [];
     if (!savedCommentIds.includes(commentId)) {
@@ -50,23 +47,22 @@ function addCommentToLocalStorage(commentId) {
     }
 }
 
-// Kiểm tra quyền chỉnh sửa/xóa
 function canEditOrDeleteComment(commentId) {
     const savedCommentIds = JSON.parse(localStorage.getItem("commentIds")) || [];
     return savedCommentIds.includes(commentId);
 }
 
-// Hàm hiển thị comment (giả sử bạn đã có một container để hiển thị comment)
-function displayComment(comment) {
-    const commentContainer = document.getElementById("allComments");
-    const commentHTML = `
-        <div class="comment" id="comment-${comment.comment_id}">
-            <p><strong>${comment.author}</strong> (${comment.time}):</p>
-            <p>${comment.content}</p>
-        </div>
-    `;
-    commentContainer.insertAdjacentHTML("beforeend", commentHTML);
-}
+// // Hàm hiển thị comment (giả sử bạn đã có một container để hiển thị comment)
+// function displayComment(comment) {
+//     const commentContainer = document.getElementById("allComments");
+//     const commentHTML = `
+//         <div class="comment" id="comment-${comment.comment_id}">
+//             <p><strong>${comment.author}</strong> (${comment.time}):</p>
+//             <p>${comment.content}</p>
+//         </div>
+//     `;
+//     commentContainer.insertAdjacentHTML("beforeend", commentHTML);
+// }
 
 
 // //新しいコメントを表示する

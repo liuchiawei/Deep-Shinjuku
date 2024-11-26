@@ -13,19 +13,6 @@ $commentManager = new CommentManager(__DIR__ . '/data/likes_data.json');
 $comments = $commentManager->getComments($story->id);
 
 $userComments = isset($_COOKIE['user_comments']) ? explode(',', $_COOKIE['user_comments']) : [];
-
-// Xử lý xóa bình luận
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_comment_id'])) {
-    $commentId = $_POST['delete_comment_id'];
-    $commentManager->deleteComment($storyId, $commentId);
-}
-
-// Xử lý chỉnh sửa bình luận
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_comment_id'])) {
-    $commentId = $_POST['edit_comment_id'];
-    $newContent = $_POST['new_content'];
-    $commentManager->editComment($storyId, $commentId, $newContent);
-}
 ?>
 
 <html>
@@ -73,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_comment_id'])) {
             <div class="story-comment-wrap">
                 <div class="story-detail-title">目撃者の説述</div>
                 <div class="story-comment-form">
-                    <form action="story.php?id=<?php echo $story->id; ?>" method="POST">
+                    <form id="commentForm" data-story-id="<?php echo $story->id; ?>" action="story.php?id=<?php echo $story->id; ?>" method="POST">
                         <textarea name="content" id="content" cols="30" rows="10"></textarea>
                         <input type="text" name="author" id="author" placeholder="名前">
                         <button type="submit">コメントを投稿</button>
