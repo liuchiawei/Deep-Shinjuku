@@ -12,6 +12,9 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
 $commentManager = new CommentManager(__DIR__ . '/data/likes_data.json');
 $comments = $commentManager->getComments($story->id);
 
+$likeManager = new LikeManager(__DIR__ . '/data/likes_data.json');
+$likeCount = $likeManager->getLikes($story->id);
+
 ?>
 
 <html>
