@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_comment_id'])) {
                                     <em><?= htmlspecialchars($comment['time']) ?></em>
 
                                     <?php if (in_array($comment['comment_id'], $userComments)): ?>
-                                        <!-- Nút xóa -->
+                                        <!-- 削除 -->
                                         <form method="post" style="display: inline;">
                                             <input type="hidden" name="delete_comment_id" value="<?= $comment['comment_id'] ?>">
                                             <button type="submit"><svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_comment_id'])) {
                                                 </svg></button>
                                         </form>
 
-                                        <!-- Nút chỉnh sửa -->
+                                        <!-- 修正 -->
                                         <form method="post" style="display: inline;">
                                             <input type="hidden" name="edit_comment_id" value="<?= $comment['comment_id'] ?>">
                                             <input type="text" name="new_content" placeholder="Edit content" required>
