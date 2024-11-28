@@ -21,6 +21,7 @@ $stories = $storyData->getAll();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.0/TweenMax.min.js"></script>
 </head>
 
+<!-- 不要在<body>内添加css样式，可以把body的样式写在.container内 -->
 <body style="overflow-x: hidden;">
     <div class="container">
         <?php include __DIR__ . '/include/nav.php'; ?>
