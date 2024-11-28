@@ -1,7 +1,6 @@
 document.getElementById("likeButton").addEventListener("click", updateLikes);
 
-function updateLikes(event) {
-   event.preventDefault();
+function updateLikes() {
 
    var storyId = document.getElementById("likeButton").dataset.storyId;
 
