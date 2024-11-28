@@ -20,36 +20,6 @@
                 "author": "test author",
                 "time": "2024-11-26 01:50:45",
                 "content": "TEST 10:50 AM"
-            },
-            {
-                "comment_id": "67452f6e36803",
-                "author": "aaa",
-                "time": "2024-11-26 02:16:14",
-                "content": "test 11:16 AM"
-            },
-            {
-                "comment_id": "67453019beb60",
-                "author": "abc",
-                "time": "2024-11-26 02:19:05",
-                "content": "TEST 11:18"
-            },
-            {
-                "comment_id": "6745309d9844f",
-                "author": "\u5c71\u7530",
-                "time": "2024-11-26 02:21:17",
-                "content": "\u7d20\u6674\u3089\u3057\u3044"
-            },
-            {
-                "comment_id": "674533bd42237",
-                "author": "abckawdnawdlkawd",
-                "time": "2024-11-26 02:34:37",
-                "content": "test 11:34"
-            },
-            {
-                "comment_id": "67453493d4172",
-                "author": "yamada",
-                "time": "2024-11-26 02:38:11",
-                "content": "TEST 11:38"
             }
         ]
     },

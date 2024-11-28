@@ -16,13 +16,11 @@ $comments = $commentManager->getComments($story->id);
 
 $userComments = isset($_COOKIE['user_comments']) ? explode(',', $_COOKIE['user_comments']) : [];
 
-// Xử lý xóa bình luận
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_comment_id'])) {
     $commentId = $_POST['delete_comment_id'];
     $commentManager->deleteComment($storyId, $commentId);
 }
 
-// Xử lý chỉnh sửa bình luận
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_comment_id'])) {
     $commentId = $_POST['edit_comment_id'];
     $newContent = $_POST['new_content'];
