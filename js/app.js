@@ -176,6 +176,11 @@ window.addEventListener("scroll", () => {
   throttle(handleScrollAnimation, 250);
 });
 
+// ページ読み込み時に実行
+window.onload = function () {
+  handleScrollAnimation();
+};
+
 // ↑↑↑↑↑↑↑↑↑ page scroll animation ↑↑↑↑↑↑↑↑↑
 
 if (document.querySelector(".stories-wrap")) {
