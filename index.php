@@ -99,7 +99,7 @@ $stories = $storyData->getAll();
 
             TweenMax.to(".content", 2, {
                 opacity: 1,
-                y: -300,
+                top: 0, // 動畫結束時讓content回到頁面上方
                 delay: 3.2,
                 ease: Power2.easeInOut
             });
