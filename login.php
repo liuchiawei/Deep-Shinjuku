@@ -6,6 +6,8 @@ require_once 'class/User.php';
 
 $userManager = new UserManager();
 
+echo $_SESSION['user_id'];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
    $username = $_POST['username'];
    $password = $_POST['password'];

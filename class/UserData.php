@@ -6,14 +6,14 @@ class UserManager
    private $usersFile = 'data/users.json';
 
    // Đăng ký người dùng mới
-   public function register(string $username, string $password): string
+   public function register(string $username, string $password): ?string
    {
       $users = $this->loadUsers();
 
       // Kiểm tra người dùng đã tồn tại chưa
       foreach ($users as $user) {
          if ($user->username === $username) {
-            return "すでに登録されているユーザーネームです.";
+            return null; // Trả về null nếu username đã tồn tại
          }
       }
 
@@ -21,7 +21,7 @@ class UserManager
       $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
       // Tạo userId ngẫu nhiên bằng uniqid
-      $userId = uniqid('', true); // Tạo ID ngẫu nhiên
+      $userId = uniqid('', true);
 
       // Tạo đối tượng User và thêm vào mảng
       $user = new User($userId, $username, $hashedPassword);
@@ -30,7 +30,9 @@ class UserManager
 
       // Lưu vào file JSON
       $this->saveUsers($users);
-      return "登録成功!";
+
+      // Trả về userId khi đăng ký thành công
+      return $userId;
    }
 
    // Đăng nhập người dùng
@@ -89,4 +91,3 @@ class UserManager
       file_put_contents($this->usersFile, json_encode($usersArray, JSON_PRETTY_PRINT));
    }
 }
-?>

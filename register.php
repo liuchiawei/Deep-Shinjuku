@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 require_once 'class/UserData.php';
 require_once 'class/User.php';
 
@@ -9,7 +10,18 @@ $userManager = new UserManager();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
    $username = $_POST['username'];
    $password = $_POST['password'];
-   echo $userManager->register($username, $password);
+
+   $userId = $userManager->register($username, $password);
+
+   if ($userId) {
+      $_SESSION['user_id'] = $userId;
+      // header('Location: story.php');
+      echo $_SESSION['user_id'];
+      exit();
+
+   } else {
+      echo "<p style='color:red;'>すでに登録されているユーザーネームです。別の名前を試してください。</p>";
+   }
 }
 ?>
 

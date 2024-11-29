@@ -2,9 +2,23 @@
 require_once __DIR__ . '/class/StoryData.php';
 require_once __DIR__ . '/class/LikeManager.php';
 require_once __DIR__ . '/class/CommentManager.php';
-require_once __DIR__ . '/api/Interaction.php';
+require_once __DIR__ . '/class/User.php';
+require_once __DIR__ . '/class/UserData.php';
 
 session_start();
+
+echo $_SESSION['user_id'];
+
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $storyId = (int)$_GET['id'];
+} else {
+    echo "Invalid or missing ID.";
+}
+
+$storyData = new StoryData();
+$story = $storyData->getById($storyId);
+$maxId = $storyData->getMaxId();
 
 $nextStory = $storyData->getById($story->id + 1 <= $maxId ? $story->id + 1 : 1);
 $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
