@@ -121,6 +121,7 @@ html, body {
     justify-content: space-around;
     margin: clamp(20px, 10vw, 40px);
     width: 200vw;
+    min-width: 2000px;
     animation: runner var(--runner-duration) linear infinite;
     &:nth-child(even) {
         animation-duration: calc(var(--runner-duration) * 1.5);
@@ -642,10 +643,13 @@ html, body {
     }
 
     .story-item {
-        scale: 0.6;
-        top: var(--padding-m);
+        transform-origin: left;
+        scale: 0.8;
+        top: var(--padding-xs);
         left: 50%;
+        z-index: 0;
         transform: translateX(-50%);
+        animation: storyFadeInBottom 1s ease-out;
     }
 
     .prev-next-story {
