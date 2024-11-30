@@ -1,13 +1,26 @@
 document.getElementById("likeButton").addEventListener("click", updateLikes);
 
 function updateLikes() {
-
    var storyId = document.getElementById("likeButton").dataset.storyId;
 
-   var hasLiked = localStorage.getItem("hasLiked_" + storyId) === "true";
+   // Kiểm tra trạng thái đăng nhập qua cookie
+   var userId = document.cookie.split('; ').find(row => row.startsWith('user_id='));
 
+   if (!userId) {
+      // Hiển thị popup nếu chưa đăng nhập
+      showLoginPopup();
+      return;
+   }
+
+   // Nếu đã đăng nhập, tiếp tục xử lý like
+   handleLike(storyId);
+}
+
+function handleLike(storyId) {
    var likeCountElement = document.getElementById("likeCount");
    var currentLikeCount = parseInt(likeCountElement.innerText);
+
+   var hasLiked = localStorage.getItem("hasLiked_" + storyId) === "true";
 
    if (hasLiked) {
       likeCountElement.innerText = currentLikeCount - 1;
@@ -32,12 +45,18 @@ function updateLikes() {
    xhr.send("hasLiked=" + (!hasLiked ? "true" : "false") + "&storyId=" + storyId);
 }
 
-window.onload = function () {
-   var storyId = document.getElementById("likeButton").dataset.storyId;
-   var hasLiked = localStorage.getItem("hasLiked_" + storyId) === "true";
+function showLoginPopup() {
+   document.getElementById("loginPopup").style.display = "block";
+   document.getElementById("overlay").style.display = "block";
+}
 
-   var likeButton = document.getElementById("likeButton");
-   likeButton.innerHTML = hasLiked
-      ? '<i class="bi bi-heart-fill"></i>'
-      : '<i class="bi bi-heart"></i>';
-};
+function closeLoginPopup() {
+   document.getElementById("loginPopup").style.display = "none";
+   document.getElementById("overlay").style.display = "none";
+}
+
+function redirectToLogin() {
+   window.location.href = "/login-page";
+}
+
+document.getElementById("closePopup").addEventListener("click", closeLoginPopup);

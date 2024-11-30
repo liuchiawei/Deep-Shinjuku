@@ -14,6 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
    if ($userManager->login($username, $password)) {
       echo "ログイン成功!";
+      header('Location: story.php');
+      exit();
    } else {
       echo "ユーザーネームまたはパスワードが間違っています.";
    }
@@ -39,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
       <button type="submit" name="login">ログイン</button>
    </form>
+   <a href="./register.php">登録</a>
 </body>
 
 </html>

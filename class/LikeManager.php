@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . '/User.php';
-require_once __DIR__ . '/UserData.php';
 
 class LikeManager
 {
@@ -61,10 +60,10 @@ class LikeManager
       foreach ($this->data as $story) {
          if ($story['id'] == $storyId) {
             $likes = isset($story['likes']) ? $story['likes'] : [];
-            return empty($likes) ? 'zero' : $likes;
+            return $likes; // Always return an array
          }
       }
-      return 0;
+      return []; // Return an empty array if the story is not found
    }
 
    public function getLikeCount($storyId)

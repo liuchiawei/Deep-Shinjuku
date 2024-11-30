@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+session_start();
 
 require_once 'class/UserData.php';
 require_once 'class/User.php';
@@ -14,9 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
    $userId = $userManager->register($username, $password);
 
    if ($userId) {
-      $_SESSION['user_id'] = $userId;
+      setcookie('user_id', $userId, time() + (86400 * 30), "/");
       // header('Location: story.php');
-      echo $_SESSION['user_id'];
+      echo $_COOKIE['user_id'];
       exit();
 
    } else {
@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
       <button type="submit" name="register">登録</button>
    </form>
+   <a href="./login.php">ログイン</a>
 </body>
 
 </html>

@@ -7,6 +7,8 @@ require_once __DIR__ . '/class/UserData.php';
 
 session_start();
 
+$userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
 echo $_SESSION['user_id'];
 
 
@@ -26,8 +28,12 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
 $commentManager = new CommentManager(__DIR__ . '/data/likes_data.json');
 $comments = $commentManager->getComments($story->id);
 
-$likeManager = new LikeManager(__DIR__ . '/data/likes_data.json');
-$likeCount = $likeManager->getLikes($story->id);
+
+// Lấy danh sách "like" từ câu chuyện
+$likeManager = new LikeManager('/data/likes_data.json');
+$likes = $likeManager->getLikes($story->id);
+$hasAlreadyLiked = $userId && is_array($likes) && in_array($userId, $likes);
+$likeCount = $likeManager->getLikeCount($story->id);
 
 ?>
 
@@ -68,6 +74,15 @@ $likeCount = $likeManager->getLikes($story->id);
                 </button>
                 <div class="like-count" id="likeCount"><?php echo $likeCount; ?></div>
             </div>
+
+            <!-- Popup yêu cầu đăng nhập -->
+            <div id="loginPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; background: white; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
+                <p>ログインしてからいいねしてください</p>
+                <button id="closePopup" style="background: none; border: none; font-size: 20px; position: absolute; top: 5px; right: 10px;">&times;</button>
+                <button onclick="redirectToLogin()">Đăng nhập</button>
+            </div>
+            <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+
         </div>
         <!-- <div class="story-article-explanation">
             <?php echo $story->explanation ?>
