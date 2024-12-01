@@ -3,6 +3,85 @@ const storiesItem = document.querySelector(".stories-item");
 const storiesRow = document.querySelectorAll(".stories-row");
 const storiesWrap = document.querySelector(".stories-wrap");
 
+const introBtn = document.getElementById("introBtn");
+const text1 =
+  "新宿――世界で最も活気に満ち、人々で溢れる街のひとつ。しかし、高層ビルやきらめくネオンの下、この地にはどんな知られざる伝説が隠されているのでしょうか?";
+const text2 =
+  "ようこそ DEEP SHINJUKU へ。このサイトでは、新宿区にまつわる25の都市伝説を集めてご紹介しています。";
+
+let currentChar = 0;
+let currentText = text1;
+let isFirstTextDone = false;
+
+/**
+   * intro text animation
+   * イントロテキストのアニメーション
+   * @function  typeText()
+  */
+function typeText() {
+  const introText = document.getElementById("introText");
+
+  if (!introText) {
+    return;
+  }
+
+  if (currentChar < currentText.length) {
+    introText.style.opacity = 1;
+    introText.innerHTML += currentText.charAt(currentChar);
+    currentChar++;
+    setTimeout(typeText, 60);
+  } else if (!isFirstTextDone) {
+    introText.innerHTML += "<br><br>";
+    currentChar = 0;
+    currentText = text2;
+    isFirstTextDone = true;
+    setTimeout(typeText, 1000);
+  } else {
+    introBtn.style.display = "block";
+    setTimeout(() => {
+      introBtn.style.opacity = 1;
+    }, 500);
+  }
+}
+
+// DOMContentLoadedイベントを待ってから実行
+document.addEventListener("DOMContentLoaded", () => {
+  if (introBtn) {
+    introBtn.style.display = "none";
+    introBtn.style.opacity = 0;
+    setTimeout(typeText, 1500);
+  }
+});
+
+/**
+ * fade out animation
+ * イントロからindexへのアニメーション
+ * @function fadeOut()
+ */
+function fadeOut() {
+  const content = document.querySelector(".content");
+  content.style.display = "block";
+
+  introBtn.style.transition = "transform 1s ease, opacity 1s ease";
+  introBtn.style.transform = "translateX(-50%) translateY(-100px)";
+  introBtn.style.opacity = "0";
+
+  introText.style.transition = "2s ease 1s";
+  introText.style.transform = "translateX(-50%) translateY(-400px)";
+  introText.style.opacity = "0";
+
+  const overlayFront = document.getElementById("overlayFront");
+  overlayFront.style.transition = "transform 2s ease 2s";
+  overlayFront.style.transform = "translateY(-110%)";
+
+  const intro = document.querySelector(".intro");
+  intro.style.transition = "transform 1s ease 3s";
+  intro.style.transform = "translateY(-100%)";
+}
+if (introBtn) {
+  introBtn.onclick = fadeOut;
+}
+
 // マウスでスクロール
 function enableDragging() {
   let isDragging = false;
@@ -107,19 +186,19 @@ storiesItems.forEach((item) => {
 // 本を開いて中心に移動
 
 // Indexのイントロアニメーション Page Load Animation
-// function fadeInItems() {
-//   storiesRow.forEach((item, index) => {
-//     item.style.opacity = "0";
-//     setTimeout(() => {
-//       item.classList.add("fadeInBottom");
+function fadeInItems() {
+  storiesRow.forEach((item, index) => {
+    item.style.opacity = "0";
+    setTimeout(() => {
+      item.classList.add("fadeInBottom");
 
-//       setTimeout(() => {
-//         item.style.opacity = "1";
-//         item.classList.remove("fadeInBottom");
-//       }, 800);
-//     }, index * 100); // 100msずつ遅延させて順番にフェードイン
-//   });
-// }
+      setTimeout(() => {
+        item.style.opacity = "1";
+        item.classList.remove("fadeInBottom");
+      }, 800);
+    }, index * 100); // 100msずつ遅延させて順番にフェードイン
+  });
+}
 // Page Load Animation
 
 // ↓↓↓↓↓↓↓↓↓ page scroll animation ↓↓↓↓↓↓↓↓↓
