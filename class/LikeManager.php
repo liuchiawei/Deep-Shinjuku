@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__ . '/User.php';
-
 class LikeManager
 {
    private $jsonFile;
@@ -28,47 +26,30 @@ class LikeManager
       file_put_contents($this->jsonFile, json_encode($this->data, JSON_PRETTY_PRINT));
    }
 
-   public function toggleLikeForStory($storyId, $userId)
+   public function toggleLikeForStory($storyId, $hasLiked)
    {
-      // Tìm câu chuyện với ID tương ứng
+      //IDに一致するストーリーを検索
       foreach ($this->data as &$story) {
          if ($story['id'] == $storyId) {
-            if (!isset($story['likes'])) {
-               $story['likes'] = []; // Tạo mảng nếu chưa tồn tại
-            }
-
-            if (in_array($userId, $story['likes'])) {
-               // Nếu userId đã tồn tại, gỡ bỏ (unlike)
-               $story['likes'] = array_filter($story['likes'], function ($id) use ($userId) {
-                  return $id !== $userId;
-               });
+            if ($hasLiked) {
+               $story['likes']--; //Like済みの場合、Like数を減らす
             } else {
-               // Nếu userId chưa tồn tại, thêm vào (like)
-               $story['likes'][] = $userId;
+               $story['likes']++; //Likeしていない場合、Like数を増やす
             }
-
             $this->saveData();
-            return count($story['likes']); // Trả về số lượng like hiện tại
+            return $story['likes'];
          }
       }
-
-      return 0; // Nếu không tìm thấy story, trả về 0
+      return 0;
    }
 
    public function getLikes($storyId)
    {
       foreach ($this->data as $story) {
          if ($story['id'] == $storyId) {
-            $likes = isset($story['likes']) ? $story['likes'] : [];
-            return $likes; // Always return an array
+            return $story['likes'];
          }
       }
-      return []; // Return an empty array if the story is not found
-   }
-
-   public function getLikeCount($storyId)
-   {
-      $likes = $this->getLikes($storyId);
-      return count($likes); // Trả về số lượng like
+      return 99;
    }
 }

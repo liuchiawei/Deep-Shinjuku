@@ -1,7 +1,7 @@
 [
     {
         "id": "1",
-        "likes": [],
+        "likes": 5,
         "comments": [
             {
                 "comment_id": 1,
@@ -25,7 +25,7 @@
     },
     {
         "id": "2",
-        "likes": [],
+        "likes": 6,
         "comments": [
             {
                 "comment_id": 2,
@@ -43,112 +43,112 @@
     },
     {
         "id": "3",
-        "likes": [],
+        "likes": 6,
         "comments": []
     },
     {
         "id": "4",
-        "likes": [],
+        "likes": 4,
         "comments": []
     },
     {
         "id": "5",
-        "likes": [],
+        "likes": 6,
         "comments": []
     },
     {
         "id": "6",
-        "likes": [],
+        "likes": 8,
         "comments": []
     },
     {
         "id": "7",
-        "likes": [],
+        "likes": 4,
         "comments": []
     },
     {
         "id": "8",
-        "likes": [],
+        "likes": 8,
         "comments": []
     },
     {
         "id": "9",
-        "likes": [],
+        "likes": 5,
         "comments": []
     },
     {
         "id": "10",
-        "likes": [],
+        "likes": 7,
         "comments": []
     },
     {
         "id": "12",
-        "likes": [],
+        "likes": 9,
         "comments": []
     },
     {
         "id": "13",
-        "likes": [],
+        "likes": 2,
         "comments": []
     },
     {
         "id": "14",
-        "likes": [],
+        "likes": 6,
         "comments": []
     },
     {
         "id": "15",
-        "likes": [],
+        "likes": 8,
         "comments": []
     },
     {
         "id": "16",
-        "likes": [],
+        "likes": 9,
         "comments": []
     },
     {
         "id": "17",
-        "likes": [],
+        "likes": 2,
         "comments": []
     },
     {
         "id": "18",
-        "likes": [],
+        "likes": 0,
         "comments": []
     },
     {
         "id": "19",
-        "likes": [],
+        "likes": 4,
         "comments": []
     },
     {
         "id": "20",
-        "likes": [],
+        "likes": 6,
         "comments": []
     },
     {
         "id": "21",
-        "likes": [],
+        "likes": 7,
         "comments": []
     },
     {
         "id": "22",
-        "likes": [],
+        "likes": 2,
         "comments": []
     },
     {
         "id": "23",
-        "likes": [],
+        "likes": 11,
         "comments": []
     },
     {
         "id": "24",
-        "likes": [],
+        "likes": 12,
         "comments": []
     },
     {
         "id": "25",
-        "likes": [],
+        "likes": 13,
         "comments": []
     }
 ]

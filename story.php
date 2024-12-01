@@ -9,8 +9,6 @@ session_start();
 
 $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-echo $_SESSION['user_id'];
-
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $storyId = (int)$_GET['id'];
@@ -21,6 +19,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 $storyData = new StoryData();
 $story = $storyData->getById($storyId);
 $maxId = $storyData->getMaxId();
+$storyId = $_GET['id'] ?? null;
 
 $nextStory = $storyData->getById($story->id + 1 <= $maxId ? $story->id + 1 : 1);
 $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
@@ -29,11 +28,14 @@ $commentManager = new CommentManager(__DIR__ . '/data/likes_data.json');
 $comments = $commentManager->getComments($story->id);
 
 
-// Lấy danh sách "like" từ câu chuyện
-$likeManager = new LikeManager('/data/likes_data.json');
-$likes = $likeManager->getLikes($story->id);
-$hasAlreadyLiked = $userId && is_array($likes) && in_array($userId, $likes);
-$likeCount = $likeManager->getLikeCount($story->id);
+$likeManager = new LikeManager(__DIR__ . '/data/likes_data.json');
+$likeCount = $likeManager->getLikes($story->id);
+
+if (isset($_POST['hasLiked'])) {
+    $hasLiked = $_POST['hasLiked'] === 'true';
+    $newLikeCount = $likeManager->toggleLikeForStory($storyId, $hasLiked);
+    echo $newLikeCount;
+}
 
 ?>
 
@@ -70,19 +72,9 @@ $likeCount = $likeManager->getLikeCount($story->id);
             <p class="js_scroll fade-in"><?php echo $story->content; ?></p>
             <div class="story-article-buttons-wrap">
                 <button type="button" id="likeButton" class="like-button" data-story-id="<?php echo $story->id; ?>">
-                    <?php echo $hasAlreadyLiked ? '<i class="bi bi-heart-fill"></i>' : '<i class="bi bi-heart"></i>'; ?>
                 </button>
                 <div class="like-count" id="likeCount"><?php echo $likeCount; ?></div>
             </div>
-
-            <!-- Popup yêu cầu đăng nhập -->
-            <div id="loginPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; background: white; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
-                <p>ログインしてからいいねしてください</p>
-                <button id="closePopup" style="background: none; border: none; font-size: 20px; position: absolute; top: 5px; right: 10px;">&times;</button>
-                <button onclick="redirectToLogin()">Đăng nhập</button>
-            </div>
-            <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
-
         </div>
         <!-- <div class="story-article-explanation">
             <?php echo $story->explanation ?>
@@ -112,28 +104,6 @@ $likeCount = $likeManager->getLikeCount($story->id);
                     <div class="user-comment-time">
                         日時
                     </div> -->
-                </div>
-                <div id="comments-Popup" style="
-                width: fit-content;
-                height: fit-content;
-                position:fixed;
-                right: 1rem;
-                bottom: 1rem;
-                background-color: #ddd;
-                color: black;
-                ">
-                    <?php if (!empty($comments)): ?>
-                        <ul>
-                            <?php foreach ($comments as $comment): ?>
-                                <li>
-                                    <strong><?= htmlspecialchars($comment['author']) ?>:</strong>
-                                    <p><?= htmlspecialchars($comment['content']) ?></p>
-                                    <em><?= htmlspecialchars($comment['time']) ?></em>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php else: ?>
-                    <?php endif; ?>
                 </div>
                 <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全てのコメントを見る</button>
             </div>
