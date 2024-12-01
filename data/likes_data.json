@@ -44,7 +44,14 @@
     {
         "id": "3",
         "likes": 6,
-        "comments": []
+        "comments": [
+            {
+                "comment_id": "674bde409b21a",
+                "author": "Koizumi",
+                "time": "2024-12-01 04:55:44",
+                "content": "Good Article"
+            }
+        ]
     },
     {
         "id": "4",

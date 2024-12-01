@@ -1,3 +1,12 @@
+document.addEventListener("DOMContentLoaded", () => {
+   let userID = localStorage.getItem("userID");
+   if (!userID) {
+      userID = `user_${Date.now()}`;
+      localStorage.setItem("userID", userID);
+   }
+});
+
+const getUserID = () => localStorage.getItem("userID");
 document.getElementById("likeButton").addEventListener("click", updateLikes);
 
 // Function to set a cookie

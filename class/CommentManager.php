@@ -1,8 +1,5 @@
 <?php
 
-require_once __DIR__ . '/User.php';
-require_once __DIR__ . '/UserData.php';
-
 class CommentManager
 {
     private $jsonFile;
@@ -29,26 +26,23 @@ class CommentManager
         file_put_contents($this->jsonFile, json_encode($this->data, JSON_PRETTY_PRINT));
     }
 
-    // Thêm bình luận
+    //コメントを追加する
     public function addComment($storyId, $author, $content)
     {
-        if (!isset($_SESSION['user_id'])) {
-            return null; // Nếu chưa đăng nhập, không cho phép thêm
-        }
-
-        $userId = $_SESSION['user_id'];
+        // jsonファイルを読み込む
+        $data = json_decode(file_get_contents($this->jsonFile), true);
 
         $newComment = [
-            'user_id' => $userId,
-            'author' => $author, // Giữ lại thông tin người viết bình luận
+            'comment_id' => uniqid(),
+            'author' => $author,
             'time' => date('Y-m-d H:i:s'),
             'content' => $content
         ];
 
-        foreach ($this->data as &$story) {
+        foreach ($data as &$story) {
             if ($story['id'] == $storyId) {
                 $story['comments'][] = $newComment;
-                $this->saveData();
+                file_put_contents($this->jsonFile, json_encode($data, JSON_PRETTY_PRINT));
                 return $newComment;
             }
         }
@@ -56,60 +50,49 @@ class CommentManager
         return null;
     }
 
-    // Lấy tất cả bình luận
+    //全てのコメントを取得する
     public function getComments($storyId)
     {
         foreach ($this->data as $story) {
             if ($story['id'] == $storyId) {
-                return $story['comments'] ?? [];
+                return $story['comments'];
             }
         }
         return [];
     }
 
-    // Sửa bình luận
-    public function editComment($storyId, $commentIndex, $newContent)
+    //コメントIDに一致するコメントを編集
+    public function editComment($storyId, $commentId, $newContent)
     {
-        if (!isset($_SESSION['user_id'])) {
-            return false; // Chưa đăng nhập, không cho phép chỉnh sửa
-        }
-
-        $userId = $_SESSION['user_id'];
-
         foreach ($this->data as &$story) {
             if ($story['id'] == $storyId) {
-                if (isset($story['comments'][$commentIndex]) && $story['comments'][$commentIndex]['user_id'] === $userId) {
-                    $story['comments'][$commentIndex]['content'] = $newContent;
-                    $story['comments'][$commentIndex]['time'] = date('Y-m-d H:i:s');
-                    $this->saveData();
-                    return true;
+                foreach ($story['comments'] as &$comment) {
+                    if ($comment['comment_id'] == $commentId) {
+                        $comment['content'] = $newContent;
+                        $comment['time'] = date('Y-m-d H:i:s');
+                        $this->saveData();
+                        return true;
+                    }
                 }
             }
         }
-
         return false;
     }
-
-    // Xóa bình luận
-    public function deleteComment($storyId, $commentIndex)
+    //コメントIDに一致するコメントを削除
+    public function deleteComment($storyId, $commentId)
     {
-        if (!isset($_SESSION['user_id'])) {
-            return false; // Chưa đăng nhập, không cho phép xóa
-        }
-
-        $userId = $_SESSION['user_id'];
-
         foreach ($this->data as &$story) {
             if ($story['id'] == $storyId) {
-                if (isset($story['comments'][$commentIndex]) && $story['comments'][$commentIndex]['user_id'] === $userId) {
-                    unset($story['comments'][$commentIndex]);
-                    $story['comments'] = array_values($story['comments']); // Reset lại chỉ số mảng
-                    $this->saveData();
-                    return true;
+                foreach ($story['comments'] as $index => $comment) {
+                    if ($comment['comment_id'] == $commentId) {
+                        unset($story['comments'][$index]);
+                        $story['comments'] = array_values($story['comments']);
+                        $this->saveData();
+                        return true;
+                    }
                 }
             }
         }
-
         return false;
     }
 }

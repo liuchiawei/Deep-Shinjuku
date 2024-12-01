@@ -2,8 +2,6 @@
 require_once __DIR__ . '/class/StoryData.php';
 require_once __DIR__ . '/class/LikeManager.php';
 require_once __DIR__ . '/class/CommentManager.php';
-require_once __DIR__ . '/class/User.php';
-require_once __DIR__ . '/class/UserData.php';
 
 session_start();
 
@@ -84,8 +82,8 @@ if (isset($_POST['hasLiked'])) {
                 <div class="story-detail-title">目撃者の説述</div>
                 <div class="story-comment-form">
                     <form id="commentForm" data-story-id="<?php echo $story->id; ?>" action="story.php?id=<?php echo $story->id; ?>" method="POST">
-                        <textarea name="content" id="content" cols="30" rows="10"></textarea>
-                        <input type="text" name="author" id="author" placeholder="名前">
+                        <textarea name="content" id="content" cols="30" rows="10" required></textarea>
+                        <input type="text" name="author" id="author" placeholder="名前" required>
                         <button type="submit">コメントを投稿</button>
                     </form>
                 </div>
@@ -104,6 +102,28 @@ if (isset($_POST['hasLiked'])) {
                     <div class="user-comment-time">
                         日時
                     </div> -->
+                </div>
+                <div id="comments-Popup" style="
+                width: fit-content;
+                height: fit-content;
+                position:fixed;
+                right: 1rem;
+                bottom: 1rem;
+                background-color: #ddd;
+                color: black;
+                ">
+                    <?php if (!empty($comments)): ?>
+                        <ul>
+                            <?php foreach ($comments as $comment): ?>
+                                <li>
+                                    <strong><?= htmlspecialchars($comment['author']) ?>:</strong>
+                                    <p><?= htmlspecialchars($comment['content']) ?></p>
+                                    <em><?= htmlspecialchars($comment['time']) ?></em>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php else: ?>
+                    <?php endif; ?>
                 </div>
                 <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全てのコメントを見る</button>
             </div>
