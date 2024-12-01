@@ -21,19 +21,61 @@ $stories = $storyData->getAll();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.0/TweenMax.min.js"></script>
 </head>
 
-<!-- 不要在<body>内添加css样式，可以把body的样式写在.container内 -->
 <body style="overflow-x: hidden;">
     <div class="container">
         <?php include __DIR__ . '/include/nav.php'; ?>
 
         <div class="overlay">
-            <p class="screen">EXPLORE</p>
+            <p class="screen" style="font-size: 40px; margin-bottom: 200px; width: 90%; opacity: 0;"></p>
+            <script>
+                const text1 = "新宿――世界で最も活気に満ち、人々で溢れる街のひとつ。しかし、高層ビルやきらめくネオンの下、この地にはどんな知られざる伝説が隠されているのでしょうか?";
+                const text2 = "ようこそ DEEP SHINJUKU へ。このサイトでは、新宿区にまつわる25の都市伝説を集めてご紹介しています。";
+                
+                let screen = document.querySelector('.screen');
+                let currentChar = 0;
+                let currentText = text1;
+                let isFirstTextDone = false;
+
+                function typeText() {
+                    if (!screen) {
+                        console.error('screen element not found');
+                        return;
+                    }
+
+                    if(currentChar < currentText.length) {
+                        screen.style.opacity = 1;
+                        screen.innerHTML += currentText.charAt(currentChar);
+                        currentChar++;
+                        setTimeout(typeText, 50);
+                    } else if(!isFirstTextDone) {
+                        screen.innerHTML += "<br><br><br>";
+                        currentChar = 0;
+                        currentText = text2;
+                        isFirstTextDone = true;
+                        setTimeout(typeText, 1000);
+                    } else {
+                        const exploreBtn = document.querySelector('.myBtn');
+                        if (exploreBtn) {
+                            exploreBtn.style.opacity = 1;
+                        }
+                    }
+                }
+
+                // DOMContentLoadedイベントを待ってから実行
+                document.addEventListener('DOMContentLoaded', () => {
+                    screen = document.querySelector('.screen');
+                    document.querySelector('.myBtn').style.opacity = 0;
+                    setTimeout(typeText, 1500);
+                });
+            </script>
+        </div>
+        </div>
             <div class="intro">
                 <button class="myBtn" onclick="fadeOut()">EXPLORE</button>
             </div>
         </div>
 
-        <div class="overlay-2"></div>
+        <div class="overlay-2" style="background-color: #2a0707;"></div>
 
         <div class="content" id="content" style="display: none;">
             <div class="stories-wrap" id="stories-wrap">
@@ -99,7 +141,7 @@ $stories = $storyData->getAll();
 
             TweenMax.to(".content", 2, {
                 opacity: 1,
-                top: 0, // 動畫結束時讓content回到頁面上方
+                y: -300,
                 delay: 3.2,
                 ease: Power2.easeInOut
             });
