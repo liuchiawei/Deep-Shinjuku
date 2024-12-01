@@ -20,6 +20,12 @@
                 "author": "test author",
                 "time": "2024-11-26 01:50:45",
                 "content": "TEST 10:50 AM"
+            },
+            {
+                "comment_id": "674be5441779a",
+                "author": "author",
+                "time": "2024-12-01 05:25:40",
+                "content": "this is a comment on story 1"
             }
         ]
     },
@@ -106,7 +112,14 @@
     {
         "id": "15",
         "likes": 8,
-        "comments": []
+        "comments": [
+            {
+                "comment_id": "674be485cf2ca",
+                "author": "this is author",
+                "time": "2024-12-01 05:22:29",
+                "content": "this is a comment"
+            }
+        ]
     },
     {
         "id": "16",
@@ -116,7 +129,14 @@
     {
         "id": "17",
         "likes": 2,
-        "comments": []
+        "comments": [
+            {
+                "comment_id": "674be4bbea17d",
+                "author": "author",
+                "time": "2024-12-01 05:23:23",
+                "content": "this is comment on story 17"
+            }
+        ]
     },
     {
         "id": "18",

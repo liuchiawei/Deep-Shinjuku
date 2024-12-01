@@ -22,8 +22,6 @@ function postComment(event) {
         })
         .then(newComment => {
             if (newComment && newComment.comment_id) {
-                //Save comment_id to LocalStorage
-                addCommentToLocalStorage(newComment.comment_id);
 
                 console.log("Comment ID saved to LocalStorage:", newComment.comment_id);
 
@@ -37,17 +35,4 @@ function postComment(event) {
         .catch(error => {
             console.error("Error during fetch:", error);
         });
-}
-
-function addCommentToLocalStorage(commentId) {
-    let savedCommentIds = JSON.parse(localStorage.getItem("commentIds")) || [];
-    if (!savedCommentIds.includes(commentId)) {
-        savedCommentIds.push(commentId);
-        localStorage.setItem("commentIds", JSON.stringify(savedCommentIds));
-    }
-}
-
-function canEditOrDeleteComment(commentId) {
-    const savedCommentIds = JSON.parse(localStorage.getItem("commentIds")) || [];
-    return savedCommentIds.includes(commentId);
 }

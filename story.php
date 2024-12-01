@@ -87,11 +87,10 @@ if (isset($_POST['hasLiked'])) {
                         <button type="submit">コメントを投稿</button>
                     </form>
                 </div>
-                <!-- TODO:コメントを表示する(foreach) -->
                 <div class="story-comment">
                     <div class="story-comment-btns">
-                        <button type="button" id="editComment" class="story-comment-btn">編集</button>
-                        <button type="button" id="deleteComment" class="user-comment-btn">削除</button>
+                        <!-- <button type="button" id="editComment" class="story-comment-btn">編集</button>
+                        <button type="button" id="deleteComment" class="user-comment-btn">削除</button> -->
                     </div>
                     <!-- <div class="user-comment-content">
                         コメント内容
