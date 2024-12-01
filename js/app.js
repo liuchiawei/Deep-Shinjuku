@@ -82,42 +82,6 @@ if (introBtn) {
   introBtn.onclick = fadeOut;
 }
 
-// マウスでスクロール
-function enableDragging() {
-  let isDragging = false;
-  let startX, startY;
-
-  document.addEventListener("mousedown", function (e) {
-    isDragging = true;
-    // ドラッグ開始位置を計算
-    startX = e.pageX - window.scrollX;
-    startY = e.pageY - window.scrollY;
-  });
-
-  document.addEventListener("mousemove", function (e) {
-    if (!isDragging) return;
-    e.preventDefault();
-    let newX = e.pageX - startX;
-    let newY = e.pageY - startY;
-    window.scrollTo(newX, newY);
-    console.log(newX, newY);
-  });
-
-  document.addEventListener("mouseup", function () {
-    isDragging = false;
-  });
-}
-// マウスでスクロール
-
-// 中心に移動
-function centerView() {
-  // 中心点を計算
-  let x = (document.body.scrollWidth - window.innerWidth) / 2;
-  // let y = (document.body.scrollHeight - window.innerHeight) / 2;
-
-  window.scrollTo(x, 0);
-}
-
 // 中心に移動2
 function scrollToElement(element) {
   // 中心を計算
@@ -135,29 +99,6 @@ function scrollToElement(element) {
     duration: 6000,
   });
 }
-
-// キーボードでスクロール
-function keyboardScrolling() {
-  let scrollSpeed = 40; // スクロール速度
-
-  document.addEventListener("keydown", function (e) {
-    switch (e.key) {
-      case "ArrowLeft":
-        window.scrollBy(-scrollSpeed, 0);
-        break;
-      case "ArrowRight":
-        window.scrollBy(scrollSpeed, 0);
-        break;
-      case "ArrowUp":
-        window.scrollBy(0, -scrollSpeed);
-        break;
-      case "ArrowDown":
-        window.scrollBy(0, scrollSpeed);
-        break;
-    }
-  });
-}
-// キーボードでスクロール
 
 // 本を開いて中心に移動
 storiesItems.forEach((item) => {
@@ -185,20 +126,6 @@ storiesItems.forEach((item) => {
 });
 // 本を開いて中心に移動
 
-// Indexのイントロアニメーション Page Load Animation
-function fadeInItems() {
-  storiesRow.forEach((item, index) => {
-    item.style.opacity = "0";
-    setTimeout(() => {
-      item.classList.add("fadeInBottom");
-
-      setTimeout(() => {
-        item.style.opacity = "1";
-        item.classList.remove("fadeInBottom");
-      }, 800);
-    }, index * 100); // 100msずつ遅延させて順番にフェードイン
-  });
-}
 // Page Load Animation
 
 // ↓↓↓↓↓↓↓↓↓ page scroll animation ↓↓↓↓↓↓↓↓↓
@@ -261,12 +188,3 @@ window.onload = function () {
 };
 
 // ↑↑↑↑↑↑↑↑↑ page scroll animation ↑↑↑↑↑↑↑↑↑
-
-if (document.querySelector(".stories-wrap")) {
-  window.onload = function () {
-    // centerView();
-    // enableDragging();
-    // keyboardScrolling();
-    fadeInItems();
-  };
-}

@@ -4,7 +4,6 @@ require_once __DIR__ . '/class/StoryData.php';
 
 $storyData = new StoryData();
 $stories = $storyData->getAll();
-// shuffle($stories); // 配列をランダムに並び替え
 
 ?>
 <html>
