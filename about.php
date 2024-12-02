@@ -24,14 +24,14 @@
         </div>
 
         <div class="team-section">
+            <div class="team-logo">
+                <img class="js_scroll fade-in" src="image/logo_team.svg?v=<?php echo time(); ?>" alt="コードの森">
+            </div>
             <h5 class="members js_scroll fade-in">
                 制作<br>
                 コードの森<br>
                 LIUCHIAWEI、レリタンハイ、KAUNGTHAR、若林真緒、鍾嘉朗、李森
             </h5>
-            <div class="team-logo">
-                <img class="js_scroll fade-in" src="image/logo_team.svg?v=<?php echo time(); ?>" alt="コードの森">
-            </div>
         </div>
     </main>
     <?php include __DIR__ . '/include/footer.php'; ?>

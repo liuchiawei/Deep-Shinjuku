@@ -185,6 +185,7 @@ html, body {
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: var(--font-size-m);
+    width: 90%;
     max-width: var(--story-article-width);
     opacity: 0;
 }
@@ -812,7 +813,7 @@ html, body {
 
 .team-logo {
     margin: 0 auto;
-    width: 160px;
+    width: 120px;
 }
 
 .members {
