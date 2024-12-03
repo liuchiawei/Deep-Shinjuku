@@ -149,6 +149,7 @@ html, body {
     letter-spacing: var(--letter-spacing-l);
     color: var(--font-color);
     font-family: var(--font-sans);
+    font-family: var(--font-sans);
     border: 2px solid var(--font-color);
     text-transform: uppercase;
     outline: none;
@@ -156,6 +157,7 @@ html, body {
     background: none;
     z-index: 2;
     transition: 2s ease;
+    animation: fade-in 3s;
     animation: fade-in 3s;
 }
 
@@ -542,6 +544,7 @@ html, body {
 
 .story-map-title {
     margin: var(--padding-s) auto;
+    margin: var(--padding-s) auto;
     font-size: var(--font-size-s);
     text-align: center;
     letter-spacing: var(--letter-spacing-xl);
@@ -549,6 +552,7 @@ html, body {
 }
 
 .story-comment-wrap {
+    max-width: var(--comment-wrap-width);
     max-width: var(--comment-wrap-width);
     width: 40%;
 }

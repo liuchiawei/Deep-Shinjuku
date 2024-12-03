@@ -130,6 +130,7 @@ if (isset($_POST['hasLiked'])) {
                 </div>
                 <div class="story-map-title"><?php echo $story->location ?></div>
             </div>
+        </div>
     </article>
     <section class="prev-next-story-wrap">
         <a href="story.php?id=<?php echo $prevStory->id; ?>">
