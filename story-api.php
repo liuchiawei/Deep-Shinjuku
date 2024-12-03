@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../class/StoryData.php';
-require_once __DIR__ . '/../class/LikeManager.php';
-require_once __DIR__ . '/../class/CommentManager.php';
-require_once __DIR__ . 'Interaction.php';
+require_once __DIR__ . '/class/StoryData.php';
+require_once __DIR__ . '/class/LikeManager.php';
+require_once __DIR__ . '/class/CommentManager.php';
+require_once __DIR__ . '/api/Interaction.php';
 
 session_start();
 

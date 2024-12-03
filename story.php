@@ -75,46 +75,43 @@ if (isset($_POST['hasLiked'])) {
                 <div class="like-count" id="likeCount"><?php echo $likeCount; ?></div>
             </div>
         </div>
-        <!-- <div class="story-article-explanation">
-            <?php echo $story->explanation ?>
-        </div> -->
         <div class="story-detail-wrap">
             <div class="story-comment-wrap">
-                <div class="story-detail-title">コメント</div>
-                <div class="story-comment-form">
-                    <form id="commentForm" data-story-id="<?php echo $story->id; ?>" action="story.php?id=<?php echo $story->id; ?>" method="POST">
-                        <textarea name="content" id="content" cols="30" rows="10" required></textarea>
-                        <input type="text" name="author" id="author" placeholder="名前">
-                        <button type="submit">投稿</button>
-                    </form>
+                <div class="story-detail-title">
+                    コメント
+                    <div class="comments-display-btn-wrap">
+                        <button id="prevBtn" class="comments-display-btn"><i class="bi bi-caret-left"></i></button>
+                        <button id="nextBtn" class="comments-display-btn"><i class="bi bi-caret-right"></i></button>
+                    </div>
                 </div>
                 <div class="story-comment">
-                    <div id="comments-Popup" style="
-                width: fit-content;
-                height: fit-content;
-                right: 1rem;
-                bottom: 1rem;
-                background-color: #ddd;
-                color: black;">
+                    <div id="comments-Popup" class="comments-popup">
                         <?php if (!empty($comments)): ?>
                             <ul id="commentList" style="display: block;">
                                 <?php foreach ($comments as $index => $comment): ?>
                                     <?php
                                     $author = trim($comment['author']) !== '' ? htmlspecialchars($comment['author']) : '名無しさん';
                                     ?>
-                                    <li id="comment-<?= $index ?>" style="display: none;">
-                                        <strong><?= htmlspecialchars($comment['author']) ?>:</strong>
-                                        <p><?= htmlspecialchars($comment['content']) ?></p>
-                                        <em><?= htmlspecialchars($comment['time']) ?></em>
+                                    <li id="comment-<?= $index ?>" style="display: none;" class="comment-body">
+                                        <strong><?= htmlspecialchars($comment['author']) ?></strong>
+                                        <div class="comment-content"><?= htmlspecialchars($comment['content']) ?></div>
+                                        <em class="comment-time"><?= htmlspecialchars($comment['time']) ?></em>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
                         <?php else: ?>
                             <p>コメントはございません</p>
                         <?php endif; ?>
-                        <button id="prevBtn">Previous</button>
-                        <button id="nextBtn">Next</button>
                     </div>
+                </div>
+                <div class="story-comment-form">
+                    <form id="commentForm" data-story-id="<?php echo $story->id; ?>" action="story.php?id=<?php echo $story->id; ?>" method="POST">
+                        <textarea name="content" id="content" cols="30" rows="10" placeholder="コメント" required></textarea>
+                        <div class="story-comment-form-post">
+                            <input type="text" name="author" id="author" placeholder="名前">
+                            <button type="submit" class="story-comment-btn">投稿</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -177,8 +174,8 @@ if (isset($_POST['hasLiked'])) {
     <?php include __DIR__ . '/include/footer.php'; ?>
 </body>
 <script src="js/app.js?<?php echo time(); ?>"></script>
-<script src="js/likes.js"></script>
-<script src="js/comments.js"></script>
+<script src="js/likes.js?<?php echo time(); ?>"></script>
+<script src="js/comments.js?<?php echo time(); ?>"></script>
 
 <script>
     document.getElementById('likeButton').dataset.storyId = <?php echo $story->id; ?>;
