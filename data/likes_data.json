@@ -209,7 +209,14 @@
     {
         "id": "22",
         "likes": 2,
-        "comments": []
+        "comments": [
+            {
+                "comment_id": "674f317aa5e4c",
+                "author": "LIU CHIAWEI",
+                "time": "2024-12-04 01:27",
+                "content": "\u3061\u3087\u3063\u3068\u611f\u52d5\u3057\u305f"
+            }
+        ]
     },
     {
         "id": "23",

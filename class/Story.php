@@ -12,7 +12,7 @@ class Story
     public string $date;
     public int $rating;
 
-    public function __construct(int $id, string $title, string $location, string $locationId, string $content, string $explanation, string $brief, string $date, int $rating)
+    public function __construct(int $id, string $title, string $location, int $locationId, string $content, string $explanation, string $brief, string $date, int $rating)
     {
         $this->id = $id;
         $this->title = $title;

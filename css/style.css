@@ -375,12 +375,18 @@ html, body {
     display: flex;
     justify-content: space-between;
     padding: clamp(var(--padding-s), 6vw, var(--padding-l));
-    background-color: red; /* TODO: delete after confirm */
+    background-size: cover;
+    background-position: center;
 }
 
 .story-info {
     width: 60%;
     position: relative;
+    padding: var(--padding-s);
+    border-radius: var(--padding-s);
+    text-shadow: 0 0 4px var(--black-color), 0 0 20px var(--black-color);
+    -webkit-backdrop-filter: blur(3px) brightness(0.9);
+    backdrop-filter: blur(3px) brightness(0.9);
 }
 
 .story-info-title {

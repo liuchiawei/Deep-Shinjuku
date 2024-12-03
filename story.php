@@ -42,18 +42,12 @@ if (isset($_POST['hasLiked'])) {
 
 <body>
     <?php include __DIR__ . '/include/nav.php'; ?>
-    <div class="story-wrap">
+    <div class="story-wrap" style="background-image: url('image/background/<?php echo $story->locationId; ?>.jpg');">
         <div class="story-info">
             <div class="story-info-title"><?php echo $story->title; ?></div>
             <div class="story-info-subinfo">
                 <div class="story-info-date"><?php echo $story->date; ?></div>
                 <div class="story-info-location"><?php echo $story->location; ?></div>
-            </div>
-            <div class="story-info-rating">
-                <!-- TODO:星の数を表示 -->
-                <?php for ($i = 0; $i < 5; $i++) { ?>
-                    <div class="story-info-rating-star"></div>
-                <?php } ?>
             </div>
             <div class="story-info-brief"><?php echo $story->brief; ?></div>
         </div>

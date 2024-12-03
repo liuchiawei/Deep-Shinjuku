@@ -54,12 +54,12 @@ function fadeOut() {
   const content = document.querySelector(".content");
   content.style.display = "block";
 
-  introBtn.style.transition = "transform 1s ease, opacity 1s ease";
-  introBtn.style.transform = "translateX(-50%) translateY(-100px)";
+  introBtn.style.transition = "2s ease-in";
+  introBtn.style.transform = "translateX(-50%) translateY(-100vh)";
   introBtn.style.opacity = "0";
 
-  introText.style.transition = "2s ease 1s";
-  introText.style.transform = "translateX(-50%) translateY(-400px)";
+  introText.style.transition = "2s ease 0.5s";
+  introText.style.transform = "translateX(-50%) translateY(-100vh)";
   introText.style.opacity = "0";
 
   const overlayFront = document.getElementById("overlayFront");
