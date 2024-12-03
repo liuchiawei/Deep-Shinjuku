@@ -4,17 +4,17 @@ const storiesRow = document.querySelectorAll(".stories-row");
 const storiesWrap = document.querySelector(".stories-wrap");
 
 const introBtn = document.getElementById("introBtn");
-const text1 =
-  "新宿――世界で最も活気に満ち、人々で溢れる街のひとつ。";
-const text2 =
-  "しかし、高層ビルやきらめくネオンの下、この地にはどんな知られざる伝説が隠されているのでしょうか?";
-const text3 =
-  "このサイトでは、新宿区にまつわる25の都市伝説を集めてご紹介しています。さあ、新宿の深い奥を探検しましょう。";
+const text = [
+  "新宿――世界で最も活気に満ち、人々で溢れる街のひとつ。",
+  "しかし、高層ビルやきらめくネオンの下、この地にはどんな知られざる伝説が隠されているのでしょうか?",
+  "このサイトでは、新宿区にまつわる25の都市伝説を集めてご紹介しています。",
+  "さあ、新宿の深い奥を探検しましょう。",
+];
+
 
 let currentChar = 0;
-let currentText = text1;
-let isFirstTextDone = false;
-let isSecondTextDone = false;
+let currentText = text[0];
+let currentTextIndex = 0;
 
 /**
    * intro text animation
@@ -32,20 +32,14 @@ function typeText() {
     introText.style.opacity = 1;
     introText.innerHTML += currentText.charAt(currentChar);
     currentChar++;
-    setTimeout(typeText, 60);
-  } else if (!isFirstTextDone) {
+    setTimeout(typeText, 50);
+  } else if (currentTextIndex < text.length - 1) {
     introText.innerHTML += "<br><br>";
     currentChar = 0;
-    currentText = text2;
-    isFirstTextDone = true;
-    setTimeout(typeText, 1000);
-  } else if (!isSecondTextDone) {
-    introText.innerHTML += "<br><br>";
-    currentChar = 0;
-    currentText = text3;
-    isSecondTextDone = true;
-    setTimeout(typeText, 1000);
-  } else if (isSecondTextDone) {
+    currentText = text[currentTextIndex + 1];
+    currentTextIndex++;
+    setTimeout(typeText, 800);
+  } else {
     introBtn.style.display = "block";
     setTimeout(() => {
       introBtn.style.opacity = 1;

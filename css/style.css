@@ -148,6 +148,7 @@ html, body {
     font-size: var(--font-size-m);
     letter-spacing: var(--letter-spacing-l);
     color: var(--font-color);
+    font-family: var(--font-sans);
     border: 2px solid var(--font-color);
     text-transform: uppercase;
     outline: none;
@@ -159,7 +160,6 @@ html, body {
 
 .intro-btn:hover {
     color: #101010;
-    cursor: crosshair;
 }
 
 .intro-btn:before {
