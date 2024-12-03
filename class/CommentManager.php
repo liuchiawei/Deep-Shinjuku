@@ -29,13 +29,17 @@ class CommentManager
     //コメントを追加する
     public function addComment($storyId, $author, $content)
     {
+
+        if (empty(trim($author))) {
+            $author = '名無しさん';
+        }
         // jsonファイルを読み込む
         $data = json_decode(file_get_contents($this->jsonFile), true);
 
         $newComment = [
             'comment_id' => uniqid(),
             'author' => $author,
-            'time' => date('Y-m-d H:i:s'),
+            'time' => date('Y-m-d H:i'),
             'content' => $content
         ];
 
@@ -69,7 +73,7 @@ class CommentManager
                 foreach ($story['comments'] as &$comment) {
                     if ($comment['comment_id'] == $commentId) {
                         $comment['content'] = $newContent;
-                        $comment['time'] = date('Y-m-d H:i:s');
+                        $comment['time'] = date('Y-m-d H:i');
                         $this->saveData();
                         return true;
                     }

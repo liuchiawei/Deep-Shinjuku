@@ -4,28 +4,34 @@
         "likes": 5,
         "comments": [
             {
-                "comment_id": 1,
-                "author": "User1",
-                "time": "2023-10-01",
-                "content": "This is a comment."
-            },
-            {
                 "comment_id": "6743d375c2302",
                 "author": "elon musk",
-                "time": "2024-11-25",
+                "time": "2024-11-25 01:55",
                 "content": "Good Article"
             },
             {
                 "comment_id": "67452975bd4b4",
                 "author": "test author",
-                "time": "2024-11-26 01:50:45",
+                "time": "2024-11-26 01:50",
                 "content": "TEST 10:50 AM"
             },
             {
-                "comment_id": "674be5441779a",
-                "author": "author",
-                "time": "2024-12-01 05:25:40",
-                "content": "this is a comment on story 1"
+                "comment_id": "674e704185ac4",
+                "author": "\u540d\u7121\u3057\u3055\u3093",
+                "time": "2024-12-03 02:43",
+                "content": "\u7d20\u6674\u3089\u3057\u3044"
+            },
+            {
+                "comment_id": "674e772cb7ab7",
+                "author": "\u540d\u7121\u3057\u3055\u3093",
+                "time": "2024-12-03 03:12",
+                "content": "\u9762\u767d\u3044"
+            },
+            {
+                "comment_id": "674e773df3f9b",
+                "author": "\u540d\u7121\u3057\u3055\u3093",
+                "time": "2024-12-03 03:13",
+                "content": "\u3068\u3066\u3082\u9762\u767d\u3044"
             }
         ]
     },

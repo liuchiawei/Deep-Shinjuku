@@ -84,38 +84,25 @@ if (isset($_POST['hasLiked'])) {
                 <div class="story-comment-form">
                     <form id="commentForm" data-story-id="<?php echo $story->id; ?>" action="story.php?id=<?php echo $story->id; ?>" method="POST">
                         <textarea name="content" id="content" cols="30" rows="10" required></textarea>
-                        <input type="text" name="author" id="author" placeholder="名前" required>
+                        <input type="text" name="author" id="author" placeholder="名前">
                         <button type="submit">コメントを投稿</button>
                     </form>
                 </div>
                 <div class="story-comment">
-                    <div class="story-comment-btns">
-                        <!-- <button type="button" id="editComment" class="story-comment-btn">編集</button>
-                        <button type="button" id="deleteComment" class="user-comment-btn">削除</button> -->
-                    </div>
-                    <!-- <div class="user-comment-content">
-                        コメント内容
-                    </div>
-                    <div class="user-comment-author">
-                        名前
-                    </div>
-                    <div class="user-comment-time">
-                        日時
-                    </div> -->
-                </div>
                 <div id="comments-Popup" style="
                 width: fit-content;
                 height: fit-content;
-                position:fixed;
                 right: 1rem;
                 bottom: 1rem;
                 background-color: #ddd;
-                color: black;
-                ">
+                color: black;">
                     <?php if (!empty($comments)): ?>
-                        <ul>
-                            <?php foreach ($comments as $comment): ?>
-                                <li>
+                        <ul id="commentList" style="display: block;">
+                            <?php foreach ($comments as $index => $comment): ?>
+                                <?php
+                                $author = trim($comment['author']) !== '' ? htmlspecialchars($comment['author']) : '名無しさん';
+                                ?>
+                                <li id="comment-<?= $index ?>" style="display: none;">
                                     <strong><?= htmlspecialchars($comment['author']) ?>:</strong>
                                     <p><?= htmlspecialchars($comment['content']) ?></p>
                                     <em><?= htmlspecialchars($comment['time']) ?></em>
@@ -123,10 +110,14 @@ if (isset($_POST['hasLiked'])) {
                             <?php endforeach; ?>
                         </ul>
                     <?php else: ?>
+                        <p>コメントはございません</p>
                     <?php endif; ?>
+                    <button id="prevBtn">Previous</button>
+                    <button id="nextBtn">Next</button>
                 </div>
-                <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全てのコメントを見る</button>
             </div>
+                </div>
+                
             <div class="story-photo-map-wrap">
                 <div class="story-detail-title">写真と地図</div>
                 <div class="story-photo">

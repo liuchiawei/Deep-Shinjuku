@@ -1,3 +1,74 @@
+// document.addEventListener("DOMContentLoaded", () => {
+//     //comment carousel
+//     let currentIndex = 0;
+//     const comments = document.querySelectorAll("#commentList li");
+//     const prevBtn = document.getElementById("prevBtn");
+//     const nextBtn = document.getElementById("nextBtn");
+
+//     function updateDisplay() {
+//         comments.forEach((comment, index) => {
+//             const commentId = `comment-${index}`;
+//             const commentElement = document.getElementById(commentId);
+//             if (commentElement) {
+//                 commentElement.style.display = index === currentIndex ? "block" : "none";
+//             }
+//         });
+
+//         prevBtn.disabled = currentIndex === 0;
+//         nextBtn.disabled = currentIndex === comments.length - 1;
+//     }
+
+//     prevBtn.addEventListener("click", () => {
+//         if (currentIndex > 0) {
+//             currentIndex--;
+//             updateDisplay();
+//         }
+//     });
+
+//     nextBtn.addEventListener("click", () => {
+//         if (currentIndex < comments.length - 1) {
+//             currentIndex++;
+//             updateDisplay();
+//         }
+//     });
+
+//     updateDisplay();
+// });
+
+//無限繰り返しver
+document.addEventListener("DOMContentLoaded", () => {
+    const commentList = document.getElementById("commentList");
+    const comments = document.querySelectorAll("#commentList li");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let currentIndex = 0;
+
+    commentList.style.display = "block";
+
+    function updateDisplay() {
+        comments.forEach((comment, index) => {
+            comment.style.display = index === currentIndex ? "block" : "none";
+        });
+    }
+
+    prevBtn.addEventListener("click", () => {
+        // Nếu là bình luận đầu tiên, chuyển đến bình luận cuối cùng
+        currentIndex = (currentIndex === 0) ? comments.length - 1 : currentIndex - 1;
+        updateDisplay();
+    });
+
+    nextBtn.addEventListener("click", () => {
+        // Nếu là bình luận cuối cùng, quay lại bình luận đầu tiên
+        currentIndex = (currentIndex === comments.length - 1) ? 0 : currentIndex + 1;
+        updateDisplay();
+    });
+
+    updateDisplay();
+});
+
+
+
 document.getElementById("commentForm").addEventListener("submit", postComment);
 
 function postComment(event) {

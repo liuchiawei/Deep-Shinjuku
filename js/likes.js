@@ -62,6 +62,7 @@ function updateLikes(event) {
    xhr.send("hasLiked=" + (hasLiked ? 'true' : 'false') + "&storyId=" + storyId);
 }
 
+
 window.onload = function () {
    var storyId = document.getElementById("likeButton").dataset.storyId;
    var hasLiked = getCookie("hasLiked_" + storyId) === "true";
