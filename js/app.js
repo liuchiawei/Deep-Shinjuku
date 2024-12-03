@@ -38,12 +38,7 @@ function typeText() {
     currentChar = 0;
     currentText = text[currentTextIndex + 1];
     currentTextIndex++;
-    setTimeout(typeText, 800);
-  } else {
-    introBtn.style.display = "block";
-    setTimeout(() => {
-      introBtn.style.opacity = 1;
-    }, 500);
+    setTimeout(typeText, 500);
   }
 }
 

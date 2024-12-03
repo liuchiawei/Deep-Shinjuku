@@ -74,18 +74,12 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
         </div> -->
         <div class="story-detail-wrap">
             <div class="story-comment-wrap">
-                <div class="story-detail-title">目撃者の説述</div>
-                <div class="story-comment-form">
-                    <form action="story.php?id=<?php echo $story->id; ?>" method="POST">
-                        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-                        <button type="submit">コメントを投稿</button>
-                    </form>
-                </div>
+                <div class="story-detail-title">コメント</div>
                 <!-- TODO:コメントを表示する(foreach) -->
                 <div class="story-comment">
                     <div class="story-comment-btns">
-                        <button type="button" id="editComment" class="story-comment-btn">編集</button>
-                        <button type="button" id="deleteComment" class="user-comment-btn">削除</button>
+                        <button type="button" id="editComment">編集</button>
+                        <button type="button" id="deleteComment">削除</button>
                     </div>
                     <div class="user-comment-content">
                         コメント内容
@@ -97,29 +91,29 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
                         日時
                     </div>
                 </div>
-                <button type="button" id="seeAllCommentBtn" class="see-all-comment-btn">全てのコメントを見る（TODO:こちらに全部のコメントの数を表示）</button>
-            </div>
-            <div class="story-photo-map-wrap">
-                <div class="story-detail-title">写真と地図</div>
-                <div class="story-photo">
-                    <div class="story-photo-l"></div>
-                    <div class="story-photo-s"></div>
+                <div class="story-comment-form">
+                    <form action="story.php?id=<?php echo $story->id; ?>" method="POST">
+                        <textarea name="comment" id="comment" cols="20" rows="10"></textarea>
+                        <button type="submit" class="story-comment-btn">コメント</button>
+                    </form>
                 </div>
-                <div class="story-map">
-                    <div class="story-map-content">
-                        <iframe
-                            style="border:0"
-                            width="100%"
-                            height="100%"
-                            loading="lazy"
-                            allowfullscreen
-                            referrerpolicy="no-referrer-when-downgrade"
-                            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAvCim13FGe1rH23MIoU3ARs45Ngx6z218&q=<?php echo $story->location; ?>">
-                        </iframe>
-                    </div>
+            </div>
+            <div class="story-map">
+                <div class="story-detail-title">地図</div>
+                <div class="story-map-content">
+                    <iframe
+                        style="border:0"
+                        width="100%"
+                        height="100%"
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAvCim13FGe1rH23MIoU3ARs45Ngx6z218&q=<?php echo $story->location; ?>">
+                    </iframe>
                 </div>
                 <div class="story-map-title"><?php echo $story->location ?></div>
             </div>
+        </div>
     </article>
     <section class="prev-next-story-wrap">
         <a href="story.php?id=<?php echo $prevStory->id; ?>">
