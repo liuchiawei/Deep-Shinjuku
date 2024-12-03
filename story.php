@@ -80,62 +80,56 @@ if (isset($_POST['hasLiked'])) {
         </div> -->
         <div class="story-detail-wrap">
             <div class="story-comment-wrap">
-                <div class="story-detail-title">目撃者の説述</div>
+                <div class="story-detail-title">コメント</div>
                 <div class="story-comment-form">
                     <form id="commentForm" data-story-id="<?php echo $story->id; ?>" action="story.php?id=<?php echo $story->id; ?>" method="POST">
                         <textarea name="content" id="content" cols="30" rows="10" required></textarea>
                         <input type="text" name="author" id="author" placeholder="名前">
-                        <button type="submit">コメントを投稿</button>
+                        <button type="submit">投稿</button>
                     </form>
                 </div>
                 <div class="story-comment">
-                <div id="comments-Popup" style="
+                    <div id="comments-Popup" style="
                 width: fit-content;
                 height: fit-content;
                 right: 1rem;
                 bottom: 1rem;
                 background-color: #ddd;
                 color: black;">
-                    <?php if (!empty($comments)): ?>
-                        <ul id="commentList" style="display: block;">
-                            <?php foreach ($comments as $index => $comment): ?>
-                                <?php
-                                $author = trim($comment['author']) !== '' ? htmlspecialchars($comment['author']) : '名無しさん';
-                                ?>
-                                <li id="comment-<?= $index ?>" style="display: none;">
-                                    <strong><?= htmlspecialchars($comment['author']) ?>:</strong>
-                                    <p><?= htmlspecialchars($comment['content']) ?></p>
-                                    <em><?= htmlspecialchars($comment['time']) ?></em>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php else: ?>
-                        <p>コメントはございません</p>
-                    <?php endif; ?>
-                    <button id="prevBtn">Previous</button>
-                    <button id="nextBtn">Next</button>
+                        <?php if (!empty($comments)): ?>
+                            <ul id="commentList" style="display: block;">
+                                <?php foreach ($comments as $index => $comment): ?>
+                                    <?php
+                                    $author = trim($comment['author']) !== '' ? htmlspecialchars($comment['author']) : '名無しさん';
+                                    ?>
+                                    <li id="comment-<?= $index ?>" style="display: none;">
+                                        <strong><?= htmlspecialchars($comment['author']) ?>:</strong>
+                                        <p><?= htmlspecialchars($comment['content']) ?></p>
+                                        <em><?= htmlspecialchars($comment['time']) ?></em>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else: ?>
+                            <p>コメントはございません</p>
+                        <?php endif; ?>
+                        <button id="prevBtn">Previous</button>
+                        <button id="nextBtn">Next</button>
+                    </div>
                 </div>
             </div>
-                </div>
-                
-            <div class="story-photo-map-wrap">
-                <div class="story-detail-title">写真と地図</div>
-                <div class="story-photo">
-                </div>
-                <div class="story-photo-s">
-                </div>
-                <div class="story-map">
-                    <div class="story-map-content">
-                        <iframe
-                            style="border:0"
-                            width="100%"
-                            height="100%"
-                            loading="lazy"
-                            allowfullscreen
-                            referrerpolicy="no-referrer-when-downgrade"
-                            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAvCim13FGe1rH23MIoU3ARs45Ngx6z218&q=<?php echo $story->location; ?>">
-                        </iframe>
-                    </div>
+
+            <div class="story-map">
+                <div class="story-detail-title">地図</div>
+                <div class="story-map-content">
+                    <iframe
+                        style="border:0"
+                        width="100%"
+                        height="100%"
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAvCim13FGe1rH23MIoU3ARs45Ngx6z218&q=<?php echo $story->location; ?>">
+                    </iframe>
                 </div>
                 <div class="story-map-title"><?php echo $story->location ?></div>
             </div>
