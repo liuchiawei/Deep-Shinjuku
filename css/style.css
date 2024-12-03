@@ -148,6 +148,7 @@ html, body {
     font-size: var(--font-size-m);
     letter-spacing: var(--letter-spacing-l);
     color: var(--font-color);
+    font-family: var(--font-sans);
     border: 2px solid var(--font-color);
     text-transform: uppercase;
     outline: none;
@@ -155,11 +156,11 @@ html, body {
     background: none;
     z-index: 2;
     transition: 2s ease;
+    animation: fade-in 3s;
 }
 
 .intro-btn:hover {
     color: #101010;
-    cursor: crosshair;
 }
 
 .intro-btn:before {
@@ -506,30 +507,11 @@ html, body {
     align-items: center;
 }
 
-/* .story-article-explanation styling */
-.story-article-explanation {
-    margin: var(--padding-m) auto;
-    text-align: center;
-    font-size: var(--font-size-xl);
-    font-family: var(--font-title);
-    font-weight: var(--font-weight-m);
-    letter-spacing: var(--letter-spacing-m);
-}
-
-.story-article-explanation::before {
-    content: '“';
-}
-
-.story-article-explanation::after {
-    content: '”';
-}
-
 /* .story-detail-wrap styling */
 .story-detail-wrap {
     display: flex;
     justify-content: space-between;
     gap: var(--padding-s);
-    border: 1px solid red;
 }
 
 .story-detail-title {
@@ -541,57 +523,22 @@ html, body {
     grid-area: title;
 }
 
-.story-photo-map-wrap {
-    width: 60%;
-    display: grid;
-    grid-template-areas: 
-        "title title"
-        "photo map"
-        "photo-s map-title";
-    grid-template-rows: auto 3fr 1fr;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--padding-xs);
-}
-
-.story-photo {
-    background-color: red;
-    grid-area: photo;
-    overflow: hidden;
-    display: grid;
-    grid-template-areas: 
-        "photo-l photo-l"
-        "photo-s photo-s";
-    grid-template-rows: 300px 1fr;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--padding-xs);
-}
-
-.story-photo-l {
-    border: 1px solid yellow;
-    grid-area: photo-l;
-}
-
-.story-photo-s {
-    grid-area: photo-s;
-    display: flex;
-    overflow: hidden;
-    border: 1px solid blue;
-}
-
-/* TODO: 地図のコンテンツを作成する */
 /* .story-map styling */
 .story-map {
-    grid-area: map;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .story-map-content {
-    /* width: 360px;
-    height: 360px; */
-    background-color: red;
+    width: 100%;
+    height: 320px;
 }
 
 .story-map-title {
-    grid-area: map-title;
+    margin: var(--padding-s) auto;
     font-size: var(--font-size-s);
     text-align: center;
     letter-spacing: var(--letter-spacing-xl);
@@ -600,14 +547,47 @@ html, body {
 
 /* TODO:コメント欄のスタイリング */
 .story-comment-wrap {
+    max-width: var(--comment-wrap-width);
     width: 40%;
     background-color: red;
 }
 
+.story-comment-form {
+    width: 100%;
+    position: relative;
+    textarea {
+        border: none;
+        height: var(--comment-wrap-height);
+        width: 100%;
+        color: var(--black-color);
+        padding: var(--padding-xs);
+        &:focus {
+            outline: none;  
+        }
+    }
+}
+
 .story-comment {
-    width: var(--comment-wrap-width);
+    width: 100%;
     height: var(--comment-wrap-height);
+    margin: var(--padding-s) auto;
     border: 1px solid #000;
+    position: relative;
+}
+
+.story-comment-btn {
+    border: 1px solid var(--font-color);
+    margin: var(--padding- s) auto;
+    padding: var(--padding-xs) var(--padding-s);
+    border-radius: var(--padding-xs);
+    position: absolute;
+    background-color: var(--background-color);
+    bottom: var(--padding-xs);
+    right: var(--padding-xs);
+    transition: 0.2s ease-out;
+    &:hover {
+        background-color: var(--font-color-sub);
+    }
 }
 
 /* .like-button styling */
@@ -879,16 +859,6 @@ html, body {
     top: 20%;
     left: 15%;
     animation-delay: -18s;
-}
-
-#comments-Popup button {
-    margin: 0.5rem;
-    padding: 0.5rem 1rem;
-    background-color: #666;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
 @keyframes floating {
