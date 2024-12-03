@@ -50,6 +50,6 @@ class LikeManager
             return $story['likes'];
          }
       }
-      return 0;
+      return 99;
    }
 }

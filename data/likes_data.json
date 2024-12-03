@@ -1,83 +1,190 @@
 [
     {
         "id": "1",
-        "likes": 3,
-        "comments": []
+        "likes": 5,
+        "comments": [
+            {
+                "comment_id": "6743d375c2302",
+                "author": "elon musk",
+                "time": "2024-11-25 01:55",
+                "content": "Good Article"
+            },
+            {
+                "comment_id": "67452975bd4b4",
+                "author": "test author",
+                "time": "2024-11-26 01:50",
+                "content": "TEST 10:50 AM"
+            },
+            {
+                "comment_id": "674e704185ac4",
+                "author": "\u540d\u7121\u3057\u3055\u3093",
+                "time": "2024-12-03 02:43",
+                "content": "\u7d20\u6674\u3089\u3057\u3044"
+            },
+            {
+                "comment_id": "674e772cb7ab7",
+                "author": "\u540d\u7121\u3057\u3055\u3093",
+                "time": "2024-12-03 03:12",
+                "content": "\u9762\u767d\u3044"
+            },
+            {
+                "comment_id": "674e773df3f9b",
+                "author": "\u540d\u7121\u3057\u3055\u3093",
+                "time": "2024-12-03 03:13",
+                "content": "\u3068\u3066\u3082\u9762\u767d\u3044"
+            }
+        ]
     },
     {
         "id": "2",
-        "likes": 1,
-        "comments": []
+        "likes": 6,
+        "comments": [
+            {
+                "comment_id": 2,
+                "author": "User3",
+                "time": "2023-10-03",
+                "content": "This is a comment."
+            },
+            {
+                "comment_id": "6736993eeca9c",
+                "author": "\u5c71\u7530",
+                "time": "2024-11-15",
+                "content": "\u7d20\u6674\u3089\u3057\u3044"
+            }
+        ]
     },
     {
         "id": "3",
+        "likes": 6,
+        "comments": [
+            {
+                "comment_id": "674bde409b21a",
+                "author": "Koizumi",
+                "time": "2024-12-01 04:55:44",
+                "content": "Good Article"
+            },
+            {
+                "comment_id": "674eeaa078d0d",
+                "author": "\u540d\u7121\u3057\u3055\u3093",
+                "time": "2024-12-03 20:25",
+                "content": "qwer"
+            },
+            {
+                "comment_id": "674eeb669f3b9",
+                "author": "\u540d\u7121\u3057\u3055\u3093",
+                "time": "2024-12-03 20:28",
+                "content": "123"
+            },
+            {
+                "comment_id": "674eeb76877d7",
+                "author": "\u30c1\u30e3\u30fc\u30a6\u30a7\u30a4 \u30ea\u30e5\u30a6",
+                "time": "2024-12-03 20:28",
+                "content": "123"
+            },
+            {
+                "comment_id": "674eeb881fddb",
+                "author": "\u540d\u7121\u3057\u3055\u3093",
+                "time": "2024-12-03 20:29",
+                "content": "123"
+            },
+            {
+                "comment_id": "674eeb921d038",
+                "author": "LIU CHIAWEI",
+                "time": "2024-12-03 20:29",
+                "content": "123"
+            },
+            {
+                "comment_id": "674eeb96006dc",
+                "author": "LIU CHIAWEI",
+                "time": "2024-12-03 20:29",
+                "content": "wert"
+            },
+            {
+                "comment_id": "674eeba88a020",
+                "author": "\u540d\u7121\u3057\u3055\u3093",
+                "time": "2024-12-03 20:29",
+                "content": "nice"
+            }
+        ]
+    },
+    {
+        "id": "4",
         "likes": 4,
         "comments": []
     },
     {
-        "id": "4",
-        "likes": 0,
-        "comments": []
-    },
-    {
         "id": "5",
-        "likes": 0,
+        "likes": 6,
         "comments": []
     },
     {
         "id": "6",
-        "likes": 0,
+        "likes": 8,
         "comments": []
     },
     {
         "id": "7",
-        "likes": 0,
+        "likes": 4,
         "comments": []
     },
     {
         "id": "8",
-        "likes": 0,
+        "likes": 8,
         "comments": []
     },
     {
         "id": "9",
-        "likes": 0,
+        "likes": 5,
         "comments": []
     },
     {
         "id": "10",
-        "likes": 0,
+        "likes": 7,
         "comments": []
     },
     {
         "id": "12",
-        "likes": 0,
+        "likes": 9,
         "comments": []
     },
     {
         "id": "13",
-        "likes": 0,
+        "likes": 2,
         "comments": []
     },
     {
         "id": "14",
-        "likes": 0,
+        "likes": 6,
         "comments": []
     },
     {
         "id": "15",
-        "likes": 0,
-        "comments": []
+        "likes": 8,
+        "comments": [
+            {
+                "comment_id": "674be485cf2ca",
+                "author": "this is author",
+                "time": "2024-12-01 05:22:29",
+                "content": "this is a comment"
+            }
+        ]
     },
     {
         "id": "16",
-        "likes": 0,
+        "likes": 9,
         "comments": []
     },
     {
         "id": "17",
-        "likes": 0,
-        "comments": []
+        "likes": 2,
+        "comments": [
+            {
+                "comment_id": "674be4bbea17d",
+                "author": "author",
+                "time": "2024-12-01 05:23:23",
+                "content": "this is comment on story 17"
+            }
+        ]
     },
     {
         "id": "18",
@@ -86,37 +193,37 @@
     },
     {
         "id": "19",
-        "likes": 0,
+        "likes": 4,
         "comments": []
     },
     {
         "id": "20",
-        "likes": 0,
+        "likes": 6,
         "comments": []
     },
     {
         "id": "21",
-        "likes": 0,
+        "likes": 7,
         "comments": []
     },
     {
         "id": "22",
-        "likes": 0,
+        "likes": 2,
         "comments": []
     },
     {
         "id": "23",
-        "likes": 0,
+        "likes": 11,
         "comments": []
     },
     {
         "id": "24",
-        "likes": 0,
+        "likes": 12,
         "comments": []
     },
     {
         "id": "25",
-        "likes": 0,
+        "likes": 13,
         "comments": []
     }
 ]

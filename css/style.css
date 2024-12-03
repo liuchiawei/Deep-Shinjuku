@@ -520,7 +520,9 @@ html, body {
     font-family: var(--font-title);
     font-weight: var(--font-weight-xl);
     margin: var(--padding-xs) 0;
-    grid-area: title;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* .story-map styling */
@@ -535,6 +537,7 @@ html, body {
 .story-map-content {
     width: 100%;
     height: 320px;
+    margin: 0 auto;
 }
 
 .story-map-title {
@@ -545,11 +548,45 @@ html, body {
     font-weight: var(--font-weight-s);
 }
 
-/* TODO:コメント欄のスタイリング */
 .story-comment-wrap {
     max-width: var(--comment-wrap-width);
     width: 40%;
-    background-color: red;
+}
+
+.story-comment {
+    width: 100%;
+    margin: var(--padding-s) auto;
+    position: relative;
+}
+
+.comments-popup {
+    width: 100%;
+    height: fit-content;
+    right: 1rem;
+    bottom: 1rem;
+}
+
+.comment-content {
+    margin: var(--padding-s) auto;
+}
+
+.comment-time {
+    font-size: var(--font-size-m);
+    letter-spacing: var(--letter-spacing-m);
+}
+
+.comments-display-btn-wrap {
+    display: flex;
+    gap: var(--padding-xs);
+}
+
+.comments-display-btn {
+    padding: var(--padding-xs);
+    border-radius: var(--padding-xs);
+    transition: 0.3s ease-out;
+    &:hover {
+        background-color: var(--font-color-sub);
+    }
 }
 
 .story-comment-form {
@@ -567,12 +604,11 @@ html, body {
     }
 }
 
-.story-comment {
-    width: 100%;
-    height: var(--comment-wrap-height);
-    margin: var(--padding-s) auto;
-    border: 1px solid #000;
-    position: relative;
+.story-comment-form-post {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: var(--padding-s) 0;
 }
 
 .story-comment-btn {
@@ -580,15 +616,13 @@ html, body {
     margin: var(--padding- s) auto;
     padding: var(--padding-xs) var(--padding-s);
     border-radius: var(--padding-xs);
-    position: absolute;
     background-color: var(--background-color);
-    bottom: var(--padding-xs);
-    right: var(--padding-xs);
     transition: 0.2s ease-out;
     &:hover {
         background-color: var(--font-color-sub);
     }
 }
+
 
 /* .like-button styling */
 .like-button {
@@ -716,6 +750,20 @@ html, body {
         z-index: 0;
         transform: translateX(-50%);
         animation: storyFadeInBottom 1s ease-out;
+    }
+
+    .story-detail-wrap {
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    .story-comment-wrap {
+        width: 100%;
+        margin: var(--padding-s) auto;
+    }
+
+    .story-map {
+        width: 100%;
     }
 
     .prev-next-story {

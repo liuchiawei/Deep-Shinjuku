@@ -1,33 +1,42 @@
 <?php
 require_once __DIR__ . '/class/StoryData.php';
 require_once __DIR__ . '/class/LikeManager.php';
+require_once __DIR__ . '/class/CommentManager.php';
+
+session_start();
+
+$userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $storyId = (int)$_GET['id'];
+} else {
+    echo "Invalid or missing ID.";
+}
 
 $storyData = new StoryData();
-$story = $storyData->getById($_GET['id']);
-
+$story = $storyData->getById($storyId);
 $maxId = $storyData->getMaxId();
-
 $storyId = $_GET['id'] ?? null;
-
-if ($storyId !== null) {
-    //今のLike数を取得
-    $likeManager = new LikeManager('./data/likes_data.json');
-    $likeCount = $likeManager->getLikes($storyId);
-
-    //Like済みかどうかを取得
-    $hasAlreadyLiked = isset($_SESSION['liked_stories'][$storyId]) ? true : false;
-
-    if (isset($_POST['hasLiked'])) {
-        $hasLiked = $_POST['hasLiked'] === 'true';
-        $newLikeCount = $likeManager->toggleLikeForStory($storyId, $hasLiked);
-
-        echo $newLikeCount;
-    }
-}
 
 $nextStory = $storyData->getById($story->id + 1 <= $maxId ? $story->id + 1 : 1);
 $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
+
+$commentManager = new CommentManager(__DIR__ . '/data/likes_data.json');
+$comments = $commentManager->getComments($story->id);
+
+
+$likeManager = new LikeManager(__DIR__ . '/data/likes_data.json');
+$likeCount = $likeManager->getLikes($story->id);
+
+if (isset($_POST['hasLiked'])) {
+    $hasLiked = $_POST['hasLiked'] === 'true';
+    $newLikeCount = $likeManager->toggleLikeForStory($storyId, $hasLiked);
+    echo $newLikeCount;
+}
+
 ?>
+
 <html>
 <?php include __DIR__ . '/include/head.php'; ?>
 
@@ -61,43 +70,51 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
         <div class="story-article-content">
             <p class="js_scroll fade-in"><?php echo $story->content; ?></p>
             <div class="story-article-buttons-wrap">
-                <form method="POST" action="story.php?id=<?php echo $story->id; ?>">
-                    <button type="submit" name="hasLiked" value="<?php echo $hasAlreadyLiked ? 'false' : 'true'; ?>" id="likeButton" class="like-button">
-                        <?php echo $hasAlreadyLiked ? '<i class="bi bi-heart-fill"></i>' : '<i class="bi bi-heart"></i>'; ?>
-                    </button>
-                </form>
+                <button type="button" id="likeButton" class="like-button" data-story-id="<?php echo $story->id; ?>">
+                </button>
                 <div class="like-count" id="likeCount"><?php echo $likeCount; ?></div>
             </div>
         </div>
-        <!-- <div class="story-article-explanation">
-            <?php echo $story->explanation ?>
-        </div> -->
         <div class="story-detail-wrap">
             <div class="story-comment-wrap">
-                <div class="story-detail-title">コメント</div>
-                <!-- TODO:コメントを表示する(foreach) -->
+                <div class="story-detail-title">
+                    コメント
+                    <div class="comments-display-btn-wrap">
+                        <button id="prevBtn" class="comments-display-btn"><i class="bi bi-caret-left"></i></button>
+                        <button id="nextBtn" class="comments-display-btn"><i class="bi bi-caret-right"></i></button>
+                    </div>
+                </div>
                 <div class="story-comment">
-                    <div class="story-comment-btns">
-                        <button type="button" id="editComment">編集</button>
-                        <button type="button" id="deleteComment">削除</button>
-                    </div>
-                    <div class="user-comment-content">
-                        コメント内容
-                    </div>
-                    <div class="user-comment-author">
-                        名前
-                    </div>
-                    <div class="user-comment-time">
-                        日時
+                    <div id="comments-Popup" class="comments-popup">
+                        <?php if (!empty($comments)): ?>
+                            <ul id="commentList" style="display: block;">
+                                <?php foreach ($comments as $index => $comment): ?>
+                                    <?php
+                                    $author = trim($comment['author']) !== '' ? htmlspecialchars($comment['author']) : '名無しさん';
+                                    ?>
+                                    <li id="comment-<?= $index ?>" style="display: none;" class="comment-body">
+                                        <strong><?= htmlspecialchars($comment['author']) ?></strong>
+                                        <div class="comment-content"><?= htmlspecialchars($comment['content']) ?></div>
+                                        <em class="comment-time"><?= htmlspecialchars($comment['time']) ?></em>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else: ?>
+                            <p>コメントはございません</p>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="story-comment-form">
-                    <form action="story.php?id=<?php echo $story->id; ?>" method="POST">
-                        <textarea name="comment" id="comment" cols="20" rows="10"></textarea>
-                        <button type="submit" class="story-comment-btn">コメント</button>
+                    <form id="commentForm" data-story-id="<?php echo $story->id; ?>" action="story.php?id=<?php echo $story->id; ?>" method="POST">
+                        <textarea name="content" id="content" cols="30" rows="10" placeholder="コメント" required></textarea>
+                        <div class="story-comment-form-post">
+                            <input type="text" name="author" id="author" placeholder="名前">
+                            <button type="submit" class="story-comment-btn">投稿</button>
+                        </div>
                     </form>
                 </div>
             </div>
+
             <div class="story-map">
                 <div class="story-detail-title">地図</div>
                 <div class="story-map-content">
@@ -158,7 +175,8 @@ $prevStory = $storyData->getById($story->id - 1 > 0 ? $story->id - 1 : $maxId);
     <?php include __DIR__ . '/include/footer.php'; ?>
 </body>
 <script src="js/app.js?<?php echo time(); ?>"></script>
-<script src="js/likes.js"></script>
+<script src="js/likes.js?<?php echo time(); ?>"></script>
+<script src="js/comments.js?<?php echo time(); ?>"></script>
 
 <script>
     document.getElementById('likeButton').dataset.storyId = <?php echo $story->id; ?>;
