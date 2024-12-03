@@ -32,7 +32,7 @@ function typeText() {
     introText.style.opacity = 1;
     introText.innerHTML += currentText.charAt(currentChar);
     currentChar++;
-    setTimeout(typeText, 50);
+    setTimeout(typeText, 40);
   } else if (currentTextIndex < text.length - 1) {
     introText.innerHTML += "<br><br>";
     currentChar = 0;
@@ -48,13 +48,7 @@ function typeText() {
 }
 
 // DOMContentLoadedイベントを待ってから実行
-document.addEventListener("DOMContentLoaded", () => {
-  if (introBtn) {
-    introBtn.style.display = "none";
-    introBtn.style.opacity = 0;
-    setTimeout(typeText, 1500);
-  }
-});
+document.addEventListener("DOMContentLoaded", () => introBtn && setTimeout(typeText, 700));
 
 /**
  * fade out animation

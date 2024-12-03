@@ -156,6 +156,7 @@ html, body {
     background: none;
     z-index: 2;
     transition: 2s ease;
+    animation: fade-in 3s;
 }
 
 .intro-btn:hover {
