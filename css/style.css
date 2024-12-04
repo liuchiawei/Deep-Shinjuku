@@ -2,7 +2,7 @@
 
 :root {
     --paper-color: #efe8dc;
-    --background-color: #131520;
+    --background-color: #010306;
     --black-color: #101010;
     --icon-color: #fff;
     --runner-duration: 30s;
@@ -206,7 +206,7 @@ html, body {
 .stories-row {
     display: flex;
     justify-content: space-around;
-    margin: clamp(20px, 10vw, 40px);
+    margin: clamp(var(--padding-s), 10vw, var(--padding-xl));
     width: 200vw;
     min-width: 2000px;
     animation: runner var(--runner-duration) linear infinite;
