@@ -385,6 +385,9 @@ html, body {
     padding: var(--padding-s);
     border-radius: var(--padding-s);
     text-shadow: 0 0 4px var(--black-color), 0 0 20px var(--black-color);
+}
+
+.story-info-top {
     -webkit-backdrop-filter: blur(3px) brightness(0.9);
     backdrop-filter: blur(3px) brightness(0.9);
 }
