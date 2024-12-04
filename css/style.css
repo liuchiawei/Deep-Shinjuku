@@ -2,7 +2,7 @@
 
 :root {
     --paper-color: #efe8dc;
-    --background-color: #131520;
+    --background-color: #010306;
     --black-color: #101010;
     --icon-color: #fff;
     --runner-duration: 30s;
@@ -70,6 +70,11 @@ button {
     border: none;
     background-color: transparent;
     cursor: pointer;
+}
+
+textarea {
+    border: none;
+    resize: none;
 }
 
 /* 共通 */
@@ -206,7 +211,7 @@ html, body {
 .stories-row {
     display: flex;
     justify-content: space-around;
-    margin: clamp(20px, 10vw, 40px);
+    margin: clamp(var(--padding-s), 10vw, var(--padding-xl));
     width: 200vw;
     min-width: 2000px;
     animation: runner var(--runner-duration) linear infinite;
@@ -385,6 +390,9 @@ html, body {
     padding: var(--padding-s);
     border-radius: var(--padding-s);
     text-shadow: 0 0 4px var(--black-color), 0 0 20px var(--black-color);
+}
+
+.story-info-top {
     -webkit-backdrop-filter: blur(3px) brightness(0.9);
     backdrop-filter: blur(3px) brightness(0.9);
 }
@@ -599,7 +607,6 @@ html, body {
     width: 100%;
     position: relative;
     textarea {
-        border: none;
         height: var(--comment-wrap-height);
         width: 100%;
         color: var(--black-color);
@@ -615,6 +622,11 @@ html, body {
     align-items: center;
     justify-content: space-between;
     margin: var(--padding-s) 0;
+}
+
+.story-comment-form-post-author {
+    color: var(--background-color);
+    padding: var(--padding-xs);
 }
 
 .story-comment-btn {

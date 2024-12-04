@@ -43,7 +43,7 @@ if (isset($_POST['hasLiked'])) {
 <body>
     <?php include __DIR__ . '/include/nav.php'; ?>
     <div class="story-wrap" style="background-image: url('image/background/<?php echo $story->locationId; ?>.jpg');">
-        <div class="story-info">
+        <div class="story-info story-info-top">
             <div class="story-info-title"><?php echo $story->title; ?></div>
             <div class="story-info-subinfo">
                 <div class="story-info-date"><?php echo $story->date; ?></div>
