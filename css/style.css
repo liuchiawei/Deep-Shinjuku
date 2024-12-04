@@ -72,6 +72,11 @@ button {
     cursor: pointer;
 }
 
+textarea {
+    border: none;
+    resize: none;
+}
+
 /* 共通 */
 html, body {
     background-color: var(--background-color);
@@ -602,7 +607,6 @@ html, body {
     width: 100%;
     position: relative;
     textarea {
-        border: none;
         height: var(--comment-wrap-height);
         width: 100%;
         color: var(--black-color);
