@@ -122,6 +122,7 @@ document.getElementById("postButton").addEventListener("click", () => {
 
         const popup = document.getElementById("confirmationPopup");
         popup.style.display = "block";
+        popup.classList.add("fadeIn");
 
         document.getElementById("confirmOk").onclick = function () {
             isConfirmed = true;
