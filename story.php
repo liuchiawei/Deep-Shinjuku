@@ -102,7 +102,7 @@ if (isset($_POST['hasLiked'])) {
                     <form id="commentForm" data-story-id="<?php echo $story->id; ?>" action="story.php?id=<?php echo $story->id; ?>" method="POST">
                         <textarea name="content" id="content" cols="30" rows="10" placeholder="コメント" required></textarea>
                         <div class="story-comment-form-post">
-                            <input type="text" name="author" id="author" placeholder="名前">
+                            <input class="story-comment-form-post-author" type="text" name="author" id="author" placeholder="名前">
                             <button type="submit" class="story-comment-btn">投稿</button>
                         </div>
                     </form>

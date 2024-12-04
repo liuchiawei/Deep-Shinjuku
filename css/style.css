@@ -617,6 +617,11 @@ html, body {
     margin: var(--padding-s) 0;
 }
 
+.story-comment-form-post-author {
+    color: var(--background-color);
+    padding: var(--padding-xs);
+}
+
 .story-comment-btn {
     border: 1px solid var(--font-color);
     margin: var(--padding- s) auto;
