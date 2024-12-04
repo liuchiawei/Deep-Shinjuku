@@ -39,7 +39,7 @@
     --article-book-height: 255px;
     /* コメント欄のサイズ */
     --comment-wrap-width: 360px;
-    --comment-wrap-height: 120px;
+    --comment-wrap-height: 140px;
     /* story.phpの記事の幅 */
     --story-article-width: 960px;
     /* 影のサイズ */
@@ -556,7 +556,7 @@ html, body {
 
 .story-map-title {
     margin: var(--padding-s) auto;
-    font-size: var(--font-size-s);
+    font-size: var(--font-size-m);
     text-align: center;
     letter-spacing: var(--letter-spacing-xl);
     font-weight: var(--font-weight-s);
