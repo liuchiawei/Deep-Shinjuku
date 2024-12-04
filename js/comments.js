@@ -116,13 +116,25 @@ document.getElementById("postButton").addEventListener("click", () => {
     const content = document.getElementById("content").value.trim();
     if (content) {
         console.log("Textarea is filled");
-        setTimeout(function() {
-            window.location.reload();
-        }, 1000);
+        
+        const popup = document.getElementById("confirmationPopup");
+        popup.style.display = "block";
+
+        document.getElementById("confirmOk").onclick = function () {
+            popup.style.display = "none";
+            setTimeout(function() {
+                window.location.reload();
+            }, 1000);
+        };
+
+        document.getElementById("confirmCancel").onclick = function () {
+            popup.style.display = "none";
+        };
     } else {
         console.log("Textarea is empty");
     }
 });
+
 
 window.onload = function() {
     const savedPosition = localStorage.getItem('scrollPosition');
@@ -131,10 +143,3 @@ window.onload = function() {
         localStorage.removeItem('scrollPosition');
     }
 };
-
-// function refreshPage(){
-//     setTimeout(function(
-//     ){
-//         window.location.reload();
-//     }, 1000);
-// }

@@ -98,6 +98,11 @@ if (isset($_POST['hasLiked'])) {
                         <?php endif; ?>
                     </div>
                 </div>
+                <div id="confirmationPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: brown; padding: 20px; border: 1px solid #ccc; box-shadow: 0px 4px 6px rgba(0,0,0,0.1); z-index: 1000;">
+                    <p>コメント投稿しますか</p>
+                    <button id="confirmCancel">戻る</button>
+                    <button id="confirmOk">確定</button>
+                </div>
                 <div class="story-comment-form">
                     <form id="commentForm" data-story-id="<?php echo $story->id; ?>" action="story.php?id=<?php echo $story->id; ?>" method="POST">
                         <textarea name="content" id="content" cols="30" rows="10" placeholder="コメント" required></textarea>
