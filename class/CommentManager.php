@@ -59,7 +59,7 @@ class CommentManager
     {
         foreach ($this->data as $story) {
             if ($story['id'] == $storyId) {
-                return $story['comments'];
+                return array_reverse($story['comments']);
             }
         }
         return [];

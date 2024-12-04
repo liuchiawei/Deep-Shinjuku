@@ -69,10 +69,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+let isConfirmed = false;
+
 document.getElementById("commentForm").addEventListener("submit", postComment);
 
 function postComment(event) {
-    event.preventDefault();
+    if (!isConfirmed) {
+        event.preventDefault();
+        console.log("Form not submitted yet. Waiting for confirmation.");
+        return;
+    }
 
     const storyId = document.getElementById("commentForm").dataset.storyId;
     const author = document.getElementById("author").value;
@@ -89,14 +95,12 @@ function postComment(event) {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            return response.json(); // Parse JSON from response body
+            return response.json();  // Parse JSON from response body
         })
         .then(newComment => {
             if (newComment && newComment.comment_id) {
-
                 console.log("Comment ID saved to LocalStorage:", newComment.comment_id);
 
-                // Reset form
                 document.getElementById("author").value = '';
                 document.getElementById("content").value = '';
             } else {
@@ -107,3 +111,54 @@ function postComment(event) {
             console.error("Error during fetch:", error);
         });
 }
+
+const scrollPosition = window.scrollY;
+localStorage.setItem('scrollPosition', scrollPosition);
+
+document.getElementById("postButton").addEventListener("click", () => {
+    const content = document.getElementById("content").value.trim();
+    if (content) {
+        console.log("Textarea is filled");
+
+        const popup = document.getElementById("confirmationPopup");
+        popup.style.display = "block";
+        popup.classList.add("fadeIn");
+
+        document.getElementById("confirmOk").onclick = function () {
+            isConfirmed = true;
+            document.getElementById("commentForm").dispatchEvent(new Event("submit"));
+
+            popup.style.display = "none";
+            setTimeout(function () {
+                window.location.reload();
+            }, 500);
+        };
+
+        document.getElementById("confirmCancel").onclick = function () {
+            popup.style.display = "none";
+        };
+    } else {
+        console.log("Textarea is empty");
+    }
+});
+
+const textarea = document.getElementById('content');
+const charCount = document.getElementById('charCount');
+
+textarea.addEventListener('input', () => {
+    const currentLength = textarea.value.length;
+    const maxLength = textarea.getAttribute('maxlength');
+    charCount.textContent = `${currentLength}/${maxLength}`;
+});
+
+
+window.onload = function () {
+    const savedPosition = localStorage.getItem('scrollPosition');
+    if (savedPosition) {
+        window.scrollTo(0, parseInt(savedPosition, 10));
+        localStorage.removeItem('scrollPosition');
+    }
+    var storyId = document.getElementById("likeButton").dataset.storyId;
+    var hasLiked = getCookie("hasLiked_" + storyId) === "true";
+    document.getElementById("likeButton").innerHTML = hasLiked ? '<i class="bi bi-heart-fill"></i>' : '<i class="bi bi-heart"></i>';
+};
