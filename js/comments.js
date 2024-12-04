@@ -96,6 +96,7 @@ function postComment(event) {
 
                 console.log("Comment ID saved to LocalStorage:", newComment.comment_id);
 
+
                 // Reset form
                 document.getElementById("author").value = '';
                 document.getElementById("content").value = '';
@@ -107,3 +108,46 @@ function postComment(event) {
             console.error("Error during fetch:", error);
         });
 }
+
+function addCommentToUI(author, content, time) {
+    const commentSection = document.getElementById("commentSection");
+
+    const commentDiv = document.createElement("div");
+    commentDiv.classList.add("comment");
+
+    commentDiv.innerHTML = `
+        <strong>${author}</strong> <small>${time}</small>
+        <p>${content}</p>
+    `;
+
+    commentSection.prepend(commentDiv);
+}
+const scrollPosition = window.scrollY;
+localStorage.setItem('scrollPosition', scrollPosition);
+
+document.getElementById("postButton").addEventListener("click", () => {
+    const content = document.getElementById("content").value.trim();
+    if (content) {
+        console.log("Textarea is filled");
+        setTimeout(function() {
+            window.location.reload();
+        }, 1000);
+    } else {
+        console.log("Textarea is empty");
+    }
+});
+
+window.onload = function() {
+    const savedPosition = localStorage.getItem('scrollPosition');
+    if (savedPosition) {
+        window.scrollTo(0, parseInt(savedPosition, 10));
+        localStorage.removeItem('scrollPosition');
+    }
+};
+
+// function refreshPage(){
+//     setTimeout(function(
+//     ){
+//         window.location.reload();
+//     }, 1000);
+// }
