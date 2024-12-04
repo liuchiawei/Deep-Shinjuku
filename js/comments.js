@@ -157,4 +157,7 @@ window.onload = function () {
         window.scrollTo(0, parseInt(savedPosition, 10));
         localStorage.removeItem('scrollPosition');
     }
+    var storyId = document.getElementById("likeButton").dataset.storyId;
+    var hasLiked = getCookie("hasLiked_" + storyId) === "true";
+    document.getElementById("likeButton").innerHTML = hasLiked ? '<i class="bi bi-heart-fill"></i>' : '<i class="bi bi-heart"></i>';
 };
