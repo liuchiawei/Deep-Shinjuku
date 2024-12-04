@@ -91,25 +91,25 @@ function postComment(event) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `storyId=${storyId}&author=${encodeURIComponent(author)}&content=${encodeURIComponent(content)}`
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();  // Parse JSON from response body
-    })
-    .then(newComment => {
-        if (newComment && newComment.comment_id) {
-            console.log("Comment ID saved to LocalStorage:", newComment.comment_id);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();  // Parse JSON from response body
+        })
+        .then(newComment => {
+            if (newComment && newComment.comment_id) {
+                console.log("Comment ID saved to LocalStorage:", newComment.comment_id);
 
-            document.getElementById("author").value = '';
-            document.getElementById("content").value = '';
-        } else {
-            console.error("Invalid response from server:", newComment);
-        }
-    })
-    .catch(error => {
-        console.error("Error during fetch:", error);
-    });
+                document.getElementById("author").value = '';
+                document.getElementById("content").value = '';
+            } else {
+                console.error("Invalid response from server:", newComment);
+            }
+        })
+        .catch(error => {
+            console.error("Error during fetch:", error);
+        });
 }
 
 const scrollPosition = window.scrollY;
@@ -128,7 +128,7 @@ document.getElementById("postButton").addEventListener("click", () => {
             document.getElementById("commentForm").dispatchEvent(new Event("submit"));
 
             popup.style.display = "none";
-            setTimeout(function() {
+            setTimeout(function () {
                 window.location.reload();
             }, 500);
         };
@@ -141,9 +141,17 @@ document.getElementById("postButton").addEventListener("click", () => {
     }
 });
 
+const textarea = document.getElementById('content');
+const charCount = document.getElementById('charCount');
+
+textarea.addEventListener('input', () => {
+    const currentLength = textarea.value.length;
+    const maxLength = textarea.getAttribute('maxlength');
+    charCount.textContent = `${currentLength}/${maxLength}`;
+});
 
 
-window.onload = function() {
+window.onload = function () {
     const savedPosition = localStorage.getItem('scrollPosition');
     if (savedPosition) {
         window.scrollTo(0, parseInt(savedPosition, 10));

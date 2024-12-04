@@ -582,6 +582,8 @@ html, body {
 
 .comment-content {
     margin: var(--padding-s) auto;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .comment-time {
