@@ -69,10 +69,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+let isConfirmed = false;
+
 document.getElementById("commentForm").addEventListener("submit", postComment);
 
 function postComment(event) {
-    event.preventDefault();
+    if (!isConfirmed) {
+        event.preventDefault();
+        console.log("Form not submitted yet. Waiting for confirmation.");
+        return;
+    }
 
     const storyId = document.getElementById("commentForm").dataset.storyId;
     const author = document.getElementById("author").value;
@@ -85,28 +91,25 @@ function postComment(event) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `storyId=${storyId}&author=${encodeURIComponent(author)}&content=${encodeURIComponent(content)}`
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json(); // Parse JSON from response body
-        })
-        .then(newComment => {
-            if (newComment && newComment.comment_id) {
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();  // Parse JSON from response body
+    })
+    .then(newComment => {
+        if (newComment && newComment.comment_id) {
+            console.log("Comment ID saved to LocalStorage:", newComment.comment_id);
 
-                console.log("Comment ID saved to LocalStorage:", newComment.comment_id);
-
-
-                // Reset form
-                document.getElementById("author").value = '';
-                document.getElementById("content").value = '';
-            } else {
-                console.error("Invalid response from server:", newComment);
-            }
-        })
-        .catch(error => {
-            console.error("Error during fetch:", error);
-        });
+            document.getElementById("author").value = '';
+            document.getElementById("content").value = '';
+        } else {
+            console.error("Invalid response from server:", newComment);
+        }
+    })
+    .catch(error => {
+        console.error("Error during fetch:", error);
+    });
 }
 
 const scrollPosition = window.scrollY;
@@ -116,15 +119,18 @@ document.getElementById("postButton").addEventListener("click", () => {
     const content = document.getElementById("content").value.trim();
     if (content) {
         console.log("Textarea is filled");
-        
+
         const popup = document.getElementById("confirmationPopup");
         popup.style.display = "block";
 
         document.getElementById("confirmOk").onclick = function () {
+            isConfirmed = true;
+            document.getElementById("commentForm").dispatchEvent(new Event("submit"));
+
             popup.style.display = "none";
             setTimeout(function() {
                 window.location.reload();
-            }, 1000);
+            }, 500);
         };
 
         document.getElementById("confirmCancel").onclick = function () {
@@ -134,6 +140,7 @@ document.getElementById("postButton").addEventListener("click", () => {
         console.log("Textarea is empty");
     }
 });
+
 
 
 window.onload = function() {
