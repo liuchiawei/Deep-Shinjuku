@@ -109,19 +109,6 @@ function postComment(event) {
         });
 }
 
-function addCommentToUI(author, content, time) {
-    const commentSection = document.getElementById("commentSection");
-
-    const commentDiv = document.createElement("div");
-    commentDiv.classList.add("comment");
-
-    commentDiv.innerHTML = `
-        <strong>${author}</strong> <small>${time}</small>
-        <p>${content}</p>
-    `;
-
-    commentSection.prepend(commentDiv);
-}
 const scrollPosition = window.scrollY;
 localStorage.setItem('scrollPosition', scrollPosition);
 
