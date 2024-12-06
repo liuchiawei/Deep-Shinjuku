@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/story.php';
+require_once __DIR__ . '/Story.php';
 
 class StoryData
 {
