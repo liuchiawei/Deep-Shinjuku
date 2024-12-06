@@ -74,23 +74,23 @@ if (introBtn) {
   introBtn.onclick = fadeOut;
 }
 
-// 中心に移動2
-function scrollToElement(element) {
-  // 中心を計算
-  const rect = element.getBoundingClientRect();
-  let targetX =
-    rect.left + window.scrollX + rect.width / 2 - window.innerWidth / 2;
-  let targetY =
-    rect.top + window.scrollY + rect.height / 2 - window.innerHeight / 2;
+// // 中心に移動2
+// function scrollToElement(element) {
+//   // 中心を計算
+//   const rect = element.getBoundingClientRect();
+//   let targetX =
+//     rect.left + window.scrollX + rect.width / 2 - window.innerWidth / 2;
+//   let targetY =
+//     rect.top + window.scrollY + rect.height / 2 - window.innerHeight / 2;
 
-  // 中心に移動
-  window.scrollTo({
-    left: targetX,
-    top: targetY,
-    behavior: "smooth",
-    duration: 6000,
-  });
-}
+//   // 中心に移動
+//   window.scrollTo({
+//     left: targetX,
+//     top: targetY,
+//     behavior: "smooth",
+//     duration: 6000,
+//   });
+// }
 
 // 本を開いて中心に移動
 storiesItems.forEach((item) => {
@@ -100,7 +100,7 @@ storiesItems.forEach((item) => {
     let link = this.querySelector("a").getAttribute("href");
     cover.classList.add("openBook");
     item.style.transform = "rotateX(0deg) rotateY(0deg)";
-    scrollToElement(this);
+    // scrollToElement(this);
     setTimeout(() => {
       cover.classList.remove("openBook");
       item.style.transform = "rotateX(20deg) rotateY(30deg)";
