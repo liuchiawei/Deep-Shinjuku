@@ -804,7 +804,7 @@ html, body {
 
 
 /* RWD-スマホ対応 */
-@media (max-width: 576px) {
+@media screen and (max-width: 576px) {
     .story-wrap {
         flex-direction: column-reverse;
         justify-content: center;
