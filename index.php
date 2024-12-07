@@ -6,7 +6,7 @@ $storyData = new StoryData();
 $stories = $storyData->getAll();
 
 ?>
-<html>
+<html lang="ja">
 <?php include __DIR__ . '/include/head.php'; ?>
 
 <body>

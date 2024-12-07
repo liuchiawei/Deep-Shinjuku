@@ -37,7 +37,7 @@ if (isset($_POST['hasLiked'])) {
 
 ?>
 
-<html>
+<html lang="ja">
 <?php include __DIR__ . '/include/head.php'; ?>
 
 <body>
