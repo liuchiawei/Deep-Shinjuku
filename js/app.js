@@ -55,7 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 function fadeOut() {
   const content = document.getElementById("content");
-  content.style.display = "block";
+  if (document.viewport.width > 600) {
+    content.style.display = "block";
+  } else {
+    content.style.opacity = "1";
+  }
 
   introBtn.style.transition = "2s ease-in";
   introBtn.style.transform = "translateY(-100vh)";
