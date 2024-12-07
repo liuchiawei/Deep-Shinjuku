@@ -1218,6 +1218,7 @@ html, body {
 @keyframes zoomInStory {
     from {
         z-index: 99;
+        transform-origin: center;
     }
     to {
         transform: scale(6);

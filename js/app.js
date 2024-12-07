@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
  * @function fadeOut()
  */
 function fadeOut() {
-  const content = document.querySelector(".content");
+  const content = document.getElementById("content");
   content.style.display = "block";
 
   introBtn.style.transition = "2s ease-in";
