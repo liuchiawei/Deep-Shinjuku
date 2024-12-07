@@ -43,7 +43,10 @@ function typeText() {
 }
 
 // DOMContentLoadedイベントを待ってから実行
-document.addEventListener("DOMContentLoaded", () => introBtn && setTimeout(typeText, 700));
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector(".intro-text-wrap").style.opacity = 1;
+  introBtn && setTimeout(typeText, 700);
+});
 
 /**
  * fade out animation
@@ -55,16 +58,18 @@ function fadeOut() {
   content.style.display = "block";
 
   introBtn.style.transition = "2s ease-in";
-  introBtn.style.transform = "translateX(-50%) translateY(-100vh)";
+  introBtn.style.transform = "translateY(-100vh)";
   introBtn.style.opacity = "0";
 
   introText.style.transition = "2s ease 0.5s";
-  introText.style.transform = "translateX(-50%) translateY(-100vh)";
+  introText.style.transform = "translateY(-100vh)";
   introText.style.opacity = "0";
 
   const overlayFront = document.getElementById("overlayFront");
-  overlayFront.style.transition = "transform 2s ease 2s";
   overlayFront.style.transform = "translateY(-110%)";
+  overlayFront.style.opacity = "0";
+  overlayFront.style.filter = "brightness(0.3)";
+
 
   const intro = document.querySelector(".intro");
   intro.style.transition = "transform 1s ease 3s";
@@ -99,11 +104,11 @@ storiesItems.forEach((item) => {
     let cover = this.querySelector(".stories-item-cover");
     let link = this.querySelector("a").getAttribute("href");
     cover.classList.add("openBook");
-    item.style.transform = "rotateX(0deg) rotateY(0deg)";
-    // scrollToElement(this);
+    item.style.animation = "zoomInStory 3s ease-in 0.3s";
+
     setTimeout(() => {
       cover.classList.remove("openBook");
-      item.style.transform = "rotateX(20deg) rotateY(30deg)";
+      item.style.animation = "";
     }, 3000);
 
     // 次のページに移動

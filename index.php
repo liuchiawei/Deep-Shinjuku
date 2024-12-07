@@ -15,9 +15,14 @@ $stories = $storyData->getAll();
 
         <div class="intro">
             <div id="overlayFront" class="overlay">
-                <p id="introText" class="intro-text"></p>
+                <div class="intro-text-wrap">
+                    <div class="intro-logo">
+                        <img src="image/logo_white.svg" alt="logo">
+                    </div>
+                    <p id="introText" class="intro-text"></p>
+                    <button class="intro-btn" id="introBtn">enter</button>
+                </div>
             </div>
-            <button class="intro-btn" id="introBtn">EXPLORE</button>
             <div id="overlayBack" class="overlay"></div>
         </div>
 

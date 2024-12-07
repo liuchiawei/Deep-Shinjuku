@@ -141,7 +141,14 @@
     {
         "id": "9",
         "likes": 5,
-        "comments": []
+        "comments": [
+            {
+                "comment_id": "6753df3c31b24",
+                "author": "\u540d\u7121\u3057\u3055\u3093",
+                "time": "2024-12-07 14:38",
+                "content": "\u3044\u3044\u306d"
+            }
+        ]
     },
     {
         "id": "10",
