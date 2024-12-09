@@ -122,6 +122,7 @@ html, body {
     z-index: 1;
     position: absolute;
     top: 0;
+    left: 0;
 }
 
 .overlay {
@@ -820,10 +821,24 @@ html, body {
 
 /* RWD-スマホ対応 */
 @media screen and (max-width: 576px) {
+    .stories-wrap {
+        left: 0;
+        transform: none;
+        width: 100vw;
+        padding: 0;
+        perspective: none;
+    }
 
-    .content {
-        display: block;
-        opacity: 0;
+    .stories-row {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-width: 100vw;
+        margin: 0 auto;
+        padding-top: var(--padding-xl);
+        animation: none;
+        gap: var(--padding-xl);
     }
 
     .story-wrap {
