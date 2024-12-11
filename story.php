@@ -5,6 +5,7 @@ require_once __DIR__ . '/class/CommentManager.php';
 
 session_start();
 
+date_default_timezone_set('Asia/Tokyo');
 $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 
