@@ -2,8 +2,9 @@
 
 :root {
     --paper-color: #efe8dc;
-    --background-color: #101113;
+    --background-color: #000;
     --black-color: #101010;
+    --story-article-background-color: #1b1c1d;
     --icon-color: #fff;
     --runner-duration: 30s;
     --font-title: "Yuji Boku", serif;
@@ -221,7 +222,12 @@ html, body {
     position: absolute;
     perspective: 1000px;
     left: -10%;
-    transform: translate3d(0, 0, 0) rotateY(10deg) rotateX(-10deg);
+    /* transform: translate3d(0, 0, 0) rotateY(10deg) rotateX(-10deg); */
+    background-image: url(../image/background/home-background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .stories-row {
@@ -515,8 +521,7 @@ html, body {
     padding: clamp(var(--padding-s), 6vw, var(--padding-l));
     padding-bottom: var(--padding-xl);
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5);
-    -webkit-backdrop-filter: blur(5px) brightness(1.2);
-    backdrop-filter: blur(5px) brightness(1.2);
+    background-color: var(--story-article-background-color);
 }
 
 .story-article-content p {
