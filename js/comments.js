@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const comments = document.querySelectorAll("#commentList li");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
+    const noMoreComments = document.getElementById("noMoreComments");
 
     let currentIndex = 0;
 
@@ -52,20 +53,35 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function showNotification(message) {
+        noMoreComments.textContent = message;
+        noMoreComments.style.display = "block";
+        setTimeout(() => {
+            noMoreComments.style.display = "none";
+        }, 2000);
+    }
+
     prevBtn.addEventListener("click", () => {
-        // Nếu là bình luận đầu tiên, chuyển đến bình luận cuối cùng
-        currentIndex = (currentIndex === 0) ? comments.length - 1 : currentIndex - 1;
-        updateDisplay();
+        if (comments.length === 1) {
+            showNotification("現在、他のコメントはありません。");
+        } else {
+            currentIndex = (currentIndex === 0) ? comments.length - 1 : currentIndex - 1;
+            updateDisplay();
+        }
     });
 
     nextBtn.addEventListener("click", () => {
-        // Nếu là bình luận cuối cùng, quay lại bình luận đầu tiên
-        currentIndex = (currentIndex === comments.length - 1) ? 0 : currentIndex + 1;
-        updateDisplay();
+        if (comments.length === 1) {
+            showNotification("現在、他のコメントはありません。");
+        } else {
+            currentIndex = (currentIndex === comments.length - 1) ? 0 : currentIndex + 1;
+            updateDisplay();
+        }
     });
 
     updateDisplay();
 });
+
 
 
 

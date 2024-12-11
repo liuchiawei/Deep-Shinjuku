@@ -79,6 +79,8 @@ if (isset($_POST['hasLiked'])) {
                         <button id="nextBtn" class="comments-display-btn"><i class="bi bi-caret-right"></i></button>
                     </div>
                 </div>
+                <div id="noMoreComments" style="display: none; position: relative; background: rgba(0, 0, 0, 0.8); color: white; padding: 10px; border-radius: 5px; z-index: 1000;">
+                </div>
                 <div class="story-comment">
                     <div id="comments-Popup" class="comments-popup">
                         <?php if (!empty($comments)): ?>
