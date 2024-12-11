@@ -392,9 +392,10 @@ html, body {
 /* story.php styling */
 .story-wrap {
     width: 100%;
-    height: 360px;
+    height: 480px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
     padding: clamp(var(--padding-s), 6vw, var(--padding-l));
     background-size: cover;
     background-position: center;
