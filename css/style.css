@@ -2,7 +2,7 @@
 
 :root {
     --paper-color: #efe8dc;
-    --background-color: #000;
+    --background-color: #040404;
     --black-color: #101010;
     --story-article-background-color: #1b1c1d;
     --icon-color: #fff;
@@ -855,8 +855,8 @@ html, body {
     }
 
     .story-wrap {
-        flex-direction: column-reverse;
         justify-content: center;
+        align-items: flex-end;
         height: 100vh;
     }
 
@@ -866,9 +866,9 @@ html, body {
     }
 
     .story-item {
-        transform-origin: left;
+        position: absolute;
         scale: 0.8;
-        top: var(--padding-xs);
+        top: var(--padding-m);
         left: 50%;
         z-index: 0;
         transform: translateX(-50%);
