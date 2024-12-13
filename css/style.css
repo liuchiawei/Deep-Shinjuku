@@ -27,6 +27,9 @@
     --letter-spacing-m: 0.05em;
     --line-height-l: 2;
     --line-height-m: 1.5;
+    --padding-4xl: 200px;
+    --padding-3xl: 120px;
+    --padding-2xl: 100px;
     --padding-xl: 80px;
     --padding-l: 60px;
     --padding-m: 40px;
@@ -62,6 +65,7 @@
 
 a {
     color: inherit;
+
     &:visited {
         color: inherit;
     }
@@ -79,7 +83,8 @@ textarea {
 }
 
 /* 共通 */
-html, body {
+html,
+body {
     background-color: var(--background-color);
     position: relative;
     overflow-x: hidden;
@@ -106,6 +111,7 @@ html, body {
     font-weight: var(--font-weight-m);
     letter-spacing: var(--letter-spacing-l);
     transition: 0.3s ease-out;
+
     &:hover {
         text-shadow: 0 0 10px var(--font-color);
     }
@@ -127,7 +133,7 @@ html, body {
 }
 
 .overlay {
-    z-index:1;
+    z-index: 1;
     position: absolute;
     width: 100%;
     height: 100vh;
@@ -197,7 +203,7 @@ html, body {
 }
 
 .intro-btn:hover:before {
-    top:0;
+    top: 0;
 }
 
 .intro-text {
@@ -237,9 +243,10 @@ html, body {
     width: 200vw;
     min-width: 2000px;
     animation: runner var(--runner-duration) linear infinite;
+
     &:nth-child(even) {
         animation-duration: calc(var(--runner-duration) * 1.5);
-    }    
+    }
 }
 
 .stories-item {
@@ -257,13 +264,14 @@ html, body {
     -ms-user-select: none;
     user-select: none;
 
-    &::after{
+    &::after {
         content: '';
         position: absolute;
         top: 0;
         right: 0;
         width: 95%;
-        height: 15px;/* 本の厚み */
+        height: 15px;
+        /* 本の厚み */
         background-color: var(--paper-color);
         transform-origin: top right;
         transform: rotateX(90deg);
@@ -283,8 +291,9 @@ html, body {
     transform: rotateY(90deg);
     background-color: var(--background-color);
     z-index: 3;
+
     /* タイトル */
-    &::after{
+    &::after {
         content: attr(data-title);
         font-family: var(--font-title);
         font-weight: var(--font-weight-l);
@@ -305,7 +314,7 @@ html, body {
     position: relative;
     z-index: 3;
     background-color: black;
-    transform-origin: right;        
+    transform-origin: right;
 }
 
 .stories-item-cover::before {
@@ -434,6 +443,7 @@ html, body {
     letter-spacing: var(--letter-spacing-l);
     margin-bottom: var(--padding-xs);
 }
+
 .story-info-subinfo {
     font-size: var(--font-size-s);
     display: flex;
@@ -472,7 +482,7 @@ html, body {
     height: 100%;
 }
 
-.story-item-image img{
+.story-item-image img {
     height: 100%;
 }
 
@@ -511,9 +521,11 @@ html, body {
     margin: var(--padding-xs) 0;
     opacity: 0;
     animation: fade-in 1s ease .3s forwards;
+
     &::before {
         content: '《';
     }
+
     &::after {
         content: '》';
     }
@@ -629,6 +641,7 @@ html, body {
     padding: var(--padding-xs);
     border-radius: var(--padding-xs);
     transition: 0.3s ease-out;
+
     &:hover {
         background-color: var(--font-color-sub);
     }
@@ -637,13 +650,15 @@ html, body {
 .story-comment-form {
     width: 100%;
     position: relative;
+
     textarea {
         height: var(--comment-wrap-height);
         width: 100%;
         color: var(--black-color);
         padding: var(--padding-xs);
+
         &:focus {
-            outline: none;  
+            outline: none;
         }
     }
 }
@@ -667,6 +682,7 @@ html, body {
     border-radius: var(--padding-xs);
     background-color: var(--background-color);
     transition: 0.2s ease-out;
+
     &:hover {
         background-color: var(--font-color-sub);
     }
@@ -694,12 +710,13 @@ html, body {
     background-color: #fcfcfcee;
     animation: fadeIn 0.3s ease-out;
     display: grid;
-    grid-template-areas: 
-    "content content"
-    "cancel ok";
+    grid-template-areas:
+        "content content"
+        "cancel ok";
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 3fr 2fr;
     gap: var(--padding-xs);
+
     h1 {
         display: flex;
         align-items: center;
@@ -709,19 +726,23 @@ html, body {
         color: var(--black-color);
         letter-spacing: var(--letter-spacing-m);
     }
+
     button {
         transition: 0.3s ease-out;
         padding: var(--padding-xs) var(--padding-s);
         border-radius: var(--padding-xs);
         color: var(--black-color);
+
         &:hover {
             background-color: var(--font-color-sub);
             color: var(--white-color);
         }
     }
+
     #confirmCancel {
         grid-area: cancel;
     }
+
     #confirmOk {
         grid-area: ok;
     }
@@ -790,7 +811,8 @@ html, body {
     .story-info {
         .story-info-title {
             font-size: var(--font-size-l);
-        }    
+        }
+
         .story-info-brief {
             font-size: var(--font-size-s);
         }
@@ -856,19 +878,22 @@ html, body {
 
     .story-wrap {
         justify-content: center;
-        align-items: flex-end;
         height: 100vh;
     }
 
     .story-info {
         width: 100%;
         text-align: center;
+        margin-top: var(--padding-4xl);
+    }
+
+    .story-info-title {
+        font-size: var(--font-size-l);
     }
 
     .story-item {
         position: absolute;
-        scale: 0.8;
-        top: var(--padding-m);
+        top: var(--padding-2xl);
         left: 50%;
         z-index: 0;
         transform: translateX(-50%);
@@ -896,7 +921,8 @@ html, body {
             font-size: var(--font-size-l);
         }
 
-        .story-info, .story-item {
+        .story-info,
+        .story-item {
             display: none;
         }
     }
@@ -1127,18 +1153,21 @@ html, body {
     0% {
         top: 0;
     }
+
     50% {
         top: -4px;
     }
+
     100% {
         top: 0;
     }
-}   
+}
 
 @keyframes openBook {
     0% {
         transform: rotateY(0);
     }
+
     100% {
         transform: rotateY(100deg);
         filter: brightness(0.1);
@@ -1151,6 +1180,7 @@ html, body {
         transform: translateY(100px);
         scale: 0.9;
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -1162,6 +1192,7 @@ html, body {
         opacity: 0;
         transform: translateX(-50%) translateY(100px);
     }
+
     100% {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
@@ -1169,78 +1200,85 @@ html, body {
 }
 
 @keyframes slide-in-left {
-  0% {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 @keyframes slide-in-right {
-  0% {
-    transform: translateX(100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 @keyframes fade-in-bottom {
-  0% {
-    transform: translateY(140px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+    0% {
+        transform: translateY(140px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 @keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes fade-in-top {
-  0% {
-    transform: translateY(-30px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+    0% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 @keyframes zoom-in {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 @keyframes zoom-out {
-  0% {
-    transform: scale(5);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+    0% {
+        transform: scale(5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 @keyframes runner {
@@ -1254,6 +1292,7 @@ html, body {
         z-index: 99;
         transform-origin: center;
     }
+
     to {
         transform: scale(6);
     }
