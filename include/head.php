@@ -9,7 +9,7 @@
     <meta name="keywords" content="新宿,怪談,新宿怪談,新宿の怪談,新宿の怪談集,新宿の怪談集め,新宿の怪談集めた,新宿の怪談集めたサイト,新宿の怪談集めたサイトです">
     <meta property="og:title" content="DEEP SHINJUKU - 新宿怪談集">
     <meta property="og:description" content="新宿の怪談を集めたサイトです。">
-    <meta property="og:image" content="image/background/intro.jpg">
+    <meta property="og:image" content="./image/background/intro.jpg">
     <meta property="og:url" content="https://deepshinjuku.com/urbanmyth/">
     <meta property="og:type" content="website">
 </head>
